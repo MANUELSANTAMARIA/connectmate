@@ -17,15 +17,12 @@ class msjwha{
         // CONFIGURACION DEL MENSAJE EN FORMATO JSON
         $mensaje = json_encode([
             "messaging_product" => "whatsapp",
-            "to" => $telefono,
-            "type" => "text",
+            "to" => $numero,
             "text" => [
-                "preview_url" => true,
-                "body" => "dddd"
-            ]
-            
+                "body" => $mensaje
+            ],
+            "type" => "text"
         ]);
-    
         // DECLARAMOS LAS CABECERAS
         $header = array("Authorization: Bearer " . $token, "Content-Type: application/json");
         
