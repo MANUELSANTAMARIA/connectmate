@@ -18,8 +18,6 @@ class msjwha{
         $mensaje = ''
     . '{'
     . '"messaging_product": "whatsapp",'
-    . '"preview_url": false,'
-    . '"recipient_type": "individual",'
     . '"to": "'.$telefono.'",'
     . '"type": "text",'
     . '"text": {'
