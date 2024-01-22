@@ -78,11 +78,3 @@ class msjwha{
 }
 
 
-
-if ($_SERVER['REQUEST_METHOD']==='POST'){
-    $input = file_get_contents('php://input');
-    $data = json_decode($input,true);
-
-    // recibirMensajes($data,http_response_code());
-    
-}
