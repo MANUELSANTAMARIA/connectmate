@@ -1,12 +1,30 @@
 <?php
+
 session_name("connectmate");
 //inciar sesiones 
 session_start();
+$id_usuario = $_SESSION["usuario"];
+const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
+// const WEBHOOK_URL = "https://samperza.com/cnt-mensaje/cnt-whatsapp/webhook.php";
+
 if($_SESSION['us_tipo']==1){
 
-    $id_usuario = $_SESSION["usuario"];
+    function verificarToken($req,$res){
+        try{
+            $token = $req['hub_verify_token'];
+            $challenge = $req['hub_challenge'];
+    
+            if (isset($challenge) && isset($token) && $token === TOKEN_ANDERCODE) {
+                $res->send($challenge);
+            } else {
+                $res->status(400)->send();
+            }
 
-
+        }catch(Exception $e){
+            $res ->status(400)->send();
+        }
+    }
+    
     // Obtener los datos JSON desde la solicitud
     $json_data = file_get_contents("php://input");
 
@@ -47,7 +65,7 @@ if($_SESSION['us_tipo']==1){
         
          EnviarMensajeWhatsapp($telefono, $mensaje);
 
-         
+
         }
          echo "add";
         } catch (Exception $e) {

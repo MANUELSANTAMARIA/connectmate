@@ -29,7 +29,7 @@ if($data["funcion"] == "txtwhatsapp"){
     
 
     $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
-    ;
+    
     
 }
 
