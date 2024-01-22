@@ -16,14 +16,16 @@ class msjwha{
     
         // CONFIGURACION DEL MENSAJE EN FORMATO JSON
         $mensaje = ''
-    . '{'
-    . '"messaging_product": "whatsapp",'
-    . '"to": "'.$telefono.'",'
-    . '"type": "text",'
-    . '"text": {'
-    .    '"body": "'.$mensaje.'"'
-    . '}'
-    . '}';
+        . '{'
+        . '"messaging_product": "whatsapp", '
+        . '"to": "'.$telefono.'", '
+        . '"type": "template", '
+        . '"template": '
+        . '{'
+        . '     "name": "hello_world",'
+        . '     "language":{ "code": "en_US" } '
+        . '} '
+        . '}';
         // DECLARAMOS LAS CABECERAS
         $header = array("Authorization: Bearer " . $token, "Content-Type: application/json");
         
