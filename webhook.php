@@ -1,13 +1,13 @@
 <?php
 
-session_name("connectmate");
-//inciar sesiones 
-session_start();
-$id_usuario = $_SESSION["usuario"];
+// session_name("connectmate");
+// //inciar sesiones 
+// session_start();
+// $id_usuario = $_SESSION["usuario"];
 const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
 const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
-if($_SESSION['us_tipo']==1){
+// if($_SESSION['us_tipo']==1){
 
     function verificarToken($req,$res){
         try{
@@ -117,4 +117,4 @@ if($_SESSION['us_tipo']==1){
         
     }
 
-}
+// }
