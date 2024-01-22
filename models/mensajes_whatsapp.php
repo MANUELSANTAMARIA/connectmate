@@ -9,34 +9,41 @@ class msjwha{
 
     
     function EnviarMensajeWhatsapp($mensaje, $telefono){
-        $data = json_encode([
-            "messaging_product" => "whatsapp",    
-            "recipient_type"=> "individual",
-            "to" => $telefono,
-            "type" => "text",
-            "text"=> [
-                "preview_url" => false,
-                "body"=> $mensaje
-            ]
-        ]);
-       
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD\r\n",
-                'content' => $data,
-                'ignore_errors' => true
-            ]
-        ];
+      //TOKEN QUE NOS DA FACEBOOK
+      $token = 'EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD';
+    //   //NUESTRO TELEFONO
+    //   $telefono = '593989583454';
+      //URL A DONDE SE MANDARA EL MENSAJE
+      $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
 
-        $context = stream_context_create($options);
-        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);  
-    
-        if ($response === false) {
-            echo "Error al enviar el mensaje\n";
-        } else {
-            echo "Mensaje enviado correctamente\n";
-        }
+      //CONFIGURACION DEL MENSAJE
+      $mensaje = ''
+        . '{'
+        . '"messaging_product": "whatsapp", '
+        . '"to": "'.$telefono.'", '
+        . '"type": "template", '
+        . '"template": '
+        . '{'
+        . '     "name": "hello_world",'
+        . '     "language":{ "code": "en_US" } '
+        . '} '
+        . '}';
+     //DECLARAMOS LAS CABECERAS
+     $header = array("Authorization: Bearer " . $token, "Content-Type: application/json",);
+    //INICIAMOS EL CURL
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $mensaje);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+   //OBTENEMOS LA RESPUESTA DEL ENVIO DE INFORMACION
+   $response = json_decode(curl_exec($curl), true);
+  //IMPRIMIMOS LA RESPUESTA 
+   print_r($response);
+  //OBTENEMOS EL CODIGO DE LA RESPUESTA
+  $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+  //CERRAMOS EL CURL
+   curl_close($curl);
     }
 
     
@@ -57,7 +64,7 @@ class msjwha{
             ':mensaje' => $mensaje,
             ':id_us' => $id_usuario
          ));
-         $this->EnviarMensajeWhatsapp($mensaje, $telefono);
+         $this->EnviarMensajeWhatsapp($telefono);
         }
          echo "add";
         } catch (Exception $e) {
