@@ -15,16 +15,17 @@ class msjwha{
         $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
     
         // CONFIGURACION DEL MENSAJE EN FORMATO JSON
-        $mensaje_json = json_encode([
-            "messaging_product" => "whatsapp",
-            "preview_url" => false,
-            "recipient_type" => "individual",
-            "to" => $telefono,
-            "type" => "text",
-            "text" => [
-                "body" => $mensaje
-            ]
-        ]);
+        $mensaje = ''
+        . '{'
+        . '"messaging_product": "whatsapp", '
+        . '"to": "'.$telefono.'", '
+        . '"type": "template", '
+        . '"template": '
+        . '{'
+        . '     "name": "hello_world",'
+        . '     "language":{ "code": "en_US" } '
+        . '} '
+        . '}';
     
         // DECLARAMOS LAS CABECERAS
         $header = array("Authorization: Bearer " . $token, "Content-Type: application/json");
