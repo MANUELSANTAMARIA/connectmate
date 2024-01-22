@@ -33,7 +33,7 @@ class msjwha{
         // INICIAMOS EL CURL
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $mensaje_json);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $mensaje);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         
