@@ -13,10 +13,10 @@ class msjwha{
             "messaging_product" => "whatsapp",    
             "recipient_type"=> "individual",
             "to" => $telefono,
-            "type" => $mensaje,
+            "type" => "text",
             "text"=> [
                 "preview_url" => false,
-                "body"=> "Te amoo"
+                "body"=> $mensaje
             ]
         ]);
 
