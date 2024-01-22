@@ -22,7 +22,7 @@ class msjwha{
             "type" => "text",
             "text"=> [
                 "preview_url" => false,
-                "body"=> "Te amoo"
+                "body"=> $mensaje
             ]
         ]);
     
