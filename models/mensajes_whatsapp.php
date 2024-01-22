@@ -17,7 +17,7 @@ class msjwha{
         // CONFIGURACION DEL MENSAJE EN FORMATO JSON
         $mensaje = json_encode([
             "messaging_product" => "whatsapp",
-            "to" => $numero,
+            "to" => $telefono,
             "text" => [
                 "body" => $mensaje
             ],
