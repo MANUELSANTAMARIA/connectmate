@@ -37,7 +37,15 @@ class msjwha{
         } else {
             echo "Mensaje enviado correctamente\n";
         }
+
+        if ($_SERVER['REQUEST_METHOD']==='POST'){
+            $input = file_get_contents('php://input');
+            $data = json_decode($input,true);
+            
+        }
     }
+
+    
 
 
     function msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario){   
