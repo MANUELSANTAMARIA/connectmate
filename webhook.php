@@ -5,7 +5,7 @@ session_name("connectmate");
 session_start();
 $id_usuario = $_SESSION["usuario"];
 const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
-const WEBHOOK_URL = "https://samperza.com/cnt-mensaje/cnt-whatsapp/webhook.php";
+const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
 if($_SESSION['us_tipo']==1){
 
