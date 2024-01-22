@@ -15,15 +15,14 @@ class msjwha{
         $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
     
         // CONFIGURACION DEL MENSAJE EN FORMATO JSON
-        $data = json_encode([
-            "messaging_product" => "whatsapp",    
-            "recipient_type"=> "individual",
-            "to" => $numero,
-            "type" => "text",
-            "text"=> [
-                "preview_url" => false,
-                "body"=> $mensaje
-            ]
+        $mensaje = json_encode([
+            "messaging_product" => "whatsapp",
+            "to" => $telefono,
+            "text" => [
+                "preview_url" => true,
+                "body" => $mensaje
+            ],
+            "type" => "text"
         ]);
     
         // DECLARAMOS LAS CABECERAS
@@ -32,7 +31,7 @@ class msjwha{
         // INICIAMOS EL CURL
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $mensaje);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         
