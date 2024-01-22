@@ -9,34 +9,34 @@ class msjwha{
 
     
     function EnviarMensajeWhatsapp($telefono, $mensaje) {
-        $token = 'EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD';
-        $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
-    
         $data = json_encode([
             "messaging_product" => "whatsapp",    
-            "to" => $telefono,
+            "recipient_type"=> "individual",
+            "to" => $numero,
             "type" => "text",
             "text"=> [
-                "body"=> $mensaje
+                "preview_url" => false,
+                "body"=> "Te amoo"
             ]
         ]);
+       
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD\r\n",
+                'content' => $data,
+                'ignore_errors' => true
+            ]
+        ];
+
+        $context = stream_context_create($options);
+        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);  
     
-        $header = array("Authorization: Bearer " . $token, "Content-Type: application/json",);
-    
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    
-        //OBTENEMOS LA RESPUESTA DEL ENVIO DE INFORMACION
-        $response = json_decode(curl_exec($curl), true);
-        //IMPRIMIMOS LA RESPUESTA 
-        print_r($response);
-        //OBTENEMOS EL CODIGO DE LA RESPUESTA
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        //CERRAMOS EL CURL
-        curl_close($curl);
+        if ($response === false) {
+            echo "Error al enviar el mensaje\n";
+        } else {
+            echo "Mensaje enviado correctamente\n";
+        }
     }
     
     
