@@ -5,7 +5,7 @@ session_name("connectmate");
 session_start();
 $id_usuario = $_SESSION["usuario"];
 const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
-// const WEBHOOK_URL = "https://samperza.com/cnt-mensaje/cnt-whatsapp/webhook.php";
+const WEBHOOK_URL = "https://samperza.com/cnt-mensaje/cnt-whatsapp/webhook.php";
 
 if($_SESSION['us_tipo']==1){
 
@@ -91,7 +91,7 @@ if($_SESSION['us_tipo']==1){
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD\r\n",
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD\r\n",
                 'content' => $data,
                 'ignore_errors' => true
             ]
