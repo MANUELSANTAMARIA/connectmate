@@ -15,7 +15,7 @@ class msjwha{
         $data = json_encode([
             "messaging_product" => "whatsapp",    
             "recipient_type"=> "individual",
-            "to" => $numero,
+            "to" => $mensaje,
             "type" => "text",
             "text"=> [
                 "preview_url" => false,
