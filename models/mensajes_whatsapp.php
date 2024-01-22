@@ -19,11 +19,11 @@ class msjwha{
                 "body"=> $mensaje
             ]
         ]);
-
+       
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD\r\n",
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD\r\n",
                 'content' => $data,
                 'ignore_errors' => true
             ]
@@ -31,22 +31,15 @@ class msjwha{
 
         $context = stream_context_create($options);
         $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);  
-
+    
         if ($response === false) {
-            throw new Exception("Error al enviar el mensaje\n");
+            echo "Error al enviar el mensaje\n";
         } else {
             echo "Mensaje enviado correctamente\n";
-        }
-
-        if ($_SERVER['REQUEST_METHOD']==='POST'){
-            $input = file_get_contents('php://input');
-            $data = json_decode($input,true);
-            
         }
     }
 
     
-
 
     function msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario){   
         try {
@@ -74,4 +67,14 @@ class msjwha{
 
 
 
+}
+
+
+
+if ($_SERVER['REQUEST_METHOD']==='POST'){
+    $input = file_get_contents('php://input');
+    $data = json_decode($input,true);
+
+    // recibirMensajes($data,http_response_code());
+    
 }
