@@ -17,14 +17,14 @@ class msjwha{
         // CONFIGURACION DEL MENSAJE EN FORMATO JSON
         $mensaje = ''
         . '{'
-        . '"messaging_product": "whatsapp", '
-        . '"to": "'.$telefono.'", '
-        . '"type": "template", '
-        . '"template": '
-        . '{'
-        . '     "name": "hello_world",'
-        . '     "language":{ "code": "en_US" } '
-        . '} '
+        . '"messaging_product": "whatsapp",'
+        . '"preview_url": false,'
+        . '"recipient_type": "individual",'
+        . '"to": "'.$telefono.'",'
+        . '"type": "text",'
+        . '"text": {'
+            . '"body": "'.$mensaje.'"'
+        . '}'
         . '}';
     
         // DECLARAMOS LAS CABECERAS
