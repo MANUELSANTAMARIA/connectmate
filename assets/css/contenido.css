@@ -1,0 +1,769 @@
+
+
+.content-wrapper {
+    /* Estilos de diseño del content-wrapper */
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    
+  }
+  
+.content-wrapper .titulo{
+  color:black ;
+  font-size: 20PX;
+  margin-bottom: 40px;
+}
+
+
+
+/* crear modal */
+.modal {
+  display: none; 
+  position: fixed; /*Esta propiedad establece la posición del elemento modal como fija en relación con la ventana del navegador.*/
+  z-index: 1; /* Esto controla la superposición de capas o "z-index" del elemento modal. Un valor más alto significa que la ventana modal aparecerá por encima de otros elementos en la página.*/
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; /* Si el contenido dentro de la ventana modal es más grande que la pantalla, esta propiedad permite que el usuario haga desplazamiento vertical u horizontal dentro de la ventana modal para ver todo el contenido */
+  background-color: rgba(0,0,0,0.5);
+
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; 
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover{
+  cursor: pointer;
+  color: black;
+}
+
+
+.titulo-modal{
+  display: block;
+  background-color: #1783db;
+  border-radius: 5px;
+  width: 90%;
+  height: 50px;
+  color: white;
+  margin-left: 25px;
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /*Centrar horizontalmente*/
+}
+
+/* modal de formulario */
+.modal-formulario {
+  display: none; 
+  position: fixed; /*Esta propiedad establece la posición del elemento modal como fija en relación con la ventana del navegador.*/
+  z-index: 1; /* Esto controla la superposición de capas o "z-index" del elemento modal. Un valor más alto significa que la ventana modal aparecerá por encima de otros elementos en la página.*/
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; /* Si el contenido dentro de la ventana modal es más grande que la pantalla, esta propiedad permite que el usuario haga desplazamiento vertical u horizontal dentro de la ventana modal para ver todo el contenido */
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-formulario .modal-content {
+  background-color: #fefefe;
+  margin: 5% auto; 
+  padding: 5px;
+  border: 1px solid #888;
+  width: 50%; 
+}
+
+
+
+
+/* formularios input y buton dentro del modal cambio de contraseña */
+.formulario{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* form input, label */
+.form{
+  width: 100%;
+  height: 50px;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 10px;
+  position: relative; /* cambia la posición del elemento en relación con el elemento principal  */
+  overflow: hidden;   /*  Esto oculta cualquier contenido que se desborde de la form */ 
+  
+}
+
+
+.form input{
+  width: 100%;
+  height: 100%;
+  background: none;
+  color: black;
+  padding-top: 12px;
+  border: none;
+  outline: 0px;
+}
+
+
+.form .lbl{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid #1783db;
+}
+
+
+
+.form .lbl:after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 100%;
+  border-bottom: 3px solid #0b7300;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+
+.text-span{
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+
+.form input:focus + .lbl .text-span,.form input:valid + .lbl .text-span{
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: #0b7300;
+}
+
+
+.form input:focus + .lbl:after, .form input:valid + .lbl:after{
+  transform: translateX(0%);
+} 
+
+
+
+.combodesplegable{
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.combodesplegable .select {
+  width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
+.combodesplegable .select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+  color: #0b7300;
+}
+
+.select option[selected] {
+  color:#1783db;
+}
+
+/* botones */
+.button-container {
+  margin-top: 40px;
+  text-align: center;
+  /* background-color: #0b7300; */
+  width: 300px;
+  margin: auto;
+}
+
+.inline-button {
+  background-color: #1783db;
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 10px 30px; /* Espaciado interno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin decoración de texto */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 5px; /* Radio de borde */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+}
+
+
+
+.inline-button:hover {
+  background-color: #0b7300; /* Color de fondo */
+
+}
+
+.inline-button-eliminar {
+  background-color: #1783db;
+  margin-top: 5px;
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 10px 30px; /* Espaciado interno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin decoración de texto */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 5px; /* Radio de borde */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+}
+
+.inline-button-eliminar:hover {
+  background-color: red; /* Color de fondo */
+
+}
+
+/* alertas de form */
+.stylo-alerta-confirmacion{
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.stylo-alerta-rechazo{
+  width: 70%;
+  background-color: #FFD9D9;
+  border-color: #c3e6cb;
+  color: #8B0000;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+
+/* buscar */
+.ds-buscar{
+  position: relative;
+  overflow: hidden;
+  width: 40%;
+  height: 50px;
+  max-width: 1000px;
+  
+}
+
+
+.ds-buscar input{
+  width: 100%;
+  height: 100%;
+  background: none;
+  color: black;
+  padding-top: 12px;
+  border: none;
+  outline: 0px;
+}
+
+
+.ds-buscar .lbl{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid #1783db;
+}
+
+
+.ds-buscar .lbl:after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 100%;
+  border-bottom: 3px solid #0b7300;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+
+.text-span{
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+
+.ds-buscar input:focus + .lbl .text-span,
+.ds-buscar input:valid + .lbl .text-span{
+  transform: translateY(-150%);
+  font-size: 15px;
+  color: #0b7300; 
+}
+
+.ds-buscar input:focus + .lbl:after, 
+.ds-buscar input:valid + .lbl:after{
+  transform: translateX(0%);
+} 
+
+
+/*HOME */
+.content-wrapper-catalogo{
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  background-color: white;  
+}
+
+/* graficos */
+.content-wrapper-catalogo .grafico {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #ddd; /* Grosor y color del borde */
+    border-radius: 6px; /* Redondear las esquinas */
+    padding: 10px; /* Espacio interno del contenido de la card */
+    border-radius: 30px;
+    box-shadow: 0px 0px 25px #222; /*difuminacion*/
+    backdrop-filter: blur(10px);
+    margin-top: 30px;
+    margin-left: 50px;
+  }
+  
+.content-wrapper-catalogo .grafico  .titulografico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px; /* Ajusta la altura según tus necesidades */
+  margin: 7px;
+  border-radius: 30px;
+  background: #0000FF;
+  border: 1px solid #ddd; /* Grosor y color del borde */
+  }
+  
+.content-wrapper-catalogo .grafico  .titulografico h5 {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+  }
+  
+  .content-wrapper-catalogo .grafico .graficodona{
+    width: 80%;
+    margin-left: 50px;
+  }
+
+.content-wrapper-catalogo .embudossee{
+    display: flex;
+}
+
+.content-wrapper-catalogo  .embudossee img {
+    display: flex;
+    margin-left: 40px;
+    width: 700px; /* Ancho deseado */
+    height: auto; /* La altura se ajustará proporcionalmente al ancho */
+  }
+  
+/* Desacraga del archivo */
+.content-wrapper-catalogo .descargardoc{
+    height: 7%;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    height: 200px;
+  }
+
+.content-wrapper-catalogo .descargardoc  .titulodes {
+    /*centrar el texto*/
+    text-align: center;
+    /*tamaño de letra*/
+    font-size: 15px;
+    /*tranformar la letra en mayuscula*/
+    text-transform: uppercase;
+    /*espacio entre letra*/
+    letter-spacing: 4px;
+    /*margen por arriba*/
+    margin-top: 15px;
+    /*trasicion*/
+    transition: all 30 ms;
+    color: black;
+    
+  }
+
+.content-wrapper-catalogo .descargardoc a{
+    font-size: 30px;
+    color: #0000FF;
+}
+
+
+
+/* DATOS PERSONALES */
+.personal-info {
+  border: 1px solid #ccc;
+  width: 350px;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.personal-info h2 {
+  margin-bottom: 10px;
+  color:#0b7300
+}
+.personal-info img{
+  display: block; /* Cambia a bloque para centrar horizontalmente */
+  margin: auto; /* Centrar horizontalmente */
+  width: 130px; /* Establece una ancho fija */
+  height: 130px; /* Establece una altura fija */
+  object-fit: cover; /* Cubre completamente el contenedor manteniendo la proporción original */
+  border-radius: 50%;
+}
+.personal-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.personal-info ul li {
+  margin-bottom: 10px;
+}
+
+.personal-info ul li strong {
+  font-weight: bold;
+}
+
+.btn-avatar {
+  background-color: #0b7300; /* Color de fondo */
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 10px 20px; /* Espaciado interno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin decoración de texto */
+  display: inline-block; /* Mostrar como bloque en línea */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 10px; /* Radio de borde */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+}
+
+.btn-avatar:hover{
+  background-color: #1783db;
+}
+
+.vista-previa{
+  width: 200px; ;
+  height: 200px;
+  margin: auto;
+}
+.vista-previa img{
+  display: block;
+  margin: auto; /* Centrar horizontalmente */
+  max-width: 100%; /* Asegura que la imagen no sea más ancha que su contenedor */
+  width: 400px;
+  height: 200px;
+  background-color: #0b7300;
+  border-radius: 50%; /* Hacer la imagen circular */
+}
+
+
+/* ADMINISTRADOR DE USUARIOS */
+
+/* card*/
+.contenedor-card{
+  display: flex;
+  /* en un contenedor flexible, los elementos flexibles se envolverán en una nueva línea si no tienen 
+  suficiente espacio horizontal en la línea actual */
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+
+.card {
+  position: relative;
+  width:  30%;
+  height: 25%;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 1px solid #ddd; /* Grosor y color del borde */
+  border-radius: 6px; /* Redondear las esquinas */
+  padding: 10px; /* Espacio interno del contenido de la card */
+  align-items: center;
+  word-wrap: break-word ; /*para controlar palabras largas*/
+}
+
+.contenedor-card .card-body img{
+  display: block; /* Cambia a bloque para centrar horizontalmente */
+  margin: auto; /* Centrar horizontalmente */
+  max-width: 100%; /* Asegura que la imagen no sea más ancha que su contenedor */
+  width: 130px;
+  border-radius: 50%;
+}
+
+
+
+.card-footer{
+  margin-top: 20px;
+  text-align: center; /* Centra el contenido horizontalmente */
+}
+
+.card-footer button{
+  margin-top: 5px;
+  
+}
+
+
+/* GESTIONAR PROGRAMA EJE */
+
+.card_programa_eje {
+  position: relative;
+  width:  30%;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 1px solid #ddd; /* Grosor y color del borde */
+  border-radius: 6px; /* Redondear las esquinas */
+  padding: 10px; /* Espacio interno del contenido de la card */
+  align-items: center;
+  word-wrap: break-word ; /*para controlar palabras largas*/
+  
+}
+
+.card_programa_eje .card-body{
+  height: 370px; 
+}
+
+.card_programa_eje .card-footer{
+  text-align: center;
+  margin-top: auto; /* Empujar el pie de la tarjeta hacia abajo */
+}
+
+.card_programa_eje .card-footer button{
+  margin-top: 5px;
+  
+}
+
+
+.contenedor-card .card-body img{
+  display: block; /* Cambia a bloque para centrar horizontalmente */
+  margin: auto; /* Centrar horizontalmente */
+  width: 130px; /* Establece una ancho fija */
+  height: 130px; /* Establece una altura fija */
+  object-fit: cover; /* Cubre completamente el contenedor manteniendo la proporción original */
+  border-radius: 50%;
+}
+
+.contenedor-card .card-body div button{
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.contenedor-card .card-body div button:hover{
+  background-color: #DCDCDC;
+  cursor: pointer;
+  
+}
+
+
+/* GESTIONAR PROYECTO */
+
+.macrometabuscar {
+  display: inline-block;
+  width: 100%;
+}
+
+.buscarinstitucionmacrometa{
+  color: #0000FF;
+}
+
+.buscarinstitucionmacrometa,
+.ds-buscar {
+  display: inline-block;
+  width: 30%;
+  box-sizing: border-box; /* Asegura que el ancho se incluya en el espacio total ocupado por cada elemento */
+  margin-left: 10px;
+}
+
+.combodesplegableadm label{
+  display:block; 
+  margin-top:10px; 
+  color:#0000FF; 
+  margin-bottom:10px;
+  margin-right: 10px;
+}
+
+
+
+.combodesplegableadm .select {
+  width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
+.combodesplegableadm .select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+  color: #0b7300;
+}
+
+
+
+
+/* GESTIONAR PROYECTO */
+.card_proyecto {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  /* height: 300px; */
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 1px solid #ddd; /* Grosor y color del borde */
+  border-radius: 6px; /* Redondear las esquinas */
+  padding: 10px; /* Espacio interno del contenido de la card */
+  align-items: center;
+  word-wrap: break-word ; /*para controlar palabras largas*/
+}
+
+.card_proyecto .card-body{
+  height: 270px;
+}
+
+.card_proyecto .card-footer{
+  text-align: center;
+  margin-top: auto; /* Empujar el pie de la tarjeta hacia abajo */
+}
+
+.card_proyecto .card-footer button{
+  margin-top: 5px;
+  
+}
+
+
+/* Mensajes masivos en Whatsapp */
+.subirdoc {
+  display: none;
+  width: 70%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 10%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 1% 30%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+.combodesplegable-content-wrapper{
+  margin-top: 30px;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.combodesplegable-content-wrapper .select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
+.combodesplegable-content-wrapper .select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+  color: #0b7300;
+}
+
+.select option[selected] {
+  color:#1783db;
+}
+
+
+
+.inline-button-msj-what {
+  display: none;
+  background-color: #1783db;
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 10px 30px; /* Espaciado interno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin decoración de texto */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 5px; /* Radio de borde */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+}
+
+
+
+.inline-button-msj-what:hover {
+  background-color: #0b7300; /* Color de fondo */
+
+}
+
+
+/* tabladata*/
+#tabla{
+  width: 90%;
+  margin: 10px 70px;
+}
+
+
+/* contenido de todo lo que va dentro de la trabla */
+#tabla .dataTables_wrapper{
+  background: white;
+}
+/* Cambiar el color de fondo de las filas alternas */
+#tablares tbody tr:nth-child(odd) {
+  background-color: rgb(224, 218, 218);
+}
+
+/* Cambiar el color de los botones de paginación */
+#tablares_paginate .paginate_button {
+  background-color: #cdd9df; /* Color de fondo */
+  
+}
+table.dataTable thead {
+  background: linear-gradient(to right,#004c9c, #e12206);
+  color: white;
+}
+
+
+
+
