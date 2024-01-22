@@ -8,26 +8,25 @@ class msjwha{
     }
 
     
-    function EnviarMensajeWhatsapp($telefono){
+    function EnviarMensajeWhatsapp($telefono, $mensaje){
       //TOKEN QUE NOS DA FACEBOOK
       $token = 'EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD';
-    //   //NUESTRO TELEFONO
-    //   $telefono = '593989583454';
       //URL A DONDE SE MANDARA EL MENSAJE
       $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
 
       //CONFIGURACION DEL MENSAJE
       $mensaje = ''
         . '{'
-        . '"messaging_product": "whatsapp", '
-        . '"to": "'.$telefono.'", '
-        . '"type": "template", '
-        . '"template": '
-        . '{'
-        . '     "name": "hello_world",'
-        . '     "language":{ "code": "en_US" } '
-        . '} '
+        . '"messaging_product": "whatsapp",'
+        . '"preview_url": false,'
+        . '"recipient_type": "individual",'
+        . '"to": "'.$telefono.'",'
+        . '"type": "text",'
+        . '"text": {'
+            . '"body": "'.$mensaje.'"'
+        . '}'
         . '}';
+
      //DECLARAMOS LAS CABECERAS
      $header = array("Authorization: Bearer " . $token, "Content-Type: application/json",);
     //INICIAMOS EL CURL
@@ -64,7 +63,7 @@ class msjwha{
             ':mensaje' => $mensaje,
             ':id_us' => $id_usuario
          ));
-         $this->EnviarMensajeWhatsapp($telefono);
+         $this->EnviarMensajeWhatsapp($telefono, $mensaje);
         }
          echo "add";
         } catch (Exception $e) {
