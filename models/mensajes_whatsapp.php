@@ -8,7 +8,7 @@ class msjwha{
     }
 
     
-    function EnviarMensajeWhatsapp($mensaje, $telefono){
+    function EnviarMensajeWhatsapp($telefono){
       //TOKEN QUE NOS DA FACEBOOK
       $token = 'EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD';
     //   //NUESTRO TELEFONO
