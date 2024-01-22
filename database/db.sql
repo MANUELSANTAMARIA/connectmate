@@ -80,6 +80,6 @@ CREATE TABLE msjwhatsapp(
     audio VARCHAR(255),
     video VARCHAR(255),
     us_id int(255) NOT NULL,
-    CONSTRAINT pk_msjwhatsapp PRIMARY KEY(msjwhatsapp),
+    CONSTRAINT pk_msjwhatsapp PRIMARY KEY(id_msjwhatsapp),
     CONSTRAINT fk_msjwhatsapp_usuario FOREIGN KEY(us_id) REFERENCES usuario(id_us)
 )ENGINE = InnoDb;
