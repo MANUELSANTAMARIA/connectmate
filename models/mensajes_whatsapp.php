@@ -19,11 +19,10 @@ class msjwha{
         . '{'
         . '"messaging_product": "whatsapp", '
         . '"to": "'.$telefono.'", '
-        . '"type": "template", '
-        . '"template": '
+        . '"type": "text", '
+        . '"text": '
         . '{'
-        . '     "name": "hello_world",'
-        . '     "language":{ "code": "en_US" } '
+        . '"body": "'.$mensaje.'"'
         . '} '
         . '}';
         // DECLARAMOS LAS CABECERAS
