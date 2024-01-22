@@ -12,12 +12,14 @@ class msjwha{
         $token = 'EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD';
         $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
     
-        $mensajeData = json_encode([
-            "messaging_product" => "whatsapp",
-            "to" => $telefono,
+        $data = json_encode([
+            "messaging_product" => "whatsapp",    
+            "recipient_type"=> "individual",
+            "to" => $numero,
             "type" => "text",
-            "text" => [
-                "body" => $mensaje
+            "text"=> [
+                "preview_url" => false,
+                "body"=> "Te amoo"
             ]
         ]);
     
@@ -28,7 +30,7 @@ class msjwha{
     
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $mensajeData);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     
