@@ -17,14 +17,11 @@ class msjwha{
             "to" => $telefono,
             "type" => "text",
             "text"=> [
-                "body"=> "Te amoo"
+                "body"=> $mensaje
             ]
         ]);
     
-        $header = [
-            "Authorization: Bearer " . $token,
-            "Content-Type: application/json"
-        ];
+        $header = array("Authorization: Bearer " . $token, "Content-Type: application/json",);
     
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -32,20 +29,13 @@ class msjwha{
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     
-        $response = curl_exec($curl);
-    
-        if ($response === false) {
-            echo "Error en la solicitud cURL: " . curl_error($curl);
-        } else {
-            $decodedResponse = json_decode($response, true);
-    
-            if (isset($decodedResponse['error'])) {
-                echo "Error en la respuesta: " . $decodedResponse['error']['message'];
-            } else {
-                echo "Mensaje enviado correctamente";
-            }
-        }
-    
+        //OBTENEMOS LA RESPUESTA DEL ENVIO DE INFORMACION
+        $response = json_decode(curl_exec($curl), true);
+        //IMPRIMIMOS LA RESPUESTA 
+        print_r($response);
+        //OBTENEMOS EL CODIGO DE LA RESPUESTA
+        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        //CERRAMOS EL CURL
         curl_close($curl);
     }
     
