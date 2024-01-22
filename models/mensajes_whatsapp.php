@@ -9,42 +9,46 @@ class msjwha{
 
     
     function EnviarMensajeWhatsapp($telefono, $mensaje){
-      //TOKEN QUE NOS DA FACEBOOK
-      $token = 'EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD';
-      //URL A DONDE SE MANDARA EL MENSAJE
-      $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
-
-      //CONFIGURACION DEL MENSAJE
-      $mensaje = ''
-        . '{'
-        . '"messaging_product": "whatsapp",'
-        . '"preview_url": false,'
-        . '"recipient_type": "individual",'
-        . '"to": "'.$telefono.'",'
-        . '"type": "text",'
-        . '"text": {'
-            . '"body": "'.$mensaje.'"'
-        . '}'
-        . '}';
-
-     //DECLARAMOS LAS CABECERAS
-     $header = array("Authorization: Bearer " . $token, "Content-Type: application/json",);
-    //INICIAMOS EL CURL
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $mensaje);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-   //OBTENEMOS LA RESPUESTA DEL ENVIO DE INFORMACION
-   $response = json_decode(curl_exec($curl), true);
-  //IMPRIMIMOS LA RESPUESTA 
-   print_r($response);
-  //OBTENEMOS EL CODIGO DE LA RESPUESTA
-  $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-  //CERRAMOS EL CURL
-   curl_close($curl);
+        // TOKEN QUE NOS DA FACEBOOK
+        $token = 'EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD';
+        // URL A DONDE SE MANDARA EL MENSAJE
+        $url = 'https://graph.facebook.com/v18.0/101906169521341/messages';
+    
+        // CONFIGURACION DEL MENSAJE EN FORMATO JSON
+        $mensaje_json = json_encode([
+            "messaging_product" => "whatsapp",
+            "preview_url" => false,
+            "recipient_type" => "individual",
+            "to" => $telefono,
+            "type" => "text",
+            "text" => [
+                "body" => $mensaje
+            ]
+        ]);
+    
+        // DECLARAMOS LAS CABECERAS
+        $header = array("Authorization: Bearer " . $token, "Content-Type: application/json");
+        
+        // INICIAMOS EL CURL
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $mensaje_json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        
+        // OBTENEMOS LA RESPUESTA DEL ENVÍO DE INFORMACIÓN
+        $response = json_decode(curl_exec($curl), true);
+        
+        // IMPRIMIMOS LA RESPUESTA
+        print_r($response);
+        
+        // OBTENEMOS EL CÓDIGO DE LA RESPUESTA
+        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        
+        // CERRAMOS EL CURL
+        curl_close($curl);
     }
-
+    
     
 
     function msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario){   
