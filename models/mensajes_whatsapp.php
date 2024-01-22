@@ -7,8 +7,8 @@ class msjwha{
         $this->acceso = $db->pdo;
     }
 
-    function EnviarMensajeWhastapp($mensaje, $telefono){
-        // $comentario = strtolower($comentario);
+    
+    function EnviarMensajeWhatsapp($mensaje, $telefono){
         $data = json_encode([
             "messaging_product" => "whatsapp",    
             "recipient_type"=> "individual",
@@ -19,7 +19,7 @@ class msjwha{
                 "body"=> "Te amoo"
             ]
         ]);
-       
+
         $options = [
             'http' => [
                 'method' => 'POST',
@@ -31,19 +31,11 @@ class msjwha{
 
         $context = stream_context_create($options);
         $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);  
-    
+
         if ($response === false) {
-            echo "Error al enviar el mensaje\n";
+            throw new Exception("Error al enviar el mensaje\n");
         } else {
             echo "Mensaje enviado correctamente\n";
-        }
-
-        if ($_SERVER['REQUEST_METHOD']==='POST'){
-            $input = file_get_contents('php://input');
-            $data = json_decode($input,true);
-    
-            // recibirMensajes($data,http_response_code());
-            
         }
     }
 
@@ -64,7 +56,7 @@ class msjwha{
             ':mensaje' => $mensaje,
             ':id_us' => $id_usuario
          ));
-         EnviarMensajeWhastapp($mensaje, $telefono);
+         $this->EnviarMensajeWhatsapp($mensaje, $telefono);
         }
          echo "add";
         } catch (Exception $e) {
