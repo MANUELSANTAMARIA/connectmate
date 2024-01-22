@@ -18,11 +18,12 @@ class msjwha{
         $mensaje = json_encode([
             "messaging_product" => "whatsapp",
             "to" => $telefono,
+            "type" => "text",
             "text" => [
                 "preview_url" => true,
-                "body" => $mensaje
-            ],
-            "type" => "text"
+                "body" => "dddd"
+            ]
+            
         ]);
     
         // DECLARAMOS LAS CABECERAS
