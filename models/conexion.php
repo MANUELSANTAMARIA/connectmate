@@ -4,8 +4,8 @@ class conexion{
     private $db = "connectmate";
     private $puerto = 3306;
     private $charset="utf8";
-    private $usuario="root";
-    private $contrasena="";
+    private $usuario="connectmate";
+    private $contrasena="bdsseE12$";
     public $pdo = null;
     // PDO::ATTR_CASE:establecer el modo en que los nombres de columnas se devuelven en los resultados de consultas.
     // PDO::CASE_LOWER: indica que los nombres de las columnas se devuelven en minúsculas.
