@@ -1,13 +1,6 @@
 <?php
-
-// session_name("connectmate");
-// //inciar sesiones 
-// session_start();
-// $id_usuario = $_SESSION["usuario"];
-const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
-const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
-
-// if($_SESSION['us_tipo']==1){
+    const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
+    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
     function verificarToken($req,$res){
         try{
@@ -24,74 +17,27 @@ const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
             $res ->status(400)->send();
         }
     }
+
     
-    // Obtener los datos JSON desde la solicitud
-    $json_data = file_get_contents("php://input");
+    EnviarMensajeWhastapp("593989519807");
 
-    // Decodificar los datos JSON
-    $data = json_decode($json_data, true);
-    if($data["funcion"] == "txtwhatsapp"){
-    // echo json_encode(["status" => "exit"]); 
-    // echo json_encode($data["datosTabla"]);
-
-    // preuba deinsercion
-    // $nombre = "manuel";
-    // $apellido = "santamaria";
-    // $telefono = "099999999";
-    // $mensaje = "sdhdjhsajhgahGXSHSJSJHJHD";
-    // $msjwhatsapp->msjwhatsapp($nombre, $apellido, $telefono, $mensaje, $id_usuario);
-    
-
-    $datosTabla = $data["datosTabla"];
-    $tipoMensaje = $data["tipo_mensaje"];
-    $mensaje = $data["descripcion"];
-    
-
-    try {
-        foreach($datosTabla as $dato){
-            $nombre = $dato[0];
-            $apellido = $dato[1];
-            $telefono = "593".$dato[2];
-         $sql = $sql = "INSERT INTO msjwhatsapp(nombre, apellido, telefono, fecha, mensaje, us_id) 
-         VALUES(:nombre, :apellido, :telefono, now(), :mensaje, :id_us )";
-         $query = $this->acceso->prepare($sql);
-         $query->execute(array(
-            ':nombre' => $nombre,
-            ':apellido' => $apellido,
-            ':telefono' => $telefono,
-            ':mensaje' => $mensaje,
-            ':id_us' => $id_usuario
-         ));
-        
-         EnviarMensajeWhatsapp($telefono, $mensaje);
-
-
-        }
-         echo "add";
-        } catch (Exception $e) {
-            echo "no add". $e;
-        }
-    
-    
-    }
-
-
-    function EnviarMensajeWhatsapp($telefono, $mensaje) {
+    function EnviarMensajeWhastapp($numero){
+        // $comentario = strtolower($comentario);
         $data = json_encode([
             "messaging_product" => "whatsapp",    
             "recipient_type"=> "individual",
-            "to" => $telefono,
+            "to" => $numero,
             "type" => "text",
             "text"=> [
                 "preview_url" => false,
-                "body"=> $mensaje
+                "body"=> "Te amoo"
             ]
         ]);
        
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBO8TG7MmiZBotovHIHEg9dnQZAQcM8IDl2XIiTDvHWlLKUJcp2TyUq30Djc5Pw4v3ZAYSR3ROF0QFP1Lp3aZC4Rv79n4uDgikd5A59Pr50o8A8XZA2M8ZAiDRDp327Gv48oZBrHZAaUgynt83VFGdZB8KFF3NVfF5pfFNlQfPNEPAG3fwGIX7tD2zJbZBK5mCnLg6A1TeZA2esAZD\r\n",
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAhcR77bZCIIBOwvzd2d9EZADmypvQgJOol4tXZCnD1MQlB62UcuRlEGcfgCpZBLWQpn7jEqVxhZCjcVbZBleAiiDP2enwpzH5yRTNHwMM351aYaXlTmiC704UVXsVernjZAr6MDtNJ4eBBxeYRW6fGesY7zwF5pkBO57fhGtnt63buzeHBODlIeA2KSfhY7yv92oH21lIht4ohiuebgVgZD\r\n",
                 'content' => $data,
                 'ignore_errors' => true
             ]
@@ -108,6 +54,8 @@ const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
     }
 
 
+    
+
 
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
@@ -116,5 +64,3 @@ const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
         // recibirMensajes($data,http_response_code());
         
     }
-
-// }
