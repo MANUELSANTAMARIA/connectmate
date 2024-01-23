@@ -1,6 +1,6 @@
 <?php
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
-    const WEBHOOK_URL = "https://samperza.com/webhook.php";
+    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
     function verificarToken($req,$res){
         try{
