@@ -1,5 +1,5 @@
 <?php
-    const TOKEN_ANDERCODE = "MANUELSANTAMARIALARA";
+    const TOKEN_ANDERCODE = "MANUELCHICOSANTASANTA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
     function verificarToken($req,$res){
@@ -19,7 +19,7 @@
     }
 
     
-    EnviarMensajeWhastapp("593989519807");
+    // EnviarMensajeWhastapp("593989519807");
 
     function EnviarMensajeWhastapp($numero){
         // $comentario = strtolower($comentario);
