@@ -1,6 +1,6 @@
 <?php
 class conexion{
-    private $servidor = "localhost";
+    private $servidor = "samperza.com";
     private $db = "connectmate";
     private $puerto = 3306;
     private $charset="utf8";
