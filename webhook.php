@@ -1,6 +1,6 @@
 <?php
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
-    const WEBHOOK_URL = "https://samperza.com/masivo_whatsapp.php";
+    const WEBHOOK_URL = "https://samperza.com/webhook.php";
 
     function verificarToken($req,$res){
         try{
