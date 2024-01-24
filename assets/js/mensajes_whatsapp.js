@@ -374,6 +374,9 @@ $(document).ready(function(){
             datosTabla: datosTabla,
             tipo_mensaje: input_tipo_mensaje,
             descripcion: descripcion,
+            // Incluir valores de sesión
+            usuario: '<?php echo $id_usuario; ?>', 
+             
         };
 
         var datos = JSON.stringify(data);
@@ -383,9 +386,6 @@ $(document).ready(function(){
             type: 'POST',
             data: datos,
             contentType: "application/json",
-            xhrFields: {
-                withCredentials: true
-            }
         }).done(function (response) {
             console.log(response);
         }).fail(function (jqXHR, textStatus, errorThrown) {
