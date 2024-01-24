@@ -379,7 +379,7 @@ $(document).ready(function(){
         var datos = JSON.stringify(data);
         // console.log(datos);
         $.ajax({
-            url: "../connectmate/webhook.php",
+            url: "../webhook.php",
             type: 'POST',
             data: datos,
             contentType: "application/json",
