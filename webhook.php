@@ -82,7 +82,7 @@
             $options = [
                 'http' => [
                     'method' => 'POST',
-                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBOxuHdZAY4p7ir8dAdwCPX144KLYZByynaOQgn8V8XfIUZAMaRAzNzlM0fny2iMMXrWZCgLxtFZCABqtRTyWi2N5Oo1xZBTGyCzx9jbCoimFDIsTrzf0TQnbzSwMfij2GEVk3btN0PAA8qXayWsfwXHdFvzo1O3CSNCYInoZCWL5rMuoMElseglr\r\n",
+                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO7bLnIs6lhkg926xBGGd0yiAZAaJ4gtCfmdPiUk6XkpHDzqPyHVuekJGEaxKZBGwfey8V6FPZAZB4FkpnDGs4pTSaQCnf2Eo9KXgiavL1bsmPn0BBatkZAnSlzWpxZAaP0NLCrMtZCNKfwZCrr8JJRQk7a2KZAY4iEASX0EokavGUMgyMONljz4PQgQ3I0qJ9fK6RoTIxsH4ZD\r\n",
                     'content' => $data, 
                     'ignore_errors' => true
                 ]
