@@ -1,11 +1,9 @@
 <?php
-    const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
-    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
-
     include_once 'models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
     
-
+    const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
+    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
     function verificarToken($req,$res){
         try{
@@ -117,4 +115,3 @@
         http_response_code(403);
         }
     }
-
