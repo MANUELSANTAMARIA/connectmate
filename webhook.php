@@ -72,16 +72,16 @@
                     "body"=> $unionmensaje
                 ]
             ]);
-
+        }
             $options = [
                 'http' => [
                     'method' => 'POST',
-                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4rl7rNPiGjAm54PihExc1D8oQQssTMaus82FKaislVYTC4QsL1xlY1eC9O8BysiCD7JSQ4pbWEQJu2dOt0PrPy7EemIzSvoSztBnDOghkFZAyKiZASjBRqFcyAgHf5TGgljmpdddCZB5oj6sG77jaUb4LHSv50vBwZCZAue7YTMeDdBLY6Kws8hkvBqJiOTeOkZBOyVMZD\r\n",
-                    'content' => $data,
+                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBOZCwmt3uvVpeiFbmM4EbZC7DZAh4jBjYUQFjBgZCqg2BxloVNefsSeszLt4y50JyafUjm0tNx0moNTy1A8hRcrPfUpnPSbcMyYkOpMY6oOtwNXbD7uDDMPrOs3xkgZAP9qGiZCyuGRvcNMtd7wVRv3edJasddJmw2AveB5c0r3opr4YeZB43N4T\r\n",
+                    'content' => $data, 
                     'ignore_errors' => true
                 ]
             ];
-        }
+        
     
             $context = stream_context_create($options);
             $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
