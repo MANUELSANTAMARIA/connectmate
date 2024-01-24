@@ -76,7 +76,7 @@
             $options = [
                 'http' => [
                     'method' => 'POST',
-                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBOZCwmt3uvVpeiFbmM4EbZC7DZAh4jBjYUQFjBgZCqg2BxloVNefsSeszLt4y50JyafUjm0tNx0moNTy1A8hRcrPfUpnPSbcMyYkOpMY6oOtwNXbD7uDDMPrOs3xkgZAP9qGiZCyuGRvcNMtd7wVRv3edJasddJmw2AveB5c0r3opr4YeZB43N4T\r\n",
+                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBOxWqflnqQKQSUUS9M4VdyBUFYIQo41azDhqpDsZBFT2BZCHEiiDXIh5BcBSkqTfMK8enKZCHyRZADeAYTAeOV9XDne7e6L37vymAqH4rka8hgNUie4Tk4ZBX3vQx7ZAZBr84JUCZA1VPFPA9qgF5ab0C8iBi82W98uqWLhLxdsiSn5NZCBTjv4425\r\n",
                     'content' => $data, 
                     'ignore_errors' => true
                 ]
