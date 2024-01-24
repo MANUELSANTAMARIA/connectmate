@@ -383,6 +383,9 @@ $(document).ready(function(){
             type: 'POST',
             data: datos,
             contentType: "application/json",
+            xhrFields: {
+                withCredentials: true
+            }
         }).done(function (response) {
             console.log(response);
         }).fail(function (jqXHR, textStatus, errorThrown) {
