@@ -44,19 +44,32 @@
         $datosTabla = $data["datosTabla"];
         $tipoMensaje = $data["tipo_mensaje"];
         $mensaje = $data["descripcion"];
-        EnviarMensajeWhastapp("593989519807", $tipoMensaje, $mensaje);
+        try {
+            foreach($datosTabla as $dato){
+                $nombre = $dato[0];
+                $apellido = $dato[1];
+                $telefono = "593".$dato[2];
+
+                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
+            }
+
+        }catch (Exception $e){
+            echo "noadd". $e;
+        }
+        
 
     }
-    function EnviarMensajeWhastapp($numero, $tipoMensaje, $mensaje){
+    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
         if($tipoMensaje == 1){
+            $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
             $data = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
-                "to" => $numero,
+                "to" => $telefono,
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "Hola visita mi web andercon-bastidas.com"
+                    "body"=> $unionmensaje
                 ]
             ]);
 
