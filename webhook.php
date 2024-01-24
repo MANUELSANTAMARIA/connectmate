@@ -4,11 +4,9 @@
 
     include_once 'models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
-    session_name("connectmate");
-    session_start();
-    $id_usuario = $_SESSION["usuario"];
+    
 
-if($id_usuario == 1){ 
+
     function verificarToken($req,$res){
         try{
             $token = $req['hub_verify_token'];
@@ -60,7 +58,7 @@ if($id_usuario == 1){
                 EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
                 
             }
-            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
+            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, "1");
         }catch (Exception $e){
             echo "noadd". $e;
         }
@@ -120,4 +118,3 @@ if($id_usuario == 1){
         }
     }
 
-}
