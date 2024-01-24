@@ -8,7 +8,8 @@ if($_SESSION['us_tipo']==1){
 ?>
 
 <div class="content-wrapper">
-    
+    <input type="hidden" id="id-us" value="<?= $_SESSION['usuario'] ?>">
+
     <h1 class="titulo">Mensajes Masivos de Whatsapp</h1>
     <div class="combodesplegable-content-wrapper">
       <select class="select" id="tipo-mensaje">

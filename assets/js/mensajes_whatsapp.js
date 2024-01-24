@@ -368,6 +368,7 @@ $(document).ready(function(){
         var datosTabla = miTabla.rows().data().toArray();
         var input_tipo_mensaje = $('#tipo-mensaje').val();
         var descripcion = $("#descripcion").val();
+        var id_us = $("#id-us").val();
     
         var data = {
             funcion: "txtwhatsapp",
@@ -375,8 +376,7 @@ $(document).ready(function(){
             tipo_mensaje: input_tipo_mensaje,
             descripcion: descripcion,
             // Incluir valores de sesión
-            usuario: '<?php echo $id_usuario; ?>', 
-             
+            usuario: id_us, 
         };
 
         var datos = JSON.stringify(data);
