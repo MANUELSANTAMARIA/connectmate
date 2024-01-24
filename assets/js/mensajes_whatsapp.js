@@ -379,11 +379,10 @@ $(document).ready(function(){
         var datos = JSON.stringify(data);
         // console.log(datos);
         $.ajax({
-            url: "../webhook.php",
+            url: "https://samperza.com/connectmate/webhook.php",
             type: 'POST',
             data: datos,
             contentType: "application/json",
-            
         }).done(function (response) {
             console.log(response);
         }).fail(function (jqXHR, textStatus, errorThrown) {
