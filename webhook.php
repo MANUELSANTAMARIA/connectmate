@@ -1,7 +1,7 @@
 <?php
     include_once 'models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
-    
+
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
@@ -54,9 +54,9 @@
                 $telefono = "593".$dato[2];
 
                 EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                
+                $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, "1");
             }
-            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, "1");
+
         }catch (Exception $e){
             echo "noadd". $e;
         }
