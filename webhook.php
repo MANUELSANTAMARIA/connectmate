@@ -1,9 +1,12 @@
 <?php
     include_once 'models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
-
+    session_name("connectmate");
+    session_start();
+    $id_usuario = $_SESSION["usuario"];
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
+
 
     function verificarToken($req,$res){
         try{
@@ -34,7 +37,7 @@
         }
     }
 
-
+if($_SESSION['us_tipo'] == 1){
     // Obtener los datos JSON desde la solicitud
     $json_data = file_get_contents("php://input");
 
@@ -54,7 +57,7 @@
                 $telefono = "593".$dato[2];
 
                 EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, "1");
+                $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
             }
 
         }catch (Exception $e){
@@ -100,7 +103,7 @@
 
     }
 
-
+}
 
     if ($_SERVER['REQUEST_METHOD']==='POST'){
       $input = file_get_contents('php://input');
