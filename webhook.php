@@ -1,12 +1,14 @@
 <?php
+    const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
+    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
+
     include_once 'models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
     session_name("connectmate");
     session_start();
     $id_usuario = $_SESSION["usuario"];
-    const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
-    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
+if($id_usuario == 1){ 
     function verificarToken($req,$res){
         try{
             $token = $req['hub_verify_token'];
@@ -117,3 +119,5 @@
         http_response_code(403);
         }
     }
+
+}
