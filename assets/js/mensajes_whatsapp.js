@@ -387,11 +387,11 @@ $(document).ready(function(){
             data: datos,
             contentType: "application/json",
         }).done(function (response) {
-            // console.log(response);
-            var response = response.trim();
-            if(response == "add"){
+            console.log(response);
+            // var response = response.trim();
+            // if(response == "add"){
                 enviado_whatsapp();
-            }
+            // }
             
         }).fail(function (jqXHR, textStatus, errorThrown) {
             console.error("Error en la llamada AJAX: ", textStatus, errorThrown);
