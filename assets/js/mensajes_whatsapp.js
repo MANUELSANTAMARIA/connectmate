@@ -387,13 +387,24 @@ $(document).ready(function(){
             data: datos,
             contentType: "application/json",
         }).done(function (response) {
-            console.log(response);
+            // console.log(response);
+            var response = response.trim();
+            if(response == "add"){
+                enviado_whatsapp();
+            }
+            
         }).fail(function (jqXHR, textStatus, errorThrown) {
             console.error("Error en la llamada AJAX: ", textStatus, errorThrown);
         });
     });
     
-    
+    function enviado_whatsapp(){
+        Swal.fire({
+          icon: 'success',
+          title: 'Proceso Exitoso',
+          text: 'Mensajes enviados Correctamente .',
+        })
+    }
 
 })
 

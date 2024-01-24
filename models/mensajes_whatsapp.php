@@ -27,7 +27,7 @@ class msjwha{
         }
             echo "add";
         } catch (Exception $e) {
-            echo "no add". $e;
+            echo "noadd". $e;
         }
     }
 

@@ -62,7 +62,7 @@
                 $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
                 $contadorIteraciones++;
 
-                if ($contadorIteraciones >= 2) {
+                if ($contadorIteraciones >= 200) {
                     break; // Sale del bucle después de 200 iteraciones
                 }
             }
@@ -103,9 +103,9 @@
             $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
     
             if ($response === false) {
-                echo "Error al enviar el mensaje\n";
+                // echo "Error al enviar el mensaje\n";
             } else {
-                echo "Mensaje enviado correctamente\n";
+                // echo "Mensaje enviado correctamente\n";
             }
 
     }
