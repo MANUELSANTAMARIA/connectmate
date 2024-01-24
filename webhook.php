@@ -58,14 +58,14 @@
                 $telefono = "593".$dato[2];
 
                 EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
+                
                 $contadorIteraciones++;
 
                 if ($contadorIteraciones >= 200) {
                     break; // Sale del bucle después de 200 iteraciones
                 }
             }
-
+            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
         }catch (Exception $e){
             echo "noadd". $e;
         }
