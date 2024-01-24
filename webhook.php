@@ -54,9 +54,9 @@
                 $telefono = "593".$dato[2];
 
                 EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, "1");
+                
             }
-
+            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, "1");
         }catch (Exception $e){
             echo "noadd". $e;
         }
