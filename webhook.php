@@ -2,7 +2,6 @@
     include_once 'models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
     
-    $id_usuario = $_SESSION["usuario"];
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
 
