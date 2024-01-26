@@ -378,24 +378,13 @@ $(document).ready(function(){
             // Incluir valores de sesión
             usuario: id_us, 
         };
-
-        var datos = JSON.stringify(data);
-        // console.log(datos);
-        $.ajax({
-            url: "../webhook.php",
-            type: 'POST',
-            data: datos,
-            contentType: "application/json",
-        }).done(function (response) {
-            console.log(response);
-            var response = response.trim();
+        $.post('../webhook.php', data, function(response) {
+            response = response.trim();
             if(response == "add"){
                 enviado_whatsapp();
             }
-            
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.error("Error en la llamada AJAX: ", textStatus, errorThrown);
         });
+        
     });
     
     function enviado_whatsapp(){

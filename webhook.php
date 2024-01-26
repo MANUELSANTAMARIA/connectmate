@@ -19,29 +19,19 @@
             $res ->status(400)->send();
         }
     }
-
     
-    
-    
-
-    
-    // Obtener los datos JSON desde la solicitud
-    $json_data = file_get_contents("php://input");
-
-    // Decodificar los datos JSON
-    $data = json_decode($json_data, true);
-    if($data["funcion"] == "txtwhatsapp"){
+    if($_POST["funcion"] == "txtwhatsapp"){
         include_once 'models/mensajes_whatsapp.php';
         $msjwhatsapp = new msjwha();
     
         // echo json_encode(["status" => "exit"]); 
         // echo json_encode($data["datosTabla"]);
     
-        $datosTabla = $data["datosTabla"];
-        $tipoMensaje = $data["tipo_mensaje"];
-        $mensaje = $data["descripcion"];
-        $mensaje = $data["descripcion"];
-        $id_usuario = $data["usuario"];
+        $datosTabla = $_POST["datosTabla"];
+        $tipoMensaje = $_POST["tipo_mensaje"];
+        $mensaje = $_POST["descripcion"];
+        $mensaje = $_POST["descripcion"];
+        $id_usuario = $_POST["usuario"];
         $contadorIteraciones = 0;
         try {
             foreach($datosTabla as $dato){
@@ -66,10 +56,44 @@
     
 
 
-    
+    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
+        if($tipoMensaje == 1){
+            $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $telefono,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> $unionmensaje
+                ]
+            ]);
+        }
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4gSYdRZAbluVQLovpGhZAHj9a8Sz0UJdMjZBhddZCZAY7VIsi2n2riMyXrCZBLav7dCokQiXgSPvreZCi8ZBqoiBjQgk2fSnvZAbNLe4fCzkXu3o6lhP0hr4TpwTY98jybMBAeN1sEGQfDkqJNOpkMwNgpta9ecOZAh627POuquERvbZA7KDrajpBW7C1ARvzt8hYW1TOE\r\n",
+                'content' => $data, 
+                'ignore_errors' => true
+            ]
+        ];
 
-    
+        
+        $context = stream_context_create($options);
+        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
+
+        if ($response === false) {
+            // echo "Error al enviar el mensaje\n";
+        } else {
+            // echo "Mensaje enviado correctamente\n";
+        }
+
+    }
+
     }else{
+
+
     function recibirMensajes($req, $res) {
         
         try {
