@@ -108,7 +108,7 @@
 
     // Decodificar los datos JSON
     $data = json_decode($json_data, true);
-    if($data["funcion"] == "txtwhatsapp"){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && $data["funcion"] == "txtwhatsapp"){
         include_once 'models/mensajes_whatsapp.php';
         $msjwhatsapp = new msjwha();
     
@@ -141,7 +141,7 @@
         }
             
 
-    }
+    
 
 
     function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
@@ -179,7 +179,7 @@
 
     }
 
-
+    }else{
 
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
@@ -193,4 +193,6 @@
           }else{
           http_response_code(403);
           }
+    }
+
     }
