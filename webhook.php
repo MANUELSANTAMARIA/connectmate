@@ -68,7 +68,7 @@
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "1.- precios de telefonos"
+                    "body"=> "precios de telefonos"
                 ]
             ]);
         }
