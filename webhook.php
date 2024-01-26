@@ -157,24 +157,24 @@
                 ]
             ]);
         }
-            $options = [
-                'http' => [
-                    'method' => 'POST',
-                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO1jVFO8ZAT2pZBoHhUQOYxAWBy2d4tcM3ZBUdLnKhNTvPxNK6iqV4cIcPKQWNSk9Y7D0vOqsTB0YGMKPlsPU23lysZCcrX2YZA6xMQ8XSkWkULzQtagjUNv6c21hJsBxMfFBfpeZCMF1rOmX7WTWKddaiqwCv9ZBb65uaoxONl7ZB1kqwak65oxfK59X7iOSeDp35YNm\r\n",
-                    'content' => $data, 
-                    'ignore_errors' => true
-                ]
-            ];
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4gSYdRZAbluVQLovpGhZAHj9a8Sz0UJdMjZBhddZCZAY7VIsi2n2riMyXrCZBLav7dCokQiXgSPvreZCi8ZBqoiBjQgk2fSnvZAbNLe4fCzkXu3o6lhP0hr4TpwTY98jybMBAeN1sEGQfDkqJNOpkMwNgpta9ecOZAh627POuquERvbZA7KDrajpBW7C1ARvzt8hYW1TOE\r\n",
+                'content' => $data, 
+                'ignore_errors' => true
+            ]
+        ];
+
         
-    
-            $context = stream_context_create($options);
-            $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
-    
-            if ($response === false) {
-                // echo "Error al enviar el mensaje\n";
-            } else {
-                // echo "Mensaje enviado correctamente\n";
-            }
+        $context = stream_context_create($options);
+        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
+
+        if ($response === false) {
+            // echo "Error al enviar el mensaje\n";
+        } else {
+            // echo "Mensaje enviado correctamente\n";
+        }
 
     }
 
