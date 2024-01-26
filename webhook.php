@@ -1,6 +1,4 @@
 <?php
-    include_once 'models/mensajes_whatsapp.php';
-    $msjwhatsapp = new msjwha();
     
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
@@ -105,12 +103,15 @@
     
 
 
-    // // Obtener los datos JSON desde la solicitud
+    // Obtener los datos JSON desde la solicitud
     $json_data = file_get_contents("php://input");
 
     // Decodificar los datos JSON
     $data = json_decode($json_data, true);
     if($data["funcion"] == "txtwhatsapp"){
+        include_once 'models/mensajes_whatsapp.php';
+        $msjwhatsapp = new msjwha();
+    
         // echo json_encode(["status" => "exit"]); 
         // echo json_encode($data["datosTabla"]);
     
