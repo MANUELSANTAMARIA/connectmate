@@ -61,7 +61,7 @@
         $comentario = strtolower($comentario);
 
         if (strpos($comentario,'hola') !==false){
-            $data = json_encode([
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
@@ -77,7 +77,7 @@
             'http' => [
                 'method' => 'POST',
                 'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4gSYdRZAbluVQLovpGhZAHj9a8Sz0UJdMjZBhddZCZAY7VIsi2n2riMyXrCZBLav7dCokQiXgSPvreZCi8ZBqoiBjQgk2fSnvZAbNLe4fCzkXu3o6lhP0hr4TpwTY98jybMBAeN1sEGQfDkqJNOpkMwNgpta9ecOZAh627POuquERvbZA7KDrajpBW7C1ARvzt8hYW1TOE\r\n",
-                'content' => $data, 
+                'content' => $dataBot, 
                 'ignore_errors' => true
             ]
         ];
@@ -182,10 +182,10 @@
 
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
-        $data = json_decode($input,true);
-  
-        recibirMensajes($data,http_response_code());
-  
+        $dataBot = json_decode($input,true);
+        if(!empty($dataBot)){
+            recibirMensajes($dataBot,http_response_code());
+        }
     }else if($_SERVER['REQUEST_METHOD']==='GET'){
           if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
           echo $_GET['hub_challenge'];
