@@ -1,6 +1,6 @@
 <?php
-    // include_once 'models/mensajes_whatsapp.php';
-    // $msjwhatsapp = new msjwha();
+    include_once 'models/mensajes_whatsapp.php';
+    $msjwhatsapp = new msjwha();
     
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
@@ -105,6 +105,81 @@
     
 
 
+    // // Obtener los datos JSON desde la solicitud
+    $json_data = file_get_contents("php://input");
+
+    // Decodificar los datos JSON
+    $data = json_decode($json_data, true);
+    if($data["funcion"] == "txtwhatsapp"){
+        // echo json_encode(["status" => "exit"]); 
+        // echo json_encode($data["datosTabla"]);
+    
+        $datosTabla = $data["datosTabla"];
+        $tipoMensaje = $data["tipo_mensaje"];
+        $mensaje = $data["descripcion"];
+        $mensaje = $data["descripcion"];
+        $id_usuario = $data["usuario"];
+        $contadorIteraciones = 0;
+        try {
+            foreach($datosTabla as $dato){
+                $nombre = $dato[0];
+                $apellido = $dato[1];
+                $telefono = "593".$dato[2];
+
+                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
+                
+                $contadorIteraciones++;
+
+                if ($contadorIteraciones >= 200) {
+                    break; // Sale del bucle después de 200 iteraciones
+                }
+            }
+            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
+        }catch (Exception $e){
+            echo "noadd". $e;
+        }
+            
+
+    }
+
+
+    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
+        if($tipoMensaje == 1){
+            $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $telefono,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> $unionmensaje
+                ]
+            ]);
+        }
+            $options = [
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO1jVFO8ZAT2pZBoHhUQOYxAWBy2d4tcM3ZBUdLnKhNTvPxNK6iqV4cIcPKQWNSk9Y7D0vOqsTB0YGMKPlsPU23lysZCcrX2YZA6xMQ8XSkWkULzQtagjUNv6c21hJsBxMfFBfpeZCMF1rOmX7WTWKddaiqwCv9ZBb65uaoxONl7ZB1kqwak65oxfK59X7iOSeDp35YNm\r\n",
+                    'content' => $data, 
+                    'ignore_errors' => true
+                ]
+            ];
+        
+    
+            $context = stream_context_create($options);
+            $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
+    
+            if ($response === false) {
+                // echo "Error al enviar el mensaje\n";
+            } else {
+                // echo "Mensaje enviado correctamente\n";
+            }
+
+    }
+
+
+
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
         $data = json_decode($input,true);
@@ -118,80 +193,3 @@
           http_response_code(403);
           }
     }
-
-    // // Obtener los datos JSON desde la solicitud
-    // $json_data = file_get_contents("php://input");
-
-    // // Decodificar los datos JSON
-    // $data = json_decode($json_data, true);
-    // if($data["funcion"] == "txtwhatsapp"){
-    //     // echo json_encode(["status" => "exit"]); 
-    //     // echo json_encode($data["datosTabla"]);
-    
-    //     $datosTabla = $data["datosTabla"];
-    //     $tipoMensaje = $data["tipo_mensaje"];
-    //     $mensaje = $data["descripcion"];
-    //     $mensaje = $data["descripcion"];
-    //     $id_usuario = $data["usuario"];
-    //     $contadorIteraciones = 0;
-    //     try {
-    //         foreach($datosTabla as $dato){
-    //             $nombre = $dato[0];
-    //             $apellido = $dato[1];
-    //             $telefono = "593".$dato[2];
-
-    //             EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                
-    //             $contadorIteraciones++;
-
-    //             if ($contadorIteraciones >= 200) {
-    //                 break; // Sale del bucle después de 200 iteraciones
-    //             }
-    //         }
-    //         $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
-    //     }catch (Exception $e){
-    //         echo "noadd". $e;
-    //     }
-            
-
-    // }
-
-
-    // function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
-    //     if($tipoMensaje == 1){
-    //         $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
-    //         $data = json_encode([
-    //             "messaging_product" => "whatsapp",    
-    //             "recipient_type"=> "individual",
-    //             "to" => $telefono,
-    //             "type" => "text",
-    //             "text"=> [
-    //                 "preview_url" => false,
-    //                 "body"=> $unionmensaje
-    //             ]
-    //         ]);
-    //     }
-    //         $options = [
-    //             'http' => [
-    //                 'method' => 'POST',
-    //                 'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO1jVFO8ZAT2pZBoHhUQOYxAWBy2d4tcM3ZBUdLnKhNTvPxNK6iqV4cIcPKQWNSk9Y7D0vOqsTB0YGMKPlsPU23lysZCcrX2YZA6xMQ8XSkWkULzQtagjUNv6c21hJsBxMfFBfpeZCMF1rOmX7WTWKddaiqwCv9ZBb65uaoxONl7ZB1kqwak65oxfK59X7iOSeDp35YNm\r\n",
-    //                 'content' => $data, 
-    //                 'ignore_errors' => true
-    //             ]
-    //         ];
-        
-    
-    //         $context = stream_context_create($options);
-    //         $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
-    
-    //         if ($response === false) {
-    //             // echo "Error al enviar el mensaje\n";
-    //         } else {
-    //             // echo "Mensaje enviado correctamente\n";
-    //         }
-
-    // }
-
-
-
-    
