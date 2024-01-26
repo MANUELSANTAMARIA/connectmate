@@ -93,6 +93,17 @@
         }
     }
 
+    function verificarTextoEnArchivo($texto, $archivo) {
+        $contenido = file_get_contents($archivo);
+        
+        if (strpos($contenido, $texto) !== false) {
+            return true; // El texto ya existe en el archivo
+        } else {
+            return false; // El texto no existe en el archivo
+        }
+    }
+    
+
 
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
