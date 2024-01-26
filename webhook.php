@@ -25,6 +25,27 @@
     function recibirMensajes($req, $res) {
         
         try {
+             
+            $entry = $req['entry'][0];
+            $changes = $entry['changes'][0];
+            $value = $changes['value'];
+            $mensaje = $value['messages'][0];
+            
+            $comentario = $mensaje['text']['body'];
+            $numero = $mensaje['from'];
+            
+            $id = $mensaje['id'];
+            
+            $archivo = "log.txt";
+            
+            if (!verificarTextoEnArchivo($id, $archivo)) {
+                $archivo = fopen($archivo, "a+");
+                $texto = json_encode($id).",".$numero.",".$comentario;
+                fwrite($archivo, $texto);
+                fclose($archivo);
+                
+                whatsappBot($comentario,$numero);
+            }
             
             $res->header('Content-Type: application/json');
             $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
@@ -35,6 +56,57 @@
         }
     }
 
+
+    function whatsappBot($comentario,$numero){
+        $comentario = strtolower($comentario);
+
+        if (strpos($comentario,'hola') !==false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "1.- precios de telefonos"
+                ]
+            ]);
+        }
+
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO1jVFO8ZAT2pZBoHhUQOYxAWBy2d4tcM3ZBUdLnKhNTvPxNK6iqV4cIcPKQWNSk9Y7D0vOqsTB0YGMKPlsPU23lysZCcrX2YZA6xMQ8XSkWkULzQtagjUNv6c21hJsBxMfFBfpeZCMF1rOmX7WTWKddaiqwCv9ZBb65uaoxONl7ZB1kqwak65oxfK59X7iOSeDp35YNm\r\n",
+                'content' => $data, 
+                'ignore_errors' => true
+            ]
+        ];
+
+        
+        $context = stream_context_create($options);
+        $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
+
+        if ($response === false) {
+            // echo "Error al enviar el mensaje\n";
+        } else {
+            // echo "Mensaje enviado correctamente\n";
+        }
+    }
+
+
+    if ($_SERVER['REQUEST_METHOD']==='POST'){
+        $input = file_get_contents('php://input');
+        $data = json_decode($input,true);
+  
+        recibirMensajes($data,http_response_code());
+  
+    }else if($_SERVER['REQUEST_METHOD']==='GET'){
+          if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
+          echo $_GET['hub_challenge'];
+          }else{
+          http_response_code(403);
+          }
+    }
 
     // Obtener los datos JSON desde la solicitud
     $json_data = file_get_contents("php://input");
@@ -111,16 +183,4 @@
 
 
 
-    if ($_SERVER['REQUEST_METHOD']==='POST'){
-      $input = file_get_contents('php://input');
-      $data = json_decode($input,true);
-
-    //   recibirMensajes($data,http_response_code());
-
-    }else if($_SERVER['REQUEST_METHOD']==='GET'){
-        if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
-        echo $_GET['hub_challenge'];
-        }else{
-        http_response_code(403);
-        }
-    }
+    
