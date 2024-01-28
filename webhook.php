@@ -71,7 +71,7 @@
                 ]
             ]);
         }else{
-            $data = json_encode([
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
