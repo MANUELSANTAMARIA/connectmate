@@ -67,7 +67,18 @@
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "precios de telefonos"
+                    "body"=> "¡Hola! ¿Cómo podemos ayudarte hoy? Si tienes alguna pregunta o necesitas información, no dudes en decírmelo."
+                ]
+            ]);
+        }else{
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "🚀 ¡Hola! Bienvenido a sanlaracode, líder en servicios tecnológicos. Para obtener más información, selecciona una opción:\n \n📌**Por favor, ingresa un número #️⃣ para recibir información:**.\n \n1️⃣. **Promociones 🎉:** ¿Quieres conocer nuestras ofertas especiales ❔\n2️⃣. **Ubicación del local 📍:** Encuentra nuestra tienda.\n3️⃣. **Catálogo de celulares 📄:** Solicita nuestro catálogo en formato PDF.\n4️⃣. **Hablar con un asesor de ventas 🙋‍♂️:** Conéctate con nuestro equipo de expertos.\n5️⃣.**Información sobre planes de internet y telefonía 🌐📞:** Descubre nuestras opciones.\n6️⃣. **Horarios de atención de la tienda física 🕒:** Conoce nuestros horarios de atención en la tienda."
                 ]
             ]);
         }
