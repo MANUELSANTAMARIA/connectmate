@@ -182,8 +182,12 @@
             echo "noadd". $e;
         }
 
-    }else{
-      if ($_SERVER['REQUEST_METHOD']==='POST'){
+    }
+
+
+
+
+    if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
         $input = file_get_contents('php://input');
         $dataBot = json_decode($input,true);
         if(!empty($dataBot)){
@@ -195,6 +199,4 @@
           }else{
           http_response_code(403);
           }
-      }
-
     }
