@@ -62,132 +62,96 @@
         $comentario = strtolower($comentario);
 
         if (strpos($comentario,'hola') !==false){
-            $data = json_encode([
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "Hola visita mi web andercon-bastidas.com"
+                    "body"=> "¡Hola! ¿Cómo podemos ayudarte hoy? Si tienes alguna pregunta o necesitas información, no dudes en decírmelo."
                 ]
             ]);
-        }else if ($comentario=='1') {
-            $data = json_encode([
-                "messaging_product" => "whatsapp",    
-                "recipient_type"=> "individual",
-                "to" => $numero,
-                "type" => "text",
-                "text"=> [
-                    "preview_url" => false,
-                    "body"=> "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                ]
-            ]);
-        }else if ($comentario=='2') {
-            $data = json_encode([
-                "messaging_product" => "whatsapp",    
-                "recipient_type"=> "individual",
-                "to" => $numero,
-                "type" => "location",
-                "location"=> [
-                    "latitude" => "-12.067158831865067",
-                    "longitude" => "-77.03377940839486",
-                    "name" => "Estadio Nacional del Perú",
-                    "address" => "Cercado de Lima"
-                ]
-            ]);
-        }else if ($comentario=='3') {
-            $data = json_encode([
+        }else if($comentario=='1'){
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
                 "type" => "document",
                 "document"=> [
                     "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
-                    "caption" => "Temario del Curso #001"
+                    "caption" => "Promociones 🎉"
                 ]
             ]);
-        }else if ($comentario=='4') {
-            $data = json_encode([
+        }else if($comentario=='2'){
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
-                "type" => "audio",
-                "audio"=> [
-                    "link" => "https://filesamples.com/samples/audio/mp3/sample1.mp3",
+                "type" => "location",
+                "location"=> [
+                    "latitude" => "-2.1858756",
+                    "longitude" => "-79.884245,3",
+                    "name" => "CNT coactiva",
+                    "address" => "Cercado de parque la madre"
                 ]
             ]);
-        }else if ($comentario=='5') {
-            $data = json_encode([
-                "messaging_product" => "whatsapp",
+        }else if($comentario=='3'){
+            $dataBot = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
                 "to" => $numero,
-                "text" => array(
-                    "preview_url" => true,
-                    "body" => "Introducción al curso! https://youtu.be/6ULOE2tGlBM"
-                )
+                "type" => "document",
+                "document"=> [
+                    "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+                    "caption" => "Catálogo de celulares 📄"
+                ]
             ]);
-        }else if ($comentario=='6') {
-            $data = json_encode([
-                "messaging_product" => "whatsapp",
-                "recipient_type" => "individual",
+        }else if($comentario=='4'){
+
+
+        }else if($comentario=='5'){
+            $dataBot = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
                 "to" => $numero,
-                "type" => "text",
-                "text" => array(
-                    "preview_url" => false,
-                    "body" => "🤝 En breve me pondré en contacto contigo. 🤓"
-                )
+                "type" => "document",
+                "document"=> [
+                    "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+                    "caption" => "planes de internet y telefonia 🌐📞"
+                ]
             ]);
-        }else if ($comentario=='7') {
-            $data = json_encode([
-                "messaging_product" => "whatsapp",
-                "recipient_type" => "individual",
-                "to" => $numero,
-                "type" => "text",
-                "text" => array(
-                    "preview_url" => false,
-                    "body" => "📅 Horario de Atención: Lunes a Viernes. \n🕜 Horario: 9:00 a.m. a 5:00 p.m. 🤓"
-                )
-            ]);
-        }else if (strpos($comentario,'gracias') !== false) {
-            $data = json_encode([
+
+
+        }else if($comentario=='6'){
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",
                 "recipient_type" => "individual",
                 "to" => $numero,
                 "type" => "text",
                 "text" => array(
                     "preview_url" => false,
-                    "body" => "Gracias a ti por contactarme. 🤩"
+                    "body" => "📅 Horario de Atención del local: Lunes a Viernes. \n🕜 Horario: 8:00 a.m. a 5:00 p.m. 🤓"
                 )
             ]);
-        }else if (strpos($comentario,'adios') !== false || strpos($comentario,'bye') !== false || strpos($comentario,'nos vemos') !== false || strpos($comentario,'adiós') !== false){
-            $data = json_encode([
-                "messaging_product" => "whatsapp",
-                "recipient_type" => "individual",
-                "to" => $numero,
-                "type" => "text",
-                "text" => array(
-                    "preview_url" => false,
-                    "body" => "Hasta luego. 🌟"
-                )
-            ]);
+
         }else{
-            $data = json_encode([
+            $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "🚀 Hola, visita mi web anderson-bastidas.com para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en pdf. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con AnderCode. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜"
+                    "body"=> "🚀 ¡Hola! Bienvenido a sanlaracode, líder en servicios tecnológicos. Para obtener más información, selecciona una opción:\n \n📌 *Por favor, ingresa un número #️⃣ para recibir información:* .\n \n1️⃣. *Promociones 🎉:* ¿Quieres conocer nuestras ofertas especiales ❔\n2️⃣. *Ubicación del local 📍:* Encuentra nuestra tienda.\n3️⃣. *Catálogo de celulares 📄:* Solicita nuestro catálogo en formato PDF.\n4️⃣. *Hablar con un asesor de ventas 🙋‍♂️:* Conéctate con nuestro equipo de expertos.\n5️⃣.*Información sobre planes de internet y telefonía 🌐📞:* Descubre nuestras opciones.\n6️⃣. *Horarios de atención de la tienda física 🕒:* Conoce nuestros horarios de atención en la tienda."
                 ]
             ]);
         }
-
         $options = [
             'http' => [
                 'method' => 'POST',
                 'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4gSYdRZAbluVQLovpGhZAHj9a8Sz0UJdMjZBhddZCZAY7VIsi2n2riMyXrCZBLav7dCokQiXgSPvreZCi8ZBqoiBjQgk2fSnvZAbNLe4fCzkXu3o6lhP0hr4TpwTY98jybMBAeN1sEGQfDkqJNOpkMwNgpta9ecOZAh627POuquERvbZA7KDrajpBW7C1ARvzt8hYW1TOE\r\n",
-                'content' => $data,
+                'content' => $dataBot,
                 'ignore_errors' => true
             ]
         ];
@@ -215,9 +179,9 @@
 
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
-        $data = json_decode($input,true);
+        $dataBot = json_decode($input,true);
 
-        recibirMensajes($data,http_response_code());
+        recibirMensajes($dataBot,http_response_code());
         
     }else if($_SERVER['REQUEST_METHOD']==='GET'){
         if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
