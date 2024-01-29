@@ -93,7 +93,7 @@
                     "latitude" => "-2.1855107085025343",
                     "longitude" => "-79.88436992054966",
                     "name" => "Manuel Galecio Ligero, Guayaquil 090312",
-                    "address" => "Cercado de parque la madre"
+                    "address" => "Manuel Galecio Ligero, Guayaquil 090312"
                 ]
             ]);
         }else if($comentario=='3'){
