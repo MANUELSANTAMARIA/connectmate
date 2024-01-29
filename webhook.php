@@ -1,4 +1,6 @@
 <?php
+    include_once 'models/mensajes_whatsapp.php';
+    $msjwhatsapp = new msjwha();
     
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARA";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
@@ -151,9 +153,6 @@
 
 
     if($_POST["funcion"] == "txtwhatsapp"){
-        include_once 'models/mensajes_whatsapp.php';
-        $msjwhatsapp = new msjwha();
-    
         // echo json_encode(["status" => "exit"]); 
         // echo json_encode($data["datosTabla"]);
     
