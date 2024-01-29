@@ -46,7 +46,7 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 
-                whatsappBot($comentario,$numero);
+                // whatsappBot($comentario,$numero);
             }
     
             $res->header('Content-Type: application/json');
