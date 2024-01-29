@@ -46,7 +46,7 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 
-                EnviarMensajeWhastapp($comentario,$numero);
+                whatsappBot($comentario,$numero);
             }
     
             $res->header('Content-Type: application/json');
@@ -58,7 +58,7 @@
         }
     }
     
-    function EnviarMensajeWhastapp($comentario,$numero){
+    function whatsappBot($comentario,$numero){
         $comentario = strtolower($comentario);
 
         if (strpos($comentario,'hola') !==false){
