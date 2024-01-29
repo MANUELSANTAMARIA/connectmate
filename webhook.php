@@ -41,12 +41,12 @@
             $archivo = "log.txt";
             
             if (!verificarTextoEnArchivo($id, $archivo)) {
-                $archivo = fopen($archivo, "a+");
+                $archivo = fopen($archivo, "a");
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 
-                // whatsappBot($comentario,$numero);
+                whatsappBot($comentario,$numero);
             }
     
             $res->header('Content-Type: application/json');
