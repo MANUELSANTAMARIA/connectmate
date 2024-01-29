@@ -90,9 +90,9 @@
                 "to" => $numero,
                 "type" => "location",
                 "location"=> [
-                    "latitude" => "-2.1858756",
-                    "longitude" => "-79.884245,3",
-                    "name" => "CNT coactiva",
+                    "latitude" => "-2.1855214295341163",
+                    "longitude" => "-79.88429481869566",
+                    "name" => "Manuel Galecio Ligero, Guayaquil 090312",
                     "address" => "Cercado de parque la madre"
                 ]
             ]);
