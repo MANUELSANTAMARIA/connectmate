@@ -8,7 +8,9 @@
 
     function verificarToken($req,$res){
         try{
+            // verificar token propio de meta
             $token = $req['hub_verify_token'];
+            // verificar challenge propio de meta
             $challenge = $req['hub_challenge'];
     
             if (isset($challenge) && isset($token) && $token === TOKEN_MANUEL) {
@@ -22,11 +24,10 @@
         }
     }
 
-
     function recibirMensajes($req, $res) {
         
         try {
-             
+            
             $entry = $req['entry'][0];
             $changes = $entry['changes'][0];
             $value = $changes['value'];
@@ -40,14 +41,14 @@
             $archivo = "log.txt";
             
             if (!verificarTextoEnArchivo($id, $archivo)) {
-                $archivo = fopen($archivo, "a");
+                $archivo = fopen($archivo, "a+");
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 
-                whatsappBot($comentario,$numero);
+                EnviarMensajeWhastapp($comentario,$numero);
             }
-            
+    
             $res->header('Content-Type: application/json');
             $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
 
@@ -56,31 +57,128 @@
             $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
         }
     }
-
-
-    function whatsappBot($comentario,$numero){
+    
+    function EnviarMensajeWhastapp($comentario,$numero){
         $comentario = strtolower($comentario);
 
         if (strpos($comentario,'hola') !==false){
-            $dataBot = json_encode([
+            $data = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "¡Hola! ¿Cómo podemos ayudarte hoy? Si tienes alguna pregunta o necesitas información, no dudes en decírmelo."
+                    "body"=> "Hola visita mi web andercon-bastidas.com"
                 ]
             ]);
-        }else{
-            $dataBot = json_encode([
+        }else if ($comentario=='1') {
+            $data = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
                 "to" => $numero,
                 "type" => "text",
                 "text"=> [
                     "preview_url" => false,
-                    "body"=> "🚀 ¡Hola! Bienvenido a sanlaracode, líder en servicios tecnológicos. Para obtener más información, selecciona una opción:\n \n📌 *Por favor, ingresa un número #️⃣ para recibir información:* .\n \n1️⃣. *Promociones 🎉:* ¿Quieres conocer nuestras ofertas especiales ❔\n2️⃣. *Ubicación del local 📍:* Encuentra nuestra tienda.\n3️⃣. *Catálogo de celulares 📄:* Solicita nuestro catálogo en formato PDF.\n4️⃣. *Hablar con un asesor de ventas 🙋‍♂️:* Conéctate con nuestro equipo de expertos.\n5️⃣.*Información sobre planes de internet y telefonía 🌐📞:* Descubre nuestras opciones.\n6️⃣. *Horarios de atención de la tienda física 🕒:* Conoce nuestros horarios de atención en la tienda."
+                    "body"=> "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                ]
+            ]);
+        }else if ($comentario=='2') {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "location",
+                "location"=> [
+                    "latitude" => "-12.067158831865067",
+                    "longitude" => "-77.03377940839486",
+                    "name" => "Estadio Nacional del Perú",
+                    "address" => "Cercado de Lima"
+                ]
+            ]);
+        }else if ($comentario=='3') {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "document",
+                "document"=> [
+                    "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+                    "caption" => "Temario del Curso #001"
+                ]
+            ]);
+        }else if ($comentario=='4') {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "audio",
+                "audio"=> [
+                    "link" => "https://filesamples.com/samples/audio/mp3/sample1.mp3",
+                ]
+            ]);
+        }else if ($comentario=='5') {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "to" => $numero,
+                "text" => array(
+                    "preview_url" => true,
+                    "body" => "Introducción al curso! https://youtu.be/6ULOE2tGlBM"
+                )
+            ]);
+        }else if ($comentario=='6') {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "recipient_type" => "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text" => array(
+                    "preview_url" => false,
+                    "body" => "🤝 En breve me pondré en contacto contigo. 🤓"
+                )
+            ]);
+        }else if ($comentario=='7') {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "recipient_type" => "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text" => array(
+                    "preview_url" => false,
+                    "body" => "📅 Horario de Atención: Lunes a Viernes. \n🕜 Horario: 9:00 a.m. a 5:00 p.m. 🤓"
+                )
+            ]);
+        }else if (strpos($comentario,'gracias') !== false) {
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "recipient_type" => "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text" => array(
+                    "preview_url" => false,
+                    "body" => "Gracias a ti por contactarme. 🤩"
+                )
+            ]);
+        }else if (strpos($comentario,'adios') !== false || strpos($comentario,'bye') !== false || strpos($comentario,'nos vemos') !== false || strpos($comentario,'adiós') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "recipient_type" => "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text" => array(
+                    "preview_url" => false,
+                    "body" => "Hasta luego. 🌟"
+                )
+            ]);
+        }else{
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "🚀 Hola, visita mi web anderson-bastidas.com para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en pdf. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con AnderCode. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜"
                 ]
             ]);
         }
@@ -89,22 +187,21 @@
             'http' => [
                 'method' => 'POST',
                 'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4gSYdRZAbluVQLovpGhZAHj9a8Sz0UJdMjZBhddZCZAY7VIsi2n2riMyXrCZBLav7dCokQiXgSPvreZCi8ZBqoiBjQgk2fSnvZAbNLe4fCzkXu3o6lhP0hr4TpwTY98jybMBAeN1sEGQfDkqJNOpkMwNgpta9ecOZAh627POuquERvbZA7KDrajpBW7C1ARvzt8hYW1TOE\r\n",
-                'content' => $dataBot, 
+                'content' => $data,
                 'ignore_errors' => true
             ]
         ];
 
-        
         $context = stream_context_create($options);
         $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
 
         if ($response === false) {
-            // echo "Error al enviar el mensaje\n";
+            echo "Error al enviar el mensaje\n";
         } else {
-            // echo "Mensaje enviado correctamente\n";
+            echo "Mensaje enviado correctamente\n";
         }
     }
-
+    
     function verificarTextoEnArchivo($texto, $archivo) {
         $contenido = file_get_contents($archivo);
         
@@ -115,87 +212,18 @@
         }
     }
     
-    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
-        if($tipoMensaje == 1){
-            $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
-            $data = json_encode([
-                "messaging_product" => "whatsapp",    
-                "recipient_type"=> "individual",
-                "to" => $telefono,
-                "type" => "text",
-                "text"=> [
-                    "preview_url" => false,
-                    "body"=> $unionmensaje
-                ]
-            ]);
-        }
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAcohQsYbHEBO4gSYdRZAbluVQLovpGhZAHj9a8Sz0UJdMjZBhddZCZAY7VIsi2n2riMyXrCZBLav7dCokQiXgSPvreZCi8ZBqoiBjQgk2fSnvZAbNLe4fCzkXu3o6lhP0hr4TpwTY98jybMBAeN1sEGQfDkqJNOpkMwNgpta9ecOZAh627POuquERvbZA7KDrajpBW7C1ARvzt8hYW1TOE\r\n",
-                'content' => $data, 
-                'ignore_errors' => true
-            ]
-        ];
 
-        
-        $context = stream_context_create($options);
-        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
-
-        if ($response === false) {
-            // echo "Error al enviar el mensaje\n";
-        } else {
-            // echo "Mensaje enviado correctamente\n";
-        }
-
-    }
-
-
-
-    if($_POST["funcion"] == "txtwhatsapp"){
-        // echo json_encode(["status" => "exit"]); 
-        // echo json_encode($data["datosTabla"]);
-    
-        $datosTabla = $_POST["datosTabla"];
-        $tipoMensaje = $_POST["tipo_mensaje"];
-        $mensaje = $_POST["descripcion"];
-        $mensaje = $_POST["descripcion"];
-        $id_usuario = $_POST["usuario"];
-        $contadorIteraciones = 0;
-        try {
-            foreach($datosTabla as $dato){
-                $nombre = $dato[0];
-                $apellido = $dato[1];
-                $telefono = "593".$dato[2];
-
-                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                
-                $contadorIteraciones++;
-
-                if ($contadorIteraciones >= 200) {
-                    break; // Sale del bucle después de 200 iteraciones
-                }
-            }
-            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
-        }catch (Exception $e){
-            echo "noadd". $e;
-        }
-
-    }
-
-
-
-
-    if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
+    if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
-        $dataBot = json_decode($input,true);
-        if(!empty($dataBot)){
-            recibirMensajes($dataBot,http_response_code());
+        $data = json_decode($input,true);
+
+        recibirMensajes($data,http_response_code());
+        
+    }else if($_SERVER['REQUEST_METHOD']==='GET'){
+        if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
+            echo $_GET['hub_challenge'];
+        }else{
+            http_response_code(403);
         }
-      }else if($_SERVER['REQUEST_METHOD']==='GET'){
-          if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
-          echo $_GET['hub_challenge'];
-          }else{
-          http_response_code(403);
-          }
     }
+?>
