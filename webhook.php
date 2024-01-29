@@ -177,7 +177,7 @@
     }
     
 
-    if ($_SERVER['REQUEST_METHOD']==='POST'){
+    if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
         $input = file_get_contents('php://input');
         $dataBot = json_decode($input,true);
 
