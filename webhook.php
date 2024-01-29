@@ -108,7 +108,16 @@
                 ]
             ]);
         }else if($comentario=='4'){
-
+            $dataBot = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "¡Hola! 🌟 Nos alegra informarte que hemos recibido tu mensaje y nos hemos puesto en contacto contigo a través de WhatsApp. Estamos aquí para ayudarte en lo que necesites. ¡Gracias por tu interés en nuestros servicios! 😊📱"
+                ]
+            ]);
 
         }else if($comentario=='5'){
             $dataBot = json_encode([
