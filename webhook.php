@@ -79,7 +79,7 @@
                 "to" => $numero,
                 "type" => "document",
                 "document"=> [
-                    "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+                    "link" => "https://samperza.com/connectmate/uploads/documento/promociones.pdf",
                     "caption" => "Promociones 🎉"
                 ]
             ]);
@@ -103,7 +103,7 @@
                 "to" => $numero,
                 "type" => "document",
                 "document"=> [
-                    "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+                    "link" => "https://samperza.com/connectmate/uploads/documento/catalogo.pdf",
                     "caption" => "Catálogo de celulares 📄"
                 ]
             ]);
@@ -117,7 +117,7 @@
                 "to" => $numero,
                 "type" => "document",
                 "document"=> [
-                    "link" => "http://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf",
+                    "link" => "https://samperza.com/connectmate/uploads/documento/internet_telefonia.pdf",
                     "caption" => "planes de internet y telefonia 🌐📞"
                 ]
             ]);
