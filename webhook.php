@@ -80,7 +80,6 @@
                 "type" => "document",
                 "document"=> [
                     "link" => "https://samperza.com/connectmate/uploads/documento/promociones.pdf",
-                    "name" => "Promociones",
                     "caption" => "Promociones 🎉"
                 ]
             ]);
