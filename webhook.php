@@ -90,8 +90,8 @@
                 "to" => $numero,
                 "type" => "location",
                 "location"=> [
-                    "latitude" => "-2.1855214295341163",
-                    "longitude" => "-79.88429481869566",
+                    "latitude" => "-2.1855107085025343",
+                    "longitude" => "-79.88436992054966",
                     "name" => "Manuel Galecio Ligero, Guayaquil 090312",
                     "address" => "Cercado de parque la madre"
                 ]
