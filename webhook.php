@@ -90,8 +90,8 @@
                 "to" => $numero,
                 "type" => "location",
                 "location"=> [
-                    "latitude" => "-2.1855107085025343",
-                    "longitude" => "-79.88436992054966",
+                    "latitude" => "-2.1855857557219434",
+                    "longitude" => "-79.88438064938596",
                     "name" => "Manuel Galecio Ligero, Guayaquil 090312",
                     "address" => "Manuel Galecio Ligero, Guayaquil 090312"
                 ]
