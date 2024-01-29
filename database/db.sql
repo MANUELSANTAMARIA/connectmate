@@ -83,3 +83,30 @@ CREATE TABLE msjwhatsapp(
     CONSTRAINT pk_msjwhatsapp PRIMARY KEY(id_msjwhatsapp),
     CONSTRAINT fk_msjwhatsapp_usuario FOREIGN KEY(us_id) REFERENCES usuario(id_us)
 )ENGINE = InnoDb;
+
+
+
+CREATE TABLE contacto(
+    id_contacto INT AUTO_INCREMENT NOT NULL,
+    numero_contacto INT(12),
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    avatar VARCHAR(255),
+    email_us varchar(100),
+    CONSTRAINT pk_contacto PRIMARY KEY(id_contacto),
+    CONSTRAINT uq_numero_contacto UNIQUE(numero_contacto)
+)ENGINE = InnoDb;
+
+CREATE TABLE conversacion_whatsapp(
+    id_con_whatsapp INT AUTO_INCREMENT NOT NULL,
+    contenido TEXT,
+    marca_tiempo TIMESTAMP,
+    numero_contacto INT(12) NOT NULL,
+    us_id INT NOT NULL,
+    CONSTRAINT pk_conversacion_whatsapp PRIMARY KEY(id_con_whatsapp),
+    CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto),
+    CONSTRAINT fk_conversacion_whatsapp_usuario FOREIGN KEY(us_id) REFERENCES usuario(id_us)
+)ENGINE = InnoDb;
+
+
+
