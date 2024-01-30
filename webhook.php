@@ -39,7 +39,7 @@
             $id = $mensaje['id'];
             
             $archivo = "log.txt";
-            $respuesta = $msjwhatsapp->varificaridjwhatsapp($id, $numero, $comentario);
+            // $respuesta = $msjwhatsapp->varificaridjwhatsapp($id, $numero, $comentario);
             // if($respuesta == "add"){
             if (!verificarTextoEnArchivo($id, $archivo)) {
                 $archivo = fopen($archivo, "a");
