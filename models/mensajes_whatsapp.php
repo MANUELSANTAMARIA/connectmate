@@ -14,7 +14,7 @@ class msjwha{
             $nombre = $dato[0];
             $apellido = $dato[1];
             $telefono = "593".$dato[2];
-         $sql = $sql = "INSERT INTO msjwhatsapp(nombre, apellido, telefono, fecha, mensaje, us_id) 
+         $sql = "INSERT INTO msjwhatsapp(nombre, apellido, telefono, fecha, mensaje, us_id) 
          VALUES(:nombre, :apellido, :telefono, now(), :mensaje, :id_us )";
          $query = $this->acceso->prepare($sql);
          $query->execute(array(
@@ -31,6 +31,21 @@ class msjwha{
         }
     }
 
+
+
+    function varificaridjwhatsapp($id, $numero, $mensaje){
+        $sql = "SELECT * FROM conversacion_whatsapp WHERE cod_whatsapp = :cod_whatsapp";
+        $query = $this->acceso->prepare($sql);
+        $query->execute(array(
+            ':cod_whatsapp' => $id,
+        ));
+        $this->objetos = $query->fetch();
+        if (!empty($this->objetos)){
+            echo "add";
+        }else{
+            echo"noadd";
+        }
+    }
 
 
 }

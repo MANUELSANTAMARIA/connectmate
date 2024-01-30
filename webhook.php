@@ -39,16 +39,17 @@
             $id = $mensaje['id'];
             
             $archivo = "log.txt";
-            
-            if (!verificarTextoEnArchivo($id, $archivo)) {
+            $respuesta = $msjwhatsapp->varificaridjwhatsapp($id, $numero, $comentario);
+            if($respuesta == "noadd"){
+            // if (!verificarTextoEnArchivo($id, $archivo)) {
                 $archivo = fopen($archivo, "a");
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 
                 whatsappBot($comentario,$numero);
+            // }
             }
-    
             $res->header('Content-Type: application/json');
             $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
 
