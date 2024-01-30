@@ -40,7 +40,7 @@
             
             $archivo = "log.txt";
             $respuesta = $msjwhatsapp->varificaridjwhatsapp($id, $numero, $comentario);
-            if($respuesta == "noadd"){
+            if($respuesta == "add"){
             // if (!verificarTextoEnArchivo($id, $archivo)) {
                 $archivo = fopen($archivo, "a");
                 $texto = json_encode($id).",".$numero.",".$comentario;

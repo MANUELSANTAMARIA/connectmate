@@ -41,9 +41,9 @@ class msjwha{
         ));
         $this->objetos = $query->fetch();
         if (!empty($this->objetos)){
-            echo "add";
+            return "add";
         }else{
-            echo"noadd";
+            return "add";
         }
     }
 
