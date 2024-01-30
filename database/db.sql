@@ -99,11 +99,13 @@ CREATE TABLE contacto(
 
 CREATE TABLE conversacion_whatsapp(
     id_con_whatsapp INT AUTO_INCREMENT NOT NULL,
+    cod_whatsapp VARCHAR(250) NOT NULL,
     contenido TEXT,
     marca_tiempo TIMESTAMP,
     numero_contacto INT(12) NOT NULL,
     us_id INT NOT NULL,
     CONSTRAINT pk_conversacion_whatsapp PRIMARY KEY(id_con_whatsapp),
+    CONSTRAINT uq_conversacion_whatsapp UNIQUE(cod_whatsapp),
     CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto),
     CONSTRAINT fk_conversacion_whatsapp_usuario FOREIGN KEY(us_id) REFERENCES usuario(id_us)
 )ENGINE = InnoDb;
