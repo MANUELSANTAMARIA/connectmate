@@ -1,5 +1,5 @@
 <?php
-    include_once 'models/mensajes_whatsapp.php';
+    include_once '../models/mensajes_whatsapp.php';
     $msjwhatsapp = new msjwha();
     
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARASSS";
