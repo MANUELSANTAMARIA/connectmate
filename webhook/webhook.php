@@ -230,7 +230,7 @@
             'http' => [
                 'method' => 'POST',
                 'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBOzhZCvnqDgaURSsM0J1mSQGvgn3wLChPNauBqi0H9ZAgkzqW4ElPsBkq0eJiPUdlGGnvXjRzQhr3qJ80XoOwwOfQEstJKAoS0w1nqZA2dvPvCKBZCbU5lis8fEGugeSNW1xIngqIZAFq1ZAqbZBd5Qfhakke5P2loJY2Lb3vDS6SAZBBZAx1ZCOFQyeHmduiZB219CEmFSt\r\n",
-                'content' => $dataBot,
+                'content' => $data,
                 'ignore_errors' => true
             ]
         ];
