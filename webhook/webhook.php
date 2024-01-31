@@ -145,6 +145,17 @@
                 )
             ]);
 
+        }else if (strpos($comentario,'adios') !== false || strpos($comentario,'bye') !== false || strpos($comentario,'nos vemos') !== false || strpos($comentario,'adiós') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "recipient_type" => "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text" => array(
+                    "preview_url" => false,
+                    "body" => "Hasta luego. 🌟"
+                )
+            ]);
         }else{
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
