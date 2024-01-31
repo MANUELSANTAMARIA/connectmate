@@ -378,7 +378,7 @@ $(document).ready(function(){
             // Incluir valores de sesión
             usuario: id_us, 
         };
-        $.post('../webhook.php', data, function(response) {
+        $.post('../webhook/webhook.php', data, function(response) {
             response = response.trim();
             if(response == "add"){
                 enviado_whatsapp();
