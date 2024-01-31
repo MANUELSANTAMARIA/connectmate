@@ -105,7 +105,7 @@ CREATE TABLE conversacion_whatsapp(
     numero_contacto INT(12) NOT NULL,
     CONSTRAINT pk_conversacion_whatsapp PRIMARY KEY(id_con_whatsapp),
     CONSTRAINT uq_conversacion_whatsapp UNIQUE(cod_whatsapp),
-    CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto),
+    CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto)
 )ENGINE = InnoDb;
 
 
