@@ -62,7 +62,7 @@
     function whatsappBot($comentario,$numero){
         $comentario = strtolower($comentario);
 
-        if (strpos($comentario,'hola') !==false){
+        if (strpos($comentario,'hola') !== false){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -73,7 +73,7 @@
                     "body"=> "¡Hola! ¿Cómo podemos ayudarte hoy? Si tienes alguna pregunta o necesitas información, no dudes en decírmelo."
                 ]
             ]);
-        }else if($comentario=='1'){
+        }else if($comentario == '1'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -84,7 +84,7 @@
                     "caption" => "Promociones 🎉"
                 ]
             ]);
-        }else if($comentario=='2'){
+        }else if($comentario == '2'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -97,7 +97,7 @@
                     "address" => "CNT COACTIVA"
                 ]
             ]);
-        }else if($comentario=='3'){
+        }else if($comentario == '3'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -108,7 +108,7 @@
                     "caption" => "Catálogo de celulares 📄"
                 ]
             ]);
-        }else if($comentario=='4'){
+        }else if($comentario == '4'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -120,7 +120,7 @@
                 ]
             ]);
 
-        }else if($comentario=='5'){
+        }else if($comentario == '5'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -133,7 +133,7 @@
             ]);
 
 
-        }else if($comentario=='6'){
+        }else if($comentario == '6'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",
                 "recipient_type" => "individual",
