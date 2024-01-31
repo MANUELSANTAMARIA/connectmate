@@ -165,7 +165,7 @@
         ];
 
         $context = stream_context_create($options);
-        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
+        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/message', false, $context);
 
         if ($response === false) {
             echo "Error al enviar el mensaje\n";
