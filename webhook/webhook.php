@@ -158,7 +158,7 @@
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAM1ST63Bc0BO1pEQZBqfb7oMpYBz0YsUN3IlkNIZBZCqdJIpmmJ3y5zcAmJ2RCNxIqKj1Fq69ZAbjl1ElnCal2dhRfeMDFnZAaXrZCBwuuBnqI0PTxF6EVnel8pV7jVvIQVF4VVwcZBy1ox85isznF2U8TZANht3kozI0bKm6LYaSWV1UhFVc7DrvjJbyQ0EECTqmzm6msUOJRdaOGcWmc4aWAdmyFIodK2wcgZD\r\n",
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBO3OK7coQODooKNqFTUZCVOy3TPWkk0ZCRO8hBAZBajwS3z0Pg7z34SyZAQPqnfm3uSq6mkfNkZC8scTEAOFGKCX22OSLdXxY9StAE6QfFCkHZCtzekPDZBSWWo4NBhZAePTN9dEDfksJHpPyWkwAP5qHENV3TZBPTB9ZBGvBQeZBEhyxiahgqjBj6wyqIRNDHdR7OYd3zTVJFRzqm0sRamYZASsLdk8ZD\r\n",
                 'content' => $dataBot,
                 'ignore_errors' => true
             ]
