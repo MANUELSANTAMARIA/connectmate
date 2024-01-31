@@ -3,7 +3,7 @@
     $msjwhatsapp = new msjwha();
     
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARASSS";
-    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook.php";
+    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook/webhook.php";
 
 
     function verificarToken($req,$res){
