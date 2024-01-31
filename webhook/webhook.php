@@ -229,20 +229,19 @@
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAQCwOGSEvUBO2O1nUQU6TyZBRZCcVM8hyExCh6gi9MHqxZB0s4BQmP1ZBFnXolv4uMsHI5HZBjic0lSJT7YYPZAZCzGNc4ajINhIUK2z5XhWlwzkri8g0IvoPmnMPAEe22EbM3qOLEJREm9a2KcyJ9WM97fLlOkcZCckfOGqA32pZCB0AHgZBnHgaMtkLoTthWY78LRyly4rS2RIvY308\r\n",
-                'content' => $data, 
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBOzhZCvnqDgaURSsM0J1mSQGvgn3wLChPNauBqi0H9ZAgkzqW4ElPsBkq0eJiPUdlGGnvXjRzQhr3qJ80XoOwwOfQEstJKAoS0w1nqZA2dvPvCKBZCbU5lis8fEGugeSNW1xIngqIZAFq1ZAqbZBd5Qfhakke5P2loJY2Lb3vDS6SAZBBZAx1ZCOFQyeHmduiZB219CEmFSt\r\n",
+                'content' => $dataBot,
                 'ignore_errors' => true
             ]
         ];
 
-        
         $context = stream_context_create($options);
-        $response = file_get_contents('https://graph.facebook.com/v18.0/101906169521341/messages', false, $context);
+        $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
 
         if ($response === false) {
-            // echo "Error al enviar el mensaje\n";
+            echo "Error al enviar el mensaje\n";
         } else {
-            // echo "Mensaje enviado correctamente\n";
+            echo "Mensaje enviado correctamente\n";
         }
 
     }
