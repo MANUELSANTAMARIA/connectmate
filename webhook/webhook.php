@@ -36,12 +36,11 @@
             
             $id = $mensaje['id'];
             
-            $archivo = "/var/www/sanperza.com/connectmate/webhook/log.txt";
-            file_put_contents($archivo, "ssssslll");
+            $archivo = "log.txt";
+            // file_put_contents($archivo, "ssssslll");
 
             if (!verificarTextoEnArchivo($id, $archivo)) {
                 // Escribe el contenido en el archivo
-                
                 $archivo = fopen($archivo, "a");
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
