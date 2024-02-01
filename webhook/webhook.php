@@ -1,5 +1,6 @@
 <?php
-    
+    include_once '../models/mensajes_whatsapp.php';
+    $msjwhatsapp = new msjwha();
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARASSS";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook/webhook.php";
     
@@ -42,8 +43,8 @@
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
-                
                 whatsappBot($comentario,$numero);
+                $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
             }
     
             $res->header('Content-Type: application/json');
@@ -115,6 +116,8 @@
                     "body"=> "¡Hola! 🌟 Nos alegra informarte que hemos recibido tu mensaje y nos hemos puesto en contacto contigo a través de WhatsApp. Estamos aquí para ayudarte en lo que necesites. ¡Gracias por tu interés en nuestros servicios! 😊📱"
                 ]
             ]);
+            $mensaje = "asesor";
+            $msjwhatsapp->conversacion_whatsapp($id, $mensaje, $numero);
 
         }else if($comentario=='5'){
             $dataBot = json_encode([
@@ -248,8 +251,6 @@
 
 
     if($_POST["funcion"] == "txtwhatsapp"){
-        include_once '../models/mensajes_whatsapp.php';
-        $msjwhatsapp = new msjwha();
         // echo json_encode(["status" => "exit"]); 
         // echo json_encode($data["datosTabla"]);
     
