@@ -39,7 +39,7 @@ class msjwha{
         ));
         $this->objetos = $query->fetch();
         if (empty($this->objetos)){
-            $sql = "INSERT INTO contacto(numero_contacto) VALUES(:numero, :numero, :numero, :numero, :numero)";
+            $sql = "INSERT INTO contacto(numero_contacto) VALUES(:numero)";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':numero' => $numero
