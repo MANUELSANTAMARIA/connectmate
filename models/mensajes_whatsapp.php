@@ -25,9 +25,9 @@ class msjwha{
             ':id_us' => $id_usuario
          ));
         }
-            return "add";
+            echo "add";
         } catch (Exception $e) {
-            return "noadd". $e;
+            echo "noadd". $e;
         }
     }
 
