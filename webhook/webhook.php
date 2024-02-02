@@ -45,7 +45,7 @@
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
-                whatsappBot($id, $comentario, $numero);
+                // whatsappBot($id, $comentario, $numero);
                 $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
                 
 
