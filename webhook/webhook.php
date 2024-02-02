@@ -172,7 +172,7 @@
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBOzhZCvnqDgaURSsM0J1mSQGvgn3wLChPNauBqi0H9ZAgkzqW4ElPsBkq0eJiPUdlGGnvXjRzQhr3qJ80XoOwwOfQEstJKAoS0w1nqZA2dvPvCKBZCbU5lis8fEGugeSNW1xIngqIZAFq1ZAqbZBd5Qfhakke5P2loJY2Lb3vDS6SAZBBZAx1ZCOFQyeHmduiZB219CEmFSt\r\n",
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBO3w4lCPxyS4vYAnbxuV763pHI0K8BCwns5xiDLbdYmukDXlvMTu3vDzXyTJ6A5G8C7wun8XgAz5Gx1ue2ADoCmFW82lYJRhn2XnfCAj4saGEdFwjKZB8qj4ZClc646vdDk6RUrwrB0Fa13SD0nQ5OUCQsJ6o1840pFVhXMCXGu4jb90IflNnyLndPfZBXZBTFcad\r\n",
                 'content' => $dataBot,
                 'ignore_errors' => true
             ]
@@ -234,7 +234,7 @@
         $options = [
             'http' => [
                 'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBOzhZCvnqDgaURSsM0J1mSQGvgn3wLChPNauBqi0H9ZAgkzqW4ElPsBkq0eJiPUdlGGnvXjRzQhr3qJ80XoOwwOfQEstJKAoS0w1nqZA2dvPvCKBZCbU5lis8fEGugeSNW1xIngqIZAFq1ZAqbZBd5Qfhakke5P2loJY2Lb3vDS6SAZBBZAx1ZCOFQyeHmduiZB219CEmFSt\r\n",
+                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBO3w4lCPxyS4vYAnbxuV763pHI0K8BCwns5xiDLbdYmukDXlvMTu3vDzXyTJ6A5G8C7wun8XgAz5Gx1ue2ADoCmFW82lYJRhn2XnfCAj4saGEdFwjKZB8qj4ZClc646vdDk6RUrwrB0Fa13SD0nQ5OUCQsJ6o1840pFVhXMCXGu4jb90IflNnyLndPfZBXZBTFcad\r\n",
                 'content' => $data,
                 'ignore_errors' => true
             ]
