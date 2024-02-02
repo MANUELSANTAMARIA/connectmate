@@ -39,6 +39,8 @@
             $archivo = "log.txt";
             
             if (!verificarTextoEnArchivo($id, $archivo)) {
+                include_once '../models/mensajes_whatsapp.php';
+                $msjwhatsapp = new msjwha();
                 $archivo = fopen($archivo, "a");
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
