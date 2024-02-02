@@ -44,9 +44,51 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
+                $host = "samperza.com";
+                $database = "connectmate";
+                $username = "connectmate";
+                $password = "bdsseE12$";
+                
+                // Crear conexión
+                $conn = mysqli_connect($host, $username, $password, $database);
+
+                // Consulta para verificar si existe un registro con el número de contacto
+                $sql = "SELECT * FROM contacto WHERE numero_contacto = ?";
+                $query = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($query, "s", $numero);
+                mysqli_stmt_execute($query);
+                $resultado = mysqli_stmt_get_result($query);
+
+                // Verificar si se encontró un registro existente
+                if ($resultado->num_rows > 0) {
+    // Registro encontrado, realizar la inserción en la tabla 'conversacion_whatsapp'
+    $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) 
+            VALUES(?, ?, NOW(), ?)";
+} else {
+    // Registro no encontrado, realizar la inserción en la tabla 'contacto' y 'conversacion_whatsapp'
+    $sql = "INSERT INTO contacto(numero_contacto, nombre, apellido, avatar, email_us) 
+            VALUES(?, ?, ?, ?, ?)";
+
+    // Ejecutar la inserción en la tabla 'contacto'
+    $query = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($query, "sssss", $numero, $numero, $numero, $numero, $numero);
+    mysqli_stmt_execute($query);
+
+    // Actualizar la consulta para la inserción en la tabla 'conversacion_whatsapp'
+    $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) 
+            VALUES(?, ?, NOW(), ?)";
+}
+
+// Ejecutar la inserción en la tabla 'conversacion_whatsapp'
+$query = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($query, "sss", $id, $comentario, $numero);
+mysqli_stmt_execute($query);
+
+// Cerrar la conexión
+mysqli_close($conn);
                 
             }
-            $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
+            
             $res->header('Content-Type: application/json');
             $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
 
