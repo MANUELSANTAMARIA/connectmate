@@ -43,7 +43,7 @@
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
-                whatsappBot($id, $comentario,$numero);
+                whatsappBot($id, $comentario, $numero);
                 $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
             }
     
@@ -116,8 +116,6 @@
                     "body"=> "¡Hola! 🌟 Nos alegra informarte que hemos recibido tu mensaje y nos hemos puesto en contacto contigo a través de WhatsApp. Estamos aquí para ayudarte en lo que necesites. ¡Gracias por tu interés en nuestros servicios! 😊📱"
                 ]
             ]);
-            $mensaje = "asesor";
-            $msjwhatsapp->conversacion_whatsapp($id, $mensaje, $numero);
 
         }else if($comentario=='5'){
             $dataBot = json_encode([
