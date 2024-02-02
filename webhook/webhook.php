@@ -56,7 +56,7 @@
         }
     }
     
-    function whatsappBot($comentario,$numero){
+    function whatsappBot($id, $comentario, $numero){
         $comentario = strtolower($comentario);
 
         if (strpos($comentario,'hola') !==false){
