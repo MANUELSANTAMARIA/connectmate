@@ -66,12 +66,12 @@
                     VALUES(?, ?, NOW(), ?)";
                 } else {
                     // Registro no encontrado, realizar la inserción en la tabla 'contacto' y 'conversacion_whatsapp'
-                    $sql = "INSERT INTO contacto(numero_contacto, nombre, apellido, avatar, email_us) 
-                    VALUES(?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO contacto(numero_contacto) 
+                    VALUES(?)";
     
                     // Ejecutar la inserción en la tabla 'contacto'
                     $queryContacto = mysqli_prepare($conn, $sql);
-                     mysqli_stmt_bind_param($queryContacto, "sssss", $numero, $numero, $numero, $numero, $numero);
+                    mysqli_stmt_bind_param($queryContacto, "s", $numero);
                     mysqli_stmt_execute($queryContacto);
     
                     // Actualizar la consulta para la inserción en la tabla 'conversacion_whatsapp'

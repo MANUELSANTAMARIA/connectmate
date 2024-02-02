@@ -88,7 +88,7 @@ CREATE TABLE msjwhatsapp(
 
 CREATE TABLE contacto(
     id_contacto INT AUTO_INCREMENT NOT NULL,
-    numero_contacto VARCHAR(12),
+    numero_contacto VARCHAR(12) NOT NULL,
     nombre VARCHAR(50),
     apellido VARCHAR(50),
     avatar VARCHAR(255),
