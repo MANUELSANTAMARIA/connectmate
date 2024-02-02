@@ -44,9 +44,9 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
-                $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
+                
             }
-    
+            $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
             $res->header('Content-Type: application/json');
             $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
 
