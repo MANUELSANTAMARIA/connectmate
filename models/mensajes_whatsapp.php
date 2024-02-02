@@ -31,7 +31,7 @@ class msjwha{
         }
     }
 
-    function conversacion_whatsapp($id, $mensaje, $numero){
+    function conversacion_whatsapp($id, $comentario, $numero){
         $sql = "SELECT * FROM contacto WHERE  numero_contacto = :numero_contacto";
         $query = $this->acceso->prepare($sql);
         $query->execute(array(
@@ -43,7 +43,7 @@ class msjwha{
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':cod_whatsapp'=>$id,
-                ':mensaje' => $mensaje,
+                ':mensaje' => $comentario,
                 ':numero' => $numero
             ));
         }else{
@@ -57,7 +57,7 @@ class msjwha{
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':cod_whatsapp'=>$id,
-                ':mensaje' => $mensaje,
+                ':mensaje' => $comentario,
                 ':numero' => $numero
             ));
 
