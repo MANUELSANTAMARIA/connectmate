@@ -88,7 +88,7 @@ CREATE TABLE msjwhatsapp(
 
 CREATE TABLE contacto(
     id_contacto INT AUTO_INCREMENT NOT NULL,
-    numero_contacto INT(12),
+    numero_contacto VARCHAR(12),
     nombre VARCHAR(50),
     apellido VARCHAR(50),
     avatar VARCHAR(255),
@@ -102,7 +102,7 @@ CREATE TABLE conversacion_whatsapp(
     cod_whatsapp VARCHAR(250) NOT NULL,
     mensaje TEXT,
     marca_tiempo DATETIME,
-    numero_contacto INT(12) NOT NULL,
+    numero_contacto VARCHAR(12) NOT NULL,
     CONSTRAINT pk_conversacion_whatsapp PRIMARY KEY(id_con_whatsapp),
     CONSTRAINT uq_conversacion_whatsapp UNIQUE(cod_whatsapp),
     CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto)
