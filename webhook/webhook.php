@@ -44,48 +44,7 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
-                $host = "samperza.com";
-                $database = "connectmate";
-                $username = "connectmate";
-                $password = "bdsseE12$";
-
-                // Crear conexión
-                $conn = mysqli_connect($host, $username, $password, $database);
-
-                // Consulta para verificar si existe un registro con el número de contacto
-                $sql = "SELECT * FROM contacto WHERE numero_contacto = ?";
-                $query = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($query, "s", $numero);
-                mysqli_stmt_execute($query);
-                $resultado = mysqli_stmt_get_result($query);
-
-                // Verificar si se encontró un registro existente
-                if ($resultado->num_rows > 0) {
-                    // Registro encontrado, realizar la inserción en la tabla 'conversacion_whatsapp'
-                    $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) 
-                    VALUES(?, ?, NOW(), ?)";
-                } else {
-                    // Registro no encontrado, realizar la inserción en la tabla 'contacto' y 'conversacion_whatsapp'
-                    $sql = "INSERT INTO contacto(numero_contacto) 
-                    VALUES(?)";
-    
-                    // Ejecutar la inserción en la tabla 'contacto'
-                    $queryContacto = mysqli_prepare($conn, $sql);
-                    mysqli_stmt_bind_param($queryContacto, "s", $numero);
-                    mysqli_stmt_execute($queryContacto);
-    
-                    // Actualizar la consulta para la inserción en la tabla 'conversacion_whatsapp'
-                     $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) 
-                    VALUES(?, ?, NOW(), ?)";
-                }
-
-                // Ejecutar la inserción en la tabla 'conversacion_whatsapp'
-                $queryConversacion = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($queryConversacion, "sss", $id, $comentario, $numero);
-                mysqli_stmt_execute($queryConversacion);
-
-                // Cerrar la conexión
-                mysqli_close($conn);
+                
 
             }
             
