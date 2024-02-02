@@ -48,7 +48,7 @@
                 $database = "connectmate";
                 $username = "connectmate";
                 $password = "bdsseE12$";
-                
+
                 // Crear conexión
                 $conn = mysqli_connect($host, $username, $password, $database);
 
@@ -68,24 +68,25 @@
                     // Registro no encontrado, realizar la inserción en la tabla 'contacto' y 'conversacion_whatsapp'
                     $sql = "INSERT INTO contacto(numero_contacto, nombre, apellido, avatar, email_us) 
                     VALUES(?, ?, ?, ?, ?)";
-
+    
                     // Ejecutar la inserción en la tabla 'contacto'
-                    $query = mysqli_prepare($conn, $sql);
-                    mysqli_stmt_bind_param($query, "sssss", $numero, $numero, $numero, $numero, $numero);
-                    mysqli_stmt_execute($query);
-
+                    $queryContacto = mysqli_prepare($conn, $sql);
+                     mysqli_stmt_bind_param($queryContacto, "sssss", $numero, $numero, $numero, $numero, $numero);
+                    mysqli_stmt_execute($queryContacto);
+    
                     // Actualizar la consulta para la inserción en la tabla 'conversacion_whatsapp'
-                    $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) 
+                     $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) 
                     VALUES(?, ?, NOW(), ?)";
                 }
 
                 // Ejecutar la inserción en la tabla 'conversacion_whatsapp'
-                $query = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($query, "sss", $id, $comentario, $numero);
-                mysqli_stmt_execute($query);
+                $queryConversacion = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($queryConversacion, "sss", $id, $comentario, $numero);
+                mysqli_stmt_execute($queryConversacion);
 
                 // Cerrar la conexión
                 mysqli_close($conn);
+
             }
             
             $res->header('Content-Type: application/json');
