@@ -39,7 +39,7 @@ class msjwha{
         ));
         $this->objetos = $query->fetch();
         if (!empty($this->objetos)){
-            $sql = "INSERT INT conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) VALUES(:cod_whatsapp, :mensaje, now(), :numero)";
+            $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) VALUES(:cod_whatsapp, :mensaje, now(), :numero)";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':cod_whatsapp'=>$id,
@@ -47,13 +47,13 @@ class msjwha{
                 ':numero' => $numero
             ));
         }else{
-            $sql = "INSERT INT contacto(numero_contacto, nombre, apellido, avatar, email_us) VALUES(:numero, :numero, :numero, :numero, :numero)";
+            $sql = "INSERT INTO contacto(numero_contacto, nombre, apellido, avatar, email_us) VALUES(:numero, :numero, :numero, :numero, :numero)";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':numero' => $numero,
             ));
 
-            $sql = "INSERT INT conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) VALUES(:cod_whatsapp, :mensaje, now(), :numero)";
+            $sql = "INSERT INTO conversacion_whatsapp(cod_whatsapp, mensaje, marca_tiempo, numero_contacto) VALUES(:cod_whatsapp, :mensaje, now(), :numero)";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':cod_whatsapp'=>$id,
