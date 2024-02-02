@@ -380,6 +380,7 @@ $(document).ready(function(){
         };
         $.post('../webhook/webhook.php', data, function(response) {
             response = response.trim();
+            console.log(response)
             if(response == "add"){
                 enviado_whatsapp();
             }
