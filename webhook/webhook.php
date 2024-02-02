@@ -44,7 +44,7 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
-                
+                conversacion_whatsapp($id, $comentario, $numero);
 
             }
             

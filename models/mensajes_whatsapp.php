@@ -47,7 +47,7 @@ class msjwha{
                 ':numero' => $numero
             ));
         }else{
-            $sql = "INSERT INTO contacto(numero_contacto, nombre, apellido, avatar, email_us) VALUES(:numero, :numero, :numero, :numero, :numero)";
+            $sql = "INSERT INTO contacto(numero_contacto) VALUES(:numero)";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':numero' => $numero
