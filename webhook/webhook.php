@@ -1,6 +1,4 @@
 <?php
-    include_once '../models/mensajes_whatsapp.php';
-    $msjwhatsapp = new msjwha();
     const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARASSS";
     const WEBHOOK_URL = "https://samperza.com/connectmate/webhook/webhook.php";
     
@@ -39,15 +37,17 @@
             $archivo = "log.txt";
             
             if (!verificarTextoEnArchivo($id, $archivo)) {
-                include_once '../models/mensajes_whatsapp.php';
-                $msjwhatsapp = new msjwha();
                 $archivo = fopen($archivo, "a");
                 $texto = json_encode($id).",".$numero.",".$comentario;
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
-                $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
                 
+                if($_POST["funcion"] != "txtwhatsapp"){
+                    include_once '../models/mensajes_whatsapp.php';
+                    $msjwhatsapp = new msjwha();
+                    $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
+                }
 
             }
             
@@ -253,6 +253,8 @@
 
 
     if($_POST["funcion"] == "txtwhatsapp"){
+        include_once '../models/mensajes_whatsapp.php';
+        $msjwhatsapp = new msjwha();
         // echo json_encode(["status" => "exit"]); 
         // echo json_encode($data["datosTabla"]);
     
