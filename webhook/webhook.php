@@ -218,7 +218,7 @@
 
 
     function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
-        if($tipoMensaje == 1){
+        if($tipoMensaje == "1"){
             $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
             $data = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -230,7 +230,7 @@
                     "body"=> $unionmensaje
                 ]
             ]);
-        }if($tipoMensaje == 2){
+        }if($tipoMensaje == "2"){
             $data = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -238,7 +238,7 @@
                 "type" => "image",
                 "image"=> [
                     "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/imgavatar",
-                    "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
+                    // "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
                 ]
             ]);
         }
@@ -254,11 +254,11 @@
         $context = stream_context_create($options);
         $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
 
-        // if ($response === false) {
-        //     echo "Error al enviar el mensaje\n";
-        // } else {
-        //     echo "Mensaje enviado correctamente\n";
-        // }
+        if ($response === false) {
+            echo "Error al enviar el mensaje\n";
+        } else {
+            echo "Mensaje enviado correctamente\n";
+        }
 
     }
 
