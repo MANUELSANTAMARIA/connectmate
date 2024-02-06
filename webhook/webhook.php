@@ -230,6 +230,19 @@
                     "body"=> $unionmensaje
                 ]
             ]);
+        }else if($tipoMensaje == 2){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $telefono,
+                "type" => "image",
+                "image"=> [
+                    "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/imgavatar",
+                    "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
+                ]
+            ]);
+        }else if($tipoMensaje == 3){
+            
         }
         $options = [
             'http' => [
@@ -278,7 +291,7 @@
                     break; // Sale del bucle después de 200 iteraciones
                 }
             }
-            $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
+            // $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
         }catch (Exception $e){
             echo "noadd". $e;
         }
