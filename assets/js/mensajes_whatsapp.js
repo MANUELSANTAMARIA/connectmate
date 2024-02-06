@@ -252,12 +252,19 @@ $(document).ready(function(){
         // console.log(input_tipo_mensaje);
         template = "";
         if(input_tipo_mensaje == 1){
-        template +=`
-        <h5>Mensajes</h5>
-        <textarea id="descripcion" cols="160" rows="5"></textarea>
-        <h5>Formato del csv</h5>
-        <label> Nombre |  Apellido | Telefono </label>
-        `;
+            template +=`
+            <h5>Mensajes</h5>
+            <textarea id="descripcion" cols="160" rows="5"></textarea>
+            <h5>Formato del csv</h5>
+            <label> Nombre |  Apellido | Telefono </label>
+            `;
+        }else if(input_tipo_mensaje == 2){
+            template +=`
+            <h5>Mensajes</h5>
+            <textarea id="descripcion" cols="160" rows="5"></textarea>
+            <h5>Formato del csv</h5>
+            <label> Nombre |  Apellido | Telefono </label>
+            `;
         }
         $(".formato-tabla").html(template);
         
