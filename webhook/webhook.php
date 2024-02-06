@@ -230,7 +230,7 @@
                     "body"=> $unionmensaje
                 ]
             ]);
-        }else if($tipoMensaje == 2){
+        }if($tipoMensaje == 2){
             $data = json_encode([
                 "messaging_product" => "whatsapp",    
                 "recipient_type"=> "individual",
@@ -241,8 +241,6 @@
                     "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
                 ]
             ]);
-        }else if($tipoMensaje == 3){
-            
         }
         $options = [
             'http' => [
