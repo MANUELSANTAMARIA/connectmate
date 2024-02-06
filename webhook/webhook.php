@@ -238,7 +238,7 @@
                 "type" => "image",
                 "image"=> [
                     "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/imgavatar.png",
-                    // "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
+                    "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
                 ]
             ]);
         }
