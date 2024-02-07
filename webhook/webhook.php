@@ -199,68 +199,68 @@
     // }
     
 
-    if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
-        $input = file_get_contents('php://input');
-        $dataBot = json_decode($input,true);
+    // if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
+    //     $input = file_get_contents('php://input');
+    //     $dataBot = json_decode($input,true);
 
-        recibirMensajes($dataBot,http_response_code());
+    //     recibirMensajes($dataBot,http_response_code());
         
-    }else if($_SERVER['REQUEST_METHOD']==='GET'){
-        if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
-            echo $_GET['hub_challenge'];
-        }else{
-            http_response_code(403);
-        }
-    }
+    // }else if($_SERVER['REQUEST_METHOD']==='GET'){
+    //     if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
+    //         echo $_GET['hub_challenge'];
+    //     }else{
+    //         http_response_code(403);
+    //     }
+    // }
 
 
 
 
 
-    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico){
-        if($tipoMensaje == "1"){
-            $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
-            $data = json_encode([
-                "messaging_product" => "whatsapp",    
-                "recipient_type"=> "individual",
-                "to" => $telefono,
-                "type" => "text",
-                "text"=> [
-                    "preview_url" => false,
-                    "body"=> $unionmensaje
-                ]
-            ]);
-        }if($tipoMensaje == "2"){
-            $data = json_encode([
-                "messaging_product" => "whatsapp",    
-                "recipient_type"=> "individual",
-                "to" => $telefono,
-                "type" => "image",
-                "image"=> [
-                    "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/".$nombreUnico,
-                    "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
-                ]
-            ]);
-        }
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBO3w4lCPxyS4vYAnbxuV763pHI0K8BCwns5xiDLbdYmukDXlvMTu3vDzXyTJ6A5G8C7wun8XgAz5Gx1ue2ADoCmFW82lYJRhn2XnfCAj4saGEdFwjKZB8qj4ZClc646vdDk6RUrwrB0Fa13SD0nQ5OUCQsJ6o1840pFVhXMCXGu4jb90IflNnyLndPfZBXZBTFcad\r\n",
-                'content' => $data,
-                'ignore_errors' => true
-            ]
-        ];
+    // function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico){
+    //     if($tipoMensaje == "1"){
+    //         $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
+    //         $data = json_encode([
+    //             "messaging_product" => "whatsapp",    
+    //             "recipient_type"=> "individual",
+    //             "to" => $telefono,
+    //             "type" => "text",
+    //             "text"=> [
+    //                 "preview_url" => false,
+    //                 "body"=> $unionmensaje
+    //             ]
+    //         ]);
+    //     }if($tipoMensaje == "2"){
+    //         $data = json_encode([
+    //             "messaging_product" => "whatsapp",    
+    //             "recipient_type"=> "individual",
+    //             "to" => $telefono,
+    //             "type" => "image",
+    //             "image"=> [
+    //                 "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/".$nombreUnico,
+    //                 "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
+    //             ]
+    //         ]);
+    //     }
+    //     $options = [
+    //         'http' => [
+    //             'method' => 'POST',
+    //             'header' => "Content-type: application/json\r\nAuthorization: Bearer EAAO4RniNZBeUBO3w4lCPxyS4vYAnbxuV763pHI0K8BCwns5xiDLbdYmukDXlvMTu3vDzXyTJ6A5G8C7wun8XgAz5Gx1ue2ADoCmFW82lYJRhn2XnfCAj4saGEdFwjKZB8qj4ZClc646vdDk6RUrwrB0Fa13SD0nQ5OUCQsJ6o1840pFVhXMCXGu4jb90IflNnyLndPfZBXZBTFcad\r\n",
+    //             'content' => $data,
+    //             'ignore_errors' => true
+    //         ]
+    //     ];
 
-        $context = stream_context_create($options);
-        $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
+    //     $context = stream_context_create($options);
+    //     $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
 
-        // if ($response === false) {
-        //     echo "Error al enviar el mensaje\n";
-        // } else {
-        //     echo "Mensaje enviado correctamente\n";
-        // }
+    //     // if ($response === false) {
+    //     //     echo "Error al enviar el mensaje\n";
+    //     // } else {
+    //     //     echo "Mensaje enviado correctamente\n";
+    //     // }
 
-    }
+    // }
 
 
     if($_POST["funcion"] == "txtwhatsapp"){
