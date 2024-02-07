@@ -217,7 +217,7 @@
 
 
 
-    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje){
+    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico){
         if($tipoMensaje == "1"){
             $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
             $data = json_encode([
@@ -237,7 +237,7 @@
                 "to" => $telefono,
                 "type" => "image",
                 "image"=> [
-                    "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/imgavatar.png",
+                    "link" => "https://samperza.com/connectmate/uploads/img-enviar-whatsapp/".$nombreUnico,
                     "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
                 ]
             ]);
@@ -254,46 +254,86 @@
         $context = stream_context_create($options);
         $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
 
-        if ($response === false) {
-            echo "Error al enviar el mensaje\n";
-        } else {
-            echo "Mensaje enviado correctamente\n";
-        }
+        // if ($response === false) {
+        //     echo "Error al enviar el mensaje\n";
+        // } else {
+        //     echo "Mensaje enviado correctamente\n";
+        // }
 
     }
 
 
     if($_POST["funcion"] == "txtwhatsapp"){
-        include_once '../models/mensajes_whatsapp.php';
-        $msjwhatsapp = new msjwha();
-        // echo json_encode(["status" => "exit"]); 
-        // echo json_encode($data["datosTabla"]);
-    
-        $datosTabla = $_POST["datosTabla"];
-        $tipoMensaje = $_POST["tipo_mensaje"];
-        $mensaje = $_POST["descripcion"];
-        $mensaje = $_POST["descripcion"];
-        $id_usuario = $_POST["usuario"];
-        $contadorIteraciones = 0;
-        try {
-            foreach($datosTabla as $dato){
-                $nombre = $dato[0];
-                $apellido = $dato[1];
-                $telefono = "593".$dato[2];
+            include_once '../models/mensajes_whatsapp.php';
+            $msjwhatsapp = new msjwha();
 
-                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-                
-                $contadorIteraciones++;
+            $datosTabla = $_POST["datosTabla"];
+            $tipoMensaje = $_POST["tipo_mensaje"];
+            $mensaje = $_POST["descripcion"];
+            $id_usuario = $_POST["usuario"];
 
-                if ($contadorIteraciones >= 200) {
-                    break; // Sale del bucle después de 200 iteraciones
+            if($tipoMensaje == 1){
+                $contadorIteraciones = 0;
+                try {
+                    foreach($datosTabla as $dato){
+                        $nombre = $dato[0];
+                        $apellido = $dato[1];
+                        $telefono = "593" . $dato[2];
+
+                    // Llamar a la función para enviar mensajes de WhatsApp
+                    EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
+
+                    $contadorIteraciones++;
+
+                        if ($contadorIteraciones >= 200) {
+                            break; // Salir del bucle después de 200 iteraciones
+                        }
+                    }
+                } catch (Exception $e){
+                    echo "noadd" . $e;
                 }
-            }
-            // $msjwhatsapp->msjwhatsapp($datosTabla, $tipoMensaje, $mensaje, $id_usuario);
-        }catch (Exception $e){
-            echo "noadd". $e;
-        }
+            } else if($tipoMensaje == 2){
+                 // Procesar la imagen
+                if(isset($_FILES['img_whatsapp'])) {
+                    $archivo = $_FILES['img_whatsapp'];
 
+                    // Acceder a las propiedades del archivo
+                    $nombreArchivo = $archivo['name'];
+                    $tipoArchivo = $archivo['type'];
+                    $tamanioArchivo = $archivo['size'];
+                    $rutaTemporal = $archivo['tmp_name'];
+                    $errorArchivo = $archivo['error'];
+                    if(($tipoArchivo == 'image/jpeg') || $tipoArchivo == "image/jpg" || ($tipoArchivo == 'image/png') || ($tipoArchivo == 'image/gif')) {
+                        // generar un nombre de archivo único 
+                        $nombreUnico = uniqid() . '-' .$nombreArchivo;
+
+                        // Mover el archivo a su ubicación deseada
+                        $rutaDestino = "../uploads/img-enviar-whatsapp/".$nombreUnico;
+
+                        // utiliza para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
+                        move_uploaded_file($rutaTemporal, $rutaDestino);
+                        
+                        $contadorIteraciones = 0;
+                        try {
+                            foreach($datosTabla as $dato){
+                                $nombre = $dato[0];
+                                $apellido = $dato[1];
+                                $telefono = "593" . $dato[2];
+                                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
+                                $contadorIteraciones++;
+                                if ($contadorIteraciones >= 200) {
+                                    break; // Salir del bucle después de 200 iteraciones
+                                }
+                            }
+                        } catch (Exception $e){
+                            echo "noadd" . $e;
+                        }
+                    }
+                   
+                } 
+            }
     }
+
+
 
 ?>
