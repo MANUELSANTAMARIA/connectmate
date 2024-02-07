@@ -260,6 +260,15 @@ $(document).ready(function(){
             `;
         }else if(input_tipo_mensaje == 2){
             template +=`
+            <div class="image-upload">
+            <label for="envimg" class="custom-file-upload">
+              <i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen
+            </label>
+            <input type="file" id="envimg" accept="image/*">
+            </div>
+            <div class="vista-img-whatsapp">
+        
+            </div>
             <h5>Mensajes</h5>
             <textarea id="descripcion" cols="160" rows="5"></textarea>
             <h5>Formato del csv</h5>
@@ -368,7 +377,37 @@ $(document).ready(function(){
         recorrer_csv_tabla(e);
     })
 
+    // mostrar imagen a enviar
+    function mostrarImgen(){
+        var input_img = $('#envimg')[0];
+        var vista_previa = $('.vista-img-whatsapp');
+        // Verificar si se seleccionó un archivo
+        if(input_img.files.length > 0 ){
+            var imagen_seleccionada = input_img.files[0];
+            // Verificar si el archivo es una imagen
+            if (imagen_seleccionada.type.startsWith('image/')) {
+                var imagen = new Image();
+                imagen.src = URL.createObjectURL(imagen_seleccionada);
+                imagen.style.maxWidth = '100%';
+                vista_previa.empty(); // Limpiar vista previa anterior
+                vista_previa.append(imagen);
+                $('.vista-img-whatsapp').show();
+            }else {
+                alert('El archivo seleccionado no es una imagen.');
+                input_img.value = ''; // Limpiar la selección
+            }
+        } else {
+            vista_previa.empty(); // Limpiar vista previa si no se selecciona ningún archivo
+        }
 
+    }
+
+    $(document).on('input', '#envimg', function() {
+        mostrarImgen();
+    })
+    
+
+    
 
     $("#subir").on("click", function(){
         var miTabla = $("#tablares").DataTable();
@@ -376,24 +415,43 @@ $(document).ready(function(){
         var input_tipo_mensaje = $('#tipo-mensaje').val();
         var descripcion = $("#descripcion").val();
         var id_us = $("#id-us").val();
+        var formData = new FormData();
     
-        var data = {
-            funcion: "txtwhatsapp",
-            datosTabla: datosTabla,
-            tipo_mensaje: input_tipo_mensaje,
-            descripcion: descripcion,
-            // Incluir valores de sesión
-            usuario: id_us, 
-        };
-        $.post('../webhook/webhook.php', data, function(response) {
-            response = response.trim();
-            console.log(response)
-            if(response == "add"){
-                enviado_whatsapp();
+        if(input_tipo_mensaje == 1) {
+            formData.append('funcion', 'txtwhatsapp');
+            formData.append('datosTabla', JSON.stringify(datosTabla));
+            formData.append('tipo_mensaje', input_tipo_mensaje);
+            formData.append('descripcion', descripcion);
+            formData.append('usuario', id_us);
+        } else if(input_tipo_mensaje == 2) {
+            var img_whatsapp = $('#envimg').prop('files')[0];
+            formData.append('funcion', 'txtwhatsapp');
+            formData.append('datosTabla', JSON.stringify(datosTabla));
+            formData.append('tipo_mensaje', input_tipo_mensaje);
+            formData.append('img_whatsapp', img_whatsapp);
+            formData.append('descripcion', descripcion);
+            formData.append('usuario', id_us);
+        }
+    
+        $.ajax({
+            url: '../webhook/webhook.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                response = response.trim();
+                console.log(response);
+                if(response == "add"){
+                    enviado_whatsapp();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al enviar la solicitud:', errorThrown);
             }
         });
-        
     });
+    
     
     function enviado_whatsapp(){
         Swal.fire({
