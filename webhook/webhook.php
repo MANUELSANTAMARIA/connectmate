@@ -323,7 +323,7 @@
                                 $nombre = $dato[0];
                                 $apellido = $dato[1];
                                 $telefono = "593" . $dato[2];
-                                // EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
+                                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
                                 
                                 $contadorIteraciones++;
                                 if ($contadorIteraciones >= 200) {
