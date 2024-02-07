@@ -309,31 +309,31 @@
 		                mkdir('../uploads/img-enviar-whatsapp', 0777, true);
                       }
                         // generar un nombre de archivo único 
-                        $nombreUnico = uniqid() . '-' .$nombreArchivo;
+                        // $nombreUnico = uniqid() . '-' .$nombreArchivo;
                          
-                        // Mover el archivo a su ubicación deseada
-                        $rutaDestino = "../uploads/img-enviar-whatsapp/".$nombreUnico;
+                        // // Mover el archivo a su ubicación deseada
+                        // $rutaDestino = "../uploads/img-enviar-whatsapp/".$nombreUnico;
 
-                        // utiliza para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
-                        move_uploaded_file($rutaTemporal, $rutaDestino);
+                        // // utiliza para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
+                        // move_uploaded_file($rutaTemporal, $rutaDestino);
                         
-                        $contadorIteraciones = 0;
-                        try {
-                            foreach($datosTabla as $dato){
-                                $nombre = $dato[0];
-                                $apellido = $dato[1];
-                                $telefono = "593" . $dato[2];
-                                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
+                        // $contadorIteraciones = 0;
+                        // try {
+                        //     foreach($datosTabla as $dato){
+                        //         $nombre = $dato[0];
+                        //         $apellido = $dato[1];
+                        //         $telefono = "593" . $dato[2];
+                        //         EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
                                 
-                                $contadorIteraciones++;
-                                if ($contadorIteraciones >= 200) {
-                                    break; // Salir del bucle después de 200 iteraciones
-                                }
-                            }
+                        //         $contadorIteraciones++;
+                        //         if ($contadorIteraciones >= 200) {
+                        //             break; // Salir del bucle después de 200 iteraciones
+                        //         }
+                        //     }
                             
-                        } catch (Exception $e){
-                            echo "noadd" . $e;
-                        }
+                        // } catch (Exception $e){
+                        //     echo "noadd" . $e;
+                        // }
                       
                     }
                    
