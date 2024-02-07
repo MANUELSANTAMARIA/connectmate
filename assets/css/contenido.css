@@ -715,6 +715,52 @@
   color:#1783db;
 }
 
+/* input subir img */
+.image-upload {
+  text-align: center;
+}
+
+.custom-file-upload {
+  color: #fff;
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 220px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+.custom-file-upload i {
+  margin-right: 5px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+/* imagen de whatsapp a enviar */
+.vista-img-whatsapp{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 200px;
+  height: 200px;
+  display: none;
+}
+
+.vista-img-whatsapp img{
+  display: block;
+  margin: auto; /* Centrar horizontalmente */
+  max-width: 100%; /* Asegura que la imagen no sea más ancha que su contenedor */
+  width: 400px;
+  height: 200px;
+}
 
 
 .inline-button-msj-what {
@@ -763,6 +809,8 @@ table.dataTable thead {
   background: linear-gradient(to right,#004c9c, #e12206);
   color: white;
 }
+
+
 
 
 
