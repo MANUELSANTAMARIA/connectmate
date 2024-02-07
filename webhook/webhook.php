@@ -305,8 +305,8 @@
                     $errorArchivo = $archivo['error'];
                     if(($tipoArchivo == 'image/jpeg') || $tipoArchivo == "image/jpg" || ($tipoArchivo == 'image/png') || ($tipoArchivo == 'image/gif')) {
                         // creo la carpeta si no existe
-	                  if(!is_dir('../uploads/img-enviar-whatsapp')){
-		                mkdir('../uploads/img-enviar-whatsapp', 0777, true);
+	                  if(!is_dir('../uploads/img-enviar-whatsappp')){
+		                mkdir('../uploads/img-enviar-whatsappp', 0777, true);
                       }
                         // generar un nombre de archivo único 
                         // $nombreUnico = uniqid() . '-' .$nombreArchivo;
