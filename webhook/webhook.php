@@ -1,6 +1,6 @@
 <?php
-    // const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARASSS";
-    // const WEBHOOK_URL = "https://samperza.com/connectmate/webhook/webhook.php";
+    const TOKEN_MANUEL = "MANUELSANTAMARIACHICOANGIELARASSS";
+    const WEBHOOK_URL = "https://samperza.com/connectmate/webhook/webhook.php";
     
     // function verificarToken($req,$res){
     //     try{
