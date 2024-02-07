@@ -199,19 +199,19 @@
     // }
     
 
-    // if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
-    //     $input = file_get_contents('php://input');
-    //     $dataBot = json_decode($input,true);
+    if ($_SERVER['REQUEST_METHOD']==='POST' && $_POST["funcion"] != "txtwhatsapp"){
+        $input = file_get_contents('php://input');
+        $dataBot = json_decode($input,true);
 
-    //     recibirMensajes($dataBot,http_response_code());
+        recibirMensajes($dataBot,http_response_code());
         
-    // }else if($_SERVER['REQUEST_METHOD']==='GET'){
-    //     if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
-    //         echo $_GET['hub_challenge'];
-    //     }else{
-    //         http_response_code(403);
-    //     }
-    // }
+    }else if($_SERVER['REQUEST_METHOD']==='GET'){
+        if(isset($_GET['hub_mode']) && isset($_GET['hub_verify_token']) && isset($_GET['hub_challenge']) && $_GET['hub_mode'] === 'subscribe' && $_GET['hub_verify_token'] === TOKEN_MANUEL){
+            echo $_GET['hub_challenge'];
+        }else{
+            http_response_code(403);
+        }
+    }
 
 
 
