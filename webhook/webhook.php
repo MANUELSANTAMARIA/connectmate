@@ -288,9 +288,9 @@
                         if ($contadorIteraciones >= 200) {
                             break; // Salir del bucle después de 200 iteraciones
                         }
-                        echo $nombre;
                     }
-                    
+                    $json = json_encode($datosTabla);
+                    echo $json; 
                 } catch (Exception $e){
                     echo "noadd" . $e;
                 }
