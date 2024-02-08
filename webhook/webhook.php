@@ -217,7 +217,7 @@
 
 
 
-    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico){
+    function EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico = null){
         if($tipoMensaje == "1"){
             $unionmensaje = "Hola ".$nombre." ".$apellido." ".$mensaje;
             $data = json_encode([
