@@ -230,6 +230,7 @@
                     "body"=> $unionmensaje
                 ]
             ]);
+            echo $telefono. $nombre. $apellido. $mensaje;
         }if($tipoMensaje == "2"){
             $data = json_encode([
                 "messaging_product" => "whatsapp",    
