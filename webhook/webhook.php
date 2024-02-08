@@ -230,7 +230,6 @@
                     "body"=> $unionmensaje
                 ]
             ]);
-            echo "hola".$telefono. $nombre. $apellido. $mensaje;
         }if($tipoMensaje == "2"){
             $data = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -268,10 +267,13 @@
             include_once '../models/mensajes_whatsapp.php';
             $msjwhatsapp = new msjwha();
 
-            $datosTabla = $_POST["datosTabla"];
+            // Obtener los datos enviados desde el formulario
+            $datosTablaJSON = $_POST['datosTabla'];
             $tipoMensaje = $_POST["tipo_mensaje"];
             $mensaje = $_POST["descripcion"];
             $id_usuario = $_POST["usuario"];
+            // Decodificar los datos JSON en un array PHP
+            $datosTabla = json_decode($datosTablaJSON);
             if($tipoMensaje == "1"){
                 $contadorIteraciones = 0;
                 try {
