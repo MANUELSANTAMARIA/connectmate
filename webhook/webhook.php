@@ -271,7 +271,7 @@
             $tipoMensaje = $_POST["tipo_mensaje"];
             $mensaje = $_POST["descripcion"];
             $id_usuario = $_POST["usuario"];
-
+            echo $tipoMensaje;
             if($tipoMensaje == "1"){
                 $contadorIteraciones = 0;
                 try {
@@ -289,8 +289,6 @@
                             break; // Salir del bucle después de 200 iteraciones
                         }
                     }
-                    $json = json_encode($datosTabla);
-                    echo $json; 
                 } catch (Exception $e){
                     echo "noadd" . $e;
                 }
