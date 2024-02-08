@@ -294,7 +294,7 @@
                 } catch (Exception $e){
                     echo "noadd" . $e;
                 }
-            } else if($tipoMensaje == 2){
+            } else if($tipoMensaje == "2"){
                  // Procesar la imagen
                 if(isset($_FILES['img_whatsapp'])) {
                     $archivo = $_FILES['img_whatsapp'];
