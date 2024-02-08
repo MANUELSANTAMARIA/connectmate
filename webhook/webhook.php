@@ -271,7 +271,6 @@
             $tipoMensaje = $_POST["tipo_mensaje"];
             $mensaje = $_POST["descripcion"];
             $id_usuario = $_POST["usuario"];
-            echo $tipoMensaje;
             if($tipoMensaje == "1"){
                 $contadorIteraciones = 0;
                 try {
