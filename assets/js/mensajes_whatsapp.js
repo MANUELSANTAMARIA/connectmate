@@ -274,6 +274,21 @@ $(document).ready(function(){
             <h5>Formato del csv</h5>
             <label> Nombre |  Apellido | Telefono </label>
             `;
+        }else if(input_tipo_mensaje == 3){
+            template +=`<div class="image-upload">
+            <label for="envpdf" class="custom-file-upload">
+              <i class="fas fa-cloud-upload-alt"></i> Seleccionar pdf
+            </label>
+            <input type="file" id="envpdf" accept="application/pdf">
+            </div>
+            <div class="vista-pdf-whatsapp">
+        
+            </div>
+            <h5>Mensajes</h5>
+            <textarea id="descripcion" cols="160" rows="5"></textarea>
+            <h5>Formato del csv</h5>
+            <label> Nombre |  Apellido | Telefono </label> 
+            `;
         }
         $(".formato-tabla").html(template);
         
@@ -391,13 +406,14 @@ $(document).ready(function(){
                 imagen.style.maxWidth = '100%';
                 vista_previa.empty(); // Limpiar vista previa anterior
                 vista_previa.append(imagen);
-                $('.vista-img-whatsapp').show();
+                vista_previa.show();
             }else {
-                alert('El archivo seleccionado no es una imagen.');
                 input_img.value = ''; // Limpiar la selección
+                vista_previa.hide();
             }
         } else {
             vista_previa.empty(); // Limpiar vista previa si no se selecciona ningún archivo
+            vista_previa.hide();
         }
 
     }
@@ -405,8 +421,41 @@ $(document).ready(function(){
     $(document).on('input', '#envimg', function() {
         mostrarImgen();
     })
+
+    // mostrar pdf
+    function mostrarPdf() {
+        var input_pdf = $('#envpdf')[0];
+        var vista_previa = $('.vista-pdf-whatsapp');
+    
+        // Verificar si se seleccionó un archivo
+        if (input_pdf.files.length > 0) {
+            var archivo_seleccionado = input_pdf.files[0];
+    
+            // Verificar si el archivo es un PDF
+            if (archivo_seleccionado.type === 'application/pdf') {
+                var embed = $('<embed>');
+                embed.attr('src', URL.createObjectURL(archivo_seleccionado));
+                embed.attr('type', 'application/pdf');
+                embed.css('width', '100%');
+                embed.css('height', '100%'); // Ajusta el tamaño según tus necesidades
+                vista_previa.empty(); // Limpiar vista previa anterior
+                vista_previa.append(embed);
+                vista_previa.show();
+            } else {
+                input_pdf.value = ''; // Limpiar la selección
+                vista_previa.empty(); // Limpiar vista previa si no se selecciona un PDF
+                vista_previa.hide();
+            }
+        } else {
+            vista_previa.empty(); // Limpiar vista previa si no se selecciona ningún archivo
+            vista_previa.hide();
+        }
+    }
     
 
+    $(document).on('input', '#envpdf', function() {
+        mostrarPdf();
+    })
     
 
     $("#subir").on("click", function(){
@@ -429,6 +478,14 @@ $(document).ready(function(){
             formData.append('datosTabla', JSON.stringify(datosTabla));
             formData.append('tipo_mensaje', input_tipo_mensaje);
             formData.append('img_whatsapp', img_whatsapp);
+            formData.append('descripcion', descripcion);
+            formData.append('usuario', id_us);
+        }else if(input_tipo_mensaje == 3){
+            var pdf_whatsapp = $('#envpdf').prop('files')[0];
+            formData.append('funcion', 'txtwhatsapp');
+            formData.append('datosTabla', JSON.stringify(datosTabla));
+            formData.append('tipo_mensaje', input_tipo_mensaje);
+            formData.append('pdf_whatsapp', pdf_whatsapp);
             formData.append('descripcion', descripcion);
             formData.append('usuario', id_us);
         }

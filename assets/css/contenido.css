@@ -762,6 +762,15 @@ input[type="file"] {
   height: 200px;
 }
 
+/* pdf de whatsapp a enviar */
+.vista-pdf-whatsapp{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 300px;
+  height: 250px;
+  display: none;
+}
+
 
 .inline-button-msj-what {
   display: none;
