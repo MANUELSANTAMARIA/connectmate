@@ -241,6 +241,17 @@
                     "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
                 ]
             ]);
+        }if($tipoMensaje == "3"){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $telefono,
+                "type" => "document",
+                "image"=> [
+                    "link" => "https://samperza.com/connectmate/uploads/pdf-enviar-whatsapp/".$nombreUnico,
+                    "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
+                ]
+            ]);
         }
         $options = [
             'http' => [
