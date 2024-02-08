@@ -272,7 +272,7 @@
             $mensaje = $_POST["descripcion"];
             $id_usuario = $_POST["usuario"];
 
-            if($tipoMensaje == 1){
+            if($tipoMensaje == "1"){
                 $contadorIteraciones = 0;
                 try {
                     foreach($datosTabla as $dato){
@@ -292,58 +292,59 @@
                 } catch (Exception $e){
                     echo "noadd" . $e;
                 }
-            } else if($tipoMensaje == 2){
-                 // Procesar la imagen
-                if(isset($_FILES['img_whatsapp'])) {
-                    $archivo = $_FILES['img_whatsapp'];
+            } 
+            // else if($tipoMensaje == 2){
+            //      // Procesar la imagen
+            //     if(isset($_FILES['img_whatsapp'])) {
+            //         $archivo = $_FILES['img_whatsapp'];
 
-                    // Acceder a las propiedades del archivo
-                    $nombreArchivo = $archivo['name'];
-                    $tipoArchivo = $archivo['type'];
-                    $tamanioArchivo = $archivo['size'];
-                    $rutaTemporal = $archivo['tmp_name'];
-                    $errorArchivo = $archivo['error'];
-                    if(($tipoArchivo == 'image/jpeg') || $tipoArchivo == "image/jpg" || ($tipoArchivo == 'image/png') || ($tipoArchivo == 'image/gif')) {
-                        // antes de todos tu ruta donde vas guardar file deben tener permisos en servidor
-                        // -R:recursivo, lo que significa que los permisos se aplicarán a todos los archivos y subdirectorios dentro de 
-                        // sudo chmod 777 /var/www/sanperza.com/connectmate/uploads
-                        // creo la carpeta si no existe
-	                  if(!is_dir('../uploads/img-enviar-whatsapp')){
-		                mkdir('../uploads/img-enviar-whatsapp', 0777, true);
-                      }else {
-                        chmod('../uploads/img-enviar-whatsapp', 0777, true);
-                      }
-                        // generar un nombre de archivo único 
-                        $nombreUnico = uniqid() . '-' .$nombreArchivo;
+            //         // Acceder a las propiedades del archivo
+            //         $nombreArchivo = $archivo['name'];
+            //         $tipoArchivo = $archivo['type'];
+            //         $tamanioArchivo = $archivo['size'];
+            //         $rutaTemporal = $archivo['tmp_name'];
+            //         $errorArchivo = $archivo['error'];
+            //         if(($tipoArchivo == 'image/jpeg') || $tipoArchivo == "image/jpg" || ($tipoArchivo == 'image/png') || ($tipoArchivo == 'image/gif')) {
+            //             // antes de todos tu ruta donde vas guardar file deben tener permisos en servidor
+            //             // -R:recursivo, lo que significa que los permisos se aplicarán a todos los archivos y subdirectorios dentro de 
+            //             // sudo chmod 777 /var/www/sanperza.com/connectmate/uploads
+            //             // creo la carpeta si no existe
+	        //           if(!is_dir('../uploads/img-enviar-whatsapp')){
+		    //             mkdir('../uploads/img-enviar-whatsapp', 0777, true);
+            //           }else {
+            //             chmod('../uploads/img-enviar-whatsapp', 0777, true);
+            //           }
+            //             // generar un nombre de archivo único 
+            //             $nombreUnico = uniqid() . '-' .$nombreArchivo;
                          
-                        // Mover el archivo a su ubicación deseada
-                        $rutaDestino = "../uploads/img-enviar-whatsapp/".$nombreUnico;
+            //             // Mover el archivo a su ubicación deseada
+            //             $rutaDestino = "../uploads/img-enviar-whatsapp/".$nombreUnico;
 
-                        // utiliza para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
-                        move_uploaded_file($rutaTemporal, $rutaDestino);
+            //             // utiliza para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
+            //             move_uploaded_file($rutaTemporal, $rutaDestino);
                         
-                        $contadorIteraciones = 0;
-                        try {
-                            foreach($datosTabla as $dato){
-                                $nombre = $dato[0];
-                                $apellido = $dato[1];
-                                $telefono = "593" . $dato[2];
-                                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
+            //             $contadorIteraciones = 0;
+            //             try {
+            //                 foreach($datosTabla as $dato){
+            //                     $nombre = $dato[0];
+            //                     $apellido = $dato[1];
+            //                     $telefono = "593" . $dato[2];
+            //                     EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
                                 
-                                $contadorIteraciones++;
-                                if ($contadorIteraciones >= 200) {
-                                    break; // Salir del bucle después de 200 iteraciones
-                                }
-                            }
+            //                     $contadorIteraciones++;
+            //                     if ($contadorIteraciones >= 200) {
+            //                         break; // Salir del bucle después de 200 iteraciones
+            //                     }
+            //                 }
                             
-                        } catch (Exception $e){
-                            echo "noadd" . $e;
-                        }
+            //             } catch (Exception $e){
+            //                 echo "noadd" . $e;
+            //             }
                       
-                    }
+            //         }
                    
-                } 
-            }
+            //     } 
+            // }
     }
 
 
