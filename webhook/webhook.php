@@ -288,8 +288,9 @@
                         if ($contadorIteraciones >= 200) {
                             break; // Salir del bucle después de 200 iteraciones
                         }
+                        echo $nombre;
                     }
-                    echo "add";
+                    
                 } catch (Exception $e){
                     echo "noadd" . $e;
                 }
