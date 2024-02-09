@@ -249,7 +249,7 @@
                 "to" => $telefono,
                 "type" => "document",
                 "document"=> [
-                    "link" => "https://samperza.com/connectmate/uploads/pdf-enviar-whatsapp/".$nombreUnico,
+                    "link" => "https://samperza.com/connectmate/uploads/doc-enviar-whatsapp/".$nombreUnico,
                     "caption" => "Hola ".$nombre." ".$apellido." ".$mensaje,
                 ]
             ]);
