@@ -97,15 +97,23 @@ CREATE TABLE contacto(
     CONSTRAINT uq_numero_contacto UNIQUE(numero_contacto)
 )ENGINE = InnoDb;
 
+CREATE TABLE tipo_mensaje(
+    id_tipo_mensaje INT AUTO_INCREMENT NOT NULL,
+    nombre_tipo_mensaje VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_tipo_mensaje PRIMARY KEY(id_tipo_mensaje)
+)ENGINE = InnoDb;
+
 CREATE TABLE conversacion_whatsapp(
     id_con_whatsapp INT AUTO_INCREMENT NOT NULL,
     cod_whatsapp VARCHAR(250) NOT NULL,
     mensaje TEXT,
     marca_tiempo DATETIME,
     numero_contacto VARCHAR(12) NOT NULL,
+    tipo_mensaje_id INT NOT NULL,
     CONSTRAINT pk_conversacion_whatsapp PRIMARY KEY(id_con_whatsapp),
     CONSTRAINT uq_conversacion_whatsapp UNIQUE(cod_whatsapp),
-    CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto)
+    CONSTRAINT fk_conversacion_whatsapp_contacto FOREIGN KEY(numero_contacto) REFERENCES contacto(numero_contacto),
+    CONSTRAINT fk_conversacion_whatsapp_tipo_mensaje FOREIGN KEY(tipo_mensaje_id) REFERENCES tipo_mensaje(id_tipo_mensaje)
 )ENGINE = InnoDb;
 
 
