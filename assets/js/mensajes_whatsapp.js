@@ -276,10 +276,10 @@ $(document).ready(function(){
             `;
         }else if(input_tipo_mensaje == 3){
             template +=`<div class="image-upload">
-            <label for="envpdf" class="custom-file-upload">
+            <label for="envdoc" class="custom-file-upload">
               <i class="fas fa-cloud-upload-alt"></i> Seleccionar pdf
             </label>
-            <input type="file" id="envpdf" accept="application/pdf">
+            <input type="file" id="envdoc"  accept=".doc, .docx, application/pdf, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
             </div>
             <div class="vista-pdf-whatsapp">
         
@@ -423,25 +423,54 @@ $(document).ready(function(){
     })
 
     // mostrar pdf
-    function mostrarPdf() {
-        var input_pdf = $('#envpdf')[0];
+    function mostrarDoc() {
+        var input_pdf = $('#envdoc')[0];
         var vista_previa = $('.vista-pdf-whatsapp');
     
         // Verificar si se seleccionó un archivo
         if (input_pdf.files.length > 0) {
             var archivo_seleccionado = input_pdf.files[0];
+            var nombre_archivo = archivo_seleccionado.name;
     
             // Verificar si el archivo es un PDF
-            if (archivo_seleccionado.type === 'application/pdf') {
+            if (archivo_seleccionado.type === 'application/pdf'){
+                // Crear un elemento de incrustación para mostrar la vista previa
                 var embed = $('<embed>');
+                var p = $('<p>'+nombre_archivo+'</p>')
                 embed.attr('src', URL.createObjectURL(archivo_seleccionado));
-                embed.attr('type', 'application/pdf');
+                embed.attr('type', archivo_seleccionado.type);
                 embed.css('width', '100%');
-                embed.css('height', '100%'); // Ajusta el tamaño según tus necesidades
+                embed.css('height', '85%'); // Ajusta el tamaño según tus necesidades
                 vista_previa.empty(); // Limpiar vista previa anterior
                 vista_previa.append(embed);
+                vista_previa.append(p);
                 vista_previa.show();
-            } else {
+            }else if(archivo_seleccionado.type === 'application/vnd.ms-excel' || 
+                archivo_seleccionado.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+               ){
+                var embed = $('<embed>');
+                var p = $('<p>'+nombre_archivo+'</p>')
+                embed.attr('src', '../assets/img/xls.png'); // Ruta de la imagen en el servidor
+                embed.attr('type', 'image/png'); // Tipo MIME de la imagen (puedes ajustar según el tipo de imagen)
+                embed.attr('width', '70%'); // Ancho de la imagen (ajusta según tus necesidades)
+                embed.attr('height', '85%'); // Altura de la imagen (ajusta según tus necesidades)
+                vista_previa.empty(); // Limpiar vista previa anterior
+                vista_previa.append(embed);
+                vista_previa.append(p);
+                vista_previa.show();
+            } else if(archivo_seleccionado.type === 'application/msword' || 
+            archivo_seleccionado.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'){
+                var embed = $('<embed>');
+                var p = $('<p>'+nombre_archivo+'</p>')
+                embed.attr('src', '../assets/img/word.png'); // Ruta de la imagen en el servidor
+                embed.attr('type', 'image/png'); // Tipo MIME de la imagen (puedes ajustar según el tipo de imagen)
+                embed.attr('width', '70%'); // Ancho de la imagen (ajusta según tus necesidades)
+                embed.attr('height', '85%'); // Altura de la imagen (ajusta según tus necesidades)
+                vista_previa.empty(); // Limpiar vista previa anterior
+                vista_previa.append(embed);
+                vista_previa.append(p)
+                vista_previa.show();
+            }else {
                 input_pdf.value = ''; // Limpiar la selección
                 vista_previa.empty(); // Limpiar vista previa si no se selecciona un PDF
                 vista_previa.hide();
@@ -453,8 +482,8 @@ $(document).ready(function(){
     }
     
 
-    $(document).on('input', '#envpdf', function() {
-        mostrarPdf();
+    $(document).on('input', '#envdoc', function() {
+        mostrarDoc();
     })
     
 
@@ -481,11 +510,11 @@ $(document).ready(function(){
             formData.append('descripcion', descripcion);
             formData.append('usuario', id_us);
         }else if(input_tipo_mensaje == 3){
-            var pdf_whatsapp = $('#envpdf').prop('files')[0];
+            var doc_whatsapp = $('#envdoc').prop('files')[0];
             formData.append('funcion', 'txtwhatsapp');
             formData.append('datosTabla', JSON.stringify(datosTabla));
             formData.append('tipo_mensaje', input_tipo_mensaje);
-            formData.append('pdf_whatsapp', pdf_whatsapp);
+            formData.append('doc_whatsapp', doc_whatsapp);
             formData.append('descripcion', descripcion);
             formData.append('usuario', id_us);
         }
