@@ -172,10 +172,10 @@
                     "body"=> "🚀 ¡Hola! Bienvenido a sanlaracode, líder en servicios tecnológicos. Para obtener más información, selecciona una opción:\n \n📌 *Por favor, ingresa un número #️⃣ para recibir información:* .\n \n1️⃣. *Promociones 🎉:* ¿Quieres conocer nuestras ofertas especiales ❔\n2️⃣. *Ubicación del local 📍:* Encuentra nuestra tienda.\n3️⃣. *Catálogo de celulares 📄:* Solicita nuestro catálogo en formato PDF.\n4️⃣. *Hablar con un asesor de ventas 🙋‍♂️:* Conéctate con nuestro equipo de expertos.\n5️⃣.*Información sobre planes de internet y telefonía 🌐📞:* Descubre nuestras opciones.\n6️⃣. *Horarios de atención de la tienda física 🕒:* Conoce nuestros horarios de atención en la tienda."
                 ]
             ]);
-            $tipo_mensaje = 1;
+            // $tipo_mensaje = 1;
         }
 
-        $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero, $tipo_mensaje);
+        // $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero, $tipo_mensaje);
         $options = [
             'http' => [
                 'method' => 'POST',
