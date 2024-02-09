@@ -67,10 +67,6 @@ class msjwha{
                 ':tipo_mensaje' => $tipo_mensaje
             ));
 
-
-
-        
-
     }
 
     
