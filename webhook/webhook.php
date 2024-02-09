@@ -73,7 +73,7 @@
                     "body"=> "¡Hola! ¿Cómo podemos ayudarte hoy? Si tienes alguna pregunta o necesitas información, no dudes en decírmelo."
                 ]
             ]);
-            $tipo_mensaje = 1;
+            // $tipo_mensaje = 1;
         }else if($comentario=='1'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -85,7 +85,7 @@
                     "caption" => "Promociones 🎉"
                 ]
             ]);
-            $tipo_mensaje = 3;
+            // $tipo_mensaje = 3;
         }else if($comentario=='2'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -99,7 +99,7 @@
                     "address" => "CNT COACTIVA"
                 ]
             ]);
-            $tipo_mensaje = 4;
+            // $tipo_mensaje = 4;
         }else if($comentario=='3'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -111,7 +111,7 @@
                     "caption" => "Catálogo de celulares 📄"
                 ]
             ]);
-            $tipo_mensaje = 3;
+            // $tipo_mensaje = 3;
         }else if($comentario=='4'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -123,7 +123,7 @@
                     "body"=> "¡Hola! 🌟 Nos alegra informarte que hemos recibido tu mensaje y nos hemos puesto en contacto contigo a través de WhatsApp. Estamos aquí para ayudarte en lo que necesites. ¡Gracias por tu interés en nuestros servicios! 😊📱"
                 ]
             ]);
-            $tipo_mensaje = 1;
+            // $tipo_mensaje = 1;
         }else if($comentario=='5'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -136,7 +136,7 @@
                 ]
             ]);
 
-            $tipo_mensaje = 3;
+            // $tipo_mensaje = 3;
         }else if($comentario=='6'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",
@@ -148,7 +148,7 @@
                     "body" => "📅 Horario de Atención del local: Lunes a Viernes. \n🕜 Horario: 8:00 a.m. a 5:00 p.m. 🤓"
                 )
             ]);
-            $tipo_mensaje = 1;
+            // $tipo_mensaje = 1;
         }else if (strpos($comentario,'adios') !== false || strpos($comentario,'bye') !== false || strpos($comentario,'nos vemos') !== false || strpos($comentario,'adiós') !== false){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",
@@ -160,7 +160,7 @@
                     "body" => "Hasta luego. 🌟"
                 )
             ]);
-            $tipo_mensaje = 1;
+            // $tipo_mensaje = 1;
         }else{
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
