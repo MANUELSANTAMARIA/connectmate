@@ -324,8 +324,6 @@
                         // creo la carpeta si no existe
 	                  if(!is_dir('../uploads/img-enviar-whatsapp')){
 		                mkdir('../uploads/img-enviar-whatsapp', 0777, true);
-                      }else {
-                        chmod('../uploads/img-enviar-whatsapp', 0777, true);
                       }
                         // generar un nombre de archivo único 
                         $nombreUnico = uniqid() . '-' .$nombreArchivo;
