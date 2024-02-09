@@ -16,7 +16,7 @@ if($_SESSION['us_tipo']==1){
         <option selected>Tipo de mensaje</option>
         <option value="1">Mensajes en Whatsapp</option>
         <option value="2">Imagen en Whatsapp</option>
-        <option value="3">Pdf en Whatsapp</option>
+        <option value="3">Documento en Whatsapp</option>
       </select> 
     </div>
 
