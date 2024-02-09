@@ -42,12 +42,11 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
+                include_once '../models/mensajes_whatsapp.php';
+                $msjwhatsapp = new msjwha();
+                $tipo_mensaje = 1;
+                $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero, $tipo_mensaje);
                 
-                if($_POST["funcion"] != "txtwhatsapp"){
-                    include_once '../models/mensajes_whatsapp.php';
-                    $msjwhatsapp = new msjwha();
-                    $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero);
-                }
 
             }
             
@@ -74,6 +73,7 @@
                     "body"=> "¡Hola! ¿Cómo podemos ayudarte hoy? Si tienes alguna pregunta o necesitas información, no dudes en decírmelo."
                 ]
             ]);
+            $tipo_mensaje = 1;
         }else if($comentario=='1'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -85,6 +85,7 @@
                     "caption" => "Promociones 🎉"
                 ]
             ]);
+            $tipo_mensaje = 3;
         }else if($comentario=='2'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -98,6 +99,7 @@
                     "address" => "CNT COACTIVA"
                 ]
             ]);
+            $tipo_mensaje = 4;
         }else if($comentario=='3'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -109,6 +111,7 @@
                     "caption" => "Catálogo de celulares 📄"
                 ]
             ]);
+            $tipo_mensaje = 3;
         }else if($comentario=='4'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -120,7 +123,7 @@
                     "body"=> "¡Hola! 🌟 Nos alegra informarte que hemos recibido tu mensaje y nos hemos puesto en contacto contigo a través de WhatsApp. Estamos aquí para ayudarte en lo que necesites. ¡Gracias por tu interés en nuestros servicios! 😊📱"
                 ]
             ]);
-
+            $tipo_mensaje = 1;
         }else if($comentario=='5'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -133,7 +136,7 @@
                 ]
             ]);
 
-
+            $tipo_mensaje = 3;
         }else if($comentario=='6'){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",
@@ -145,7 +148,7 @@
                     "body" => "📅 Horario de Atención del local: Lunes a Viernes. \n🕜 Horario: 8:00 a.m. a 5:00 p.m. 🤓"
                 )
             ]);
-
+            $tipo_mensaje = 1;
         }else if (strpos($comentario,'adios') !== false || strpos($comentario,'bye') !== false || strpos($comentario,'nos vemos') !== false || strpos($comentario,'adiós') !== false){
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",
@@ -157,6 +160,7 @@
                     "body" => "Hasta luego. 🌟"
                 )
             ]);
+            $tipo_mensaje = 1;
         }else{
             $dataBot = json_encode([
                 "messaging_product" => "whatsapp",    
@@ -168,7 +172,10 @@
                     "body"=> "🚀 ¡Hola! Bienvenido a sanlaracode, líder en servicios tecnológicos. Para obtener más información, selecciona una opción:\n \n📌 *Por favor, ingresa un número #️⃣ para recibir información:* .\n \n1️⃣. *Promociones 🎉:* ¿Quieres conocer nuestras ofertas especiales ❔\n2️⃣. *Ubicación del local 📍:* Encuentra nuestra tienda.\n3️⃣. *Catálogo de celulares 📄:* Solicita nuestro catálogo en formato PDF.\n4️⃣. *Hablar con un asesor de ventas 🙋‍♂️:* Conéctate con nuestro equipo de expertos.\n5️⃣.*Información sobre planes de internet y telefonía 🌐📞:* Descubre nuestras opciones.\n6️⃣. *Horarios de atención de la tienda física 🕒:* Conoce nuestros horarios de atención en la tienda."
                 ]
             ]);
+            $tipo_mensaje = 1;
         }
+
+        $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero, $tipo_mensaje);
         $options = [
             'http' => [
                 'method' => 'POST',
@@ -181,11 +188,11 @@
         $context = stream_context_create($options);
         $response = file_get_contents('https://graph.facebook.com/v18.0/218219994708699/messages', false, $context);
 
-        if ($response === false) {
-            echo "Error al enviar el mensaje\n";
-        } else {
-            echo "Mensaje enviado correctamente\n";
-        }
+        // if ($response === false) {
+        //     echo "Error al enviar el mensaje\n";
+        // } else {
+        //     echo "Mensaje enviado correctamente\n";
+        // }
     }
     
     function verificarTextoEnArchivo($texto, $archivo) {
@@ -296,7 +303,7 @@
 
                     // Llamar a la función para enviar mensajes de WhatsApp
                     EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje);
-
+                    
                     $contadorIteraciones++;
 
                         if ($contadorIteraciones >= 200) {
