@@ -277,7 +277,7 @@ $(document).ready(function(){
         }else if(input_tipo_mensaje == 3){
             template +=`<div class="image-upload">
             <label for="envdoc" class="custom-file-upload">
-              <i class="fas fa-cloud-upload-alt"></i> Seleccionar pdf
+              <i class="fas fa-cloud-upload-alt"></i> Seleccionar Documento
             </label>
             <input type="file" id="envdoc"  accept=".doc, .docx, application/pdf, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
             </div>
