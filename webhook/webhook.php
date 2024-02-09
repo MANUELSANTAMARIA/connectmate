@@ -42,10 +42,10 @@
                 fwrite($archivo, $texto);
                 fclose($archivo);
                 whatsappBot($id, $comentario, $numero);
-                // include_once '../models/mensajes_whatsapp.php';
-                // $msjwhatsapp = new msjwha();
-                // $tipo_mensaje = 1;
-                // $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero, $tipo_mensaje);
+                include_once '../models/mensajes_whatsapp.php';
+                $msjwhatsapp = new msjwha();
+                $tipo_mensaje = 1;
+                $msjwhatsapp->conversacion_whatsapp($id, $comentario, $numero, $tipo_mensaje);
                 
 
             }
