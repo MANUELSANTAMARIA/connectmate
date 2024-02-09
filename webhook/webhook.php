@@ -358,53 +358,49 @@
                    
                 } 
             } else if($tipoMensaje == "3"){
-                if(isset($_FILES['pdf_whatsapp'])) {
-                    $archivo = $_FILES['pdf_whatsapp'];
-                
+                if(isset($_FILES['doc_whatsapp'])) {
+                    $archivo = $_FILES['doc_whatsapp'];
+                    // var_dump($_FILES['pdf_whatsapp']);
                     // Acceder a las propiedades del archivo
                     $nombreArchivo = $archivo['name'];
                     $tipoArchivo = $archivo['type'];
                     $tamanioArchivo = $archivo['size'];
                     $rutaTemporal = $archivo['tmp_name'];
                     $errorArchivo = $archivo['error'];
-                
-                    if($tipoArchivo == 'application/pdf') {
                         // Antes de todos, asegúrate de que la carpeta donde guardarás los archivos tenga permisos en el servidor
                         // -R: recursivo, lo que significa que los permisos se aplicarán a todos los archivos y subdirectorios dentro de 
                         // sudo chmod 777 -R /var/www/sanperza.com/connectmate/uploads
                         // Creo la carpeta si no existe
-                        if(!is_dir('../uploads/pdf-enviar-whatsapp')) {
-                            mkdir('../uploads/pdf-enviar-whatsapp', 0777, true);
-                        } else {
-                            chmod('../uploads/pdf-enviar-whatsapp', 0777);
-                        }
-                
+                        
+                        if(!is_dir('../uploads/doc-enviar-whatsapp')) {
+                            mkdir('../uploads/doc-enviar-whatsapp', 0777, true);
+                        } 
                         // Generar un nombre de archivo único 
                         $nombreUnico = uniqid() . '-' . $nombreArchivo;
                         
-                        // Mover el archivo a su ubicación deseada
-                        $rutaDestino = "../uploads/pdf-enviar-whatsapp/" . $nombreUnico;
                         
-                        // Utilizado para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
-                        move_uploaded_file($rutaTemporal, $rutaDestino);
+                         // Mover el archivo a su ubicación deseada
+                         $rutaDestino = "../uploads/doc-enviar-whatsapp/".$nombreUnico;
+
+                         // utiliza para mover un archivo cargado (subido) desde una ubicación temporal a una ubicación permanente en el servidor
+                         move_uploaded_file($rutaTemporal, $rutaDestino);
                 
-                        // $contadorIteraciones = 0;
-                        // try {
-                        //     foreach($datosTabla as $dato) {
-                        //         $nombre = $dato[0];
-                        //         $apellido = $dato[1];
-                        //         $telefono = "593" . $dato[2];
-                        //         EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
+                        $contadorIteraciones = 0;
+                        try {
+                            foreach($datosTabla as $dato) {
+                                $nombre = $dato[0];
+                                $apellido = $dato[1];
+                                $telefono = "593" . $dato[2];
+                                EnviarMensajeWhastapp($telefono, $tipoMensaje, $nombre, $apellido, $mensaje, $nombreUnico);
                                 
-                        //         $contadorIteraciones++;
-                        //         if ($contadorIteraciones >= 200) {
-                        //             break; // Salir del bucle después de 200 iteraciones
-                        //         }
-                        //     }
-                        // } catch (Exception $e) {
-                        //     echo "noadd" . $e;
-                        // }
-                    }
+                                $contadorIteraciones++;
+                                if ($contadorIteraciones >= 200) {
+                                    break; // Salir del bucle después de 200 iteraciones
+                                }
+                            }
+                        } catch (Exception $e) {
+                            echo "noadd" . $e;
+                        }
                 }                
 
             }
