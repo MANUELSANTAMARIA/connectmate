@@ -13,7 +13,7 @@ class msjwha{
         foreach($datosTabla as $dato){
             $nombre = $dato[0];
             $apellido = $dato[1];
-            $telefono = "593".$dato[2];
+            $numero = "593".$dato[2];
             $sql = "SELECT * FROM contacto WHERE  numero_contacto = :numero_contacto";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
