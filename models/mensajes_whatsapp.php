@@ -21,10 +21,12 @@ class msjwha{
             ));
             $this->objetos = $query->fetch();
         if (empty($this->objetos)){
-            $sql = "INSERT INTO contacto(numero_contacto) VALUES(:numero)";
+            $sql = "INSERT INTO contacto(numero_contacto, nombre, apellido) VALUES(:numero, :nombre, :apellido)";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
-                ':numero' => $numero
+                ':numero' => $numero,
+                ':nombre' => $nombre,
+                ':apellido' => $apellido 
             ));
         }
          $sql = "INSERT INTO msjwhatsapp(nombre, apellido, telefono, fecha, mensaje, us_id) 

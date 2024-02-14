@@ -29,7 +29,7 @@ if($_SESSION['us_tipo']==1){
 
     <div class="subirdoc">
         <label for="leer-csv" class="file-label">Selecciona el archivo en formato csv</label>
-        <input type="file" class="file-input" id="leer-csv">
+        <input type="file" class="file-input" id="leer-csv"  accept=".csv">
         
     </div>
 

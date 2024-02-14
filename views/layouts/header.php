@@ -29,7 +29,7 @@
       </p>
         <div class="menu__ajustes">
         
-            <img src="../assets/img/logo-cnt.svg" alt="">
+            <img src="../assets/img/logo-cnt.svg.png" alt="">
             <i class="fa-regular fa-user"></i>
             <?= "Bienvenido"." ". $_SESSION["nombre"] . " " . $_SESSION["apellido"]; ?></p>
             

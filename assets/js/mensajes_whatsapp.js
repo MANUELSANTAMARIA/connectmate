@@ -527,8 +527,13 @@ $(document).ready(function(){
             processData: false,
             success: function(response) {
                 response = response.trim();
-                console.log(response);
+                // console.log(response);
                 if(response == "add"){
+                    var input_tipo_mensaje = $('#tipo-mensaje').val("");
+                    var descripcion = $("#descripcion").val("");
+                    var id_us = $("#id-us").val("");
+                    // Limpiar los datos de la tabla
+                    miTabla.clear().draw();
                     enviado_whatsapp();
                 }
             },
