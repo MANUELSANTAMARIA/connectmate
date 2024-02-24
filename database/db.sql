@@ -69,6 +69,80 @@ INSERT INTO
     );
 
 
+CREATE TABLE categoria(
+    id_categoria int auto_increment NOT NULL,
+    nombre_categoria VARCHAR(70) NOT NULL,
+    CONSTRAINT pk_categoria PRIMARY KEY(id_categoria)
+)ENGINE = InnoDb;
+
+INSERT INTO categoria(nombre_categoria) 
+    VALUES ("SMARTPHONE"), ("FIJO"), ("PLANES");
+
+
+CREATE TABLE marca(
+    id_marca INT auto_increment NOT NULL,
+    nombre_marca VARCHAR(70) NOT NULL,
+    CONSTRAINT pk_id_marca PRIMARY KEY(id_marca)
+)ENGINE = InnoDb;
+
+INSERT INTO marca(nombre_marca) 
+VALUES ('SAMSUNG'), ('APPLE'), ('HUAWEI'), ('XIAOMI'), ('HONOR'), ("TCL");
+
+CREATE TABLE regalo(
+    id_regalo int auto_increment NOT NULL,
+    nombre_regalo VARCHAR(70) NOT NULL,
+    CONSTRAINT pk_regalo PRIMARY KEY(id_regalo)
+)ENGINE = InnoDb;
+
+
+INSERT INTO regalo(nombre_regalo) 
+    VALUES ("TOMATODOS"), ("CUBRE CARRO");
+
+CREATE TABLE gama(
+    id_gama int auto_increment NOT NULL,
+    nombre_gama VARCHAR(70) NOT NULL,
+    CONSTRAINT pk_gama PRIMARY KEY(id_gama)
+)ENGINE = InnoDb;
+
+INSERT INTO gama(nombre_gama) VALUES ("GAMA PREMIUM"), ("GAMA ALTA"), ("GAMA MEDIA"), ("GAMA BAJA");
+
+
+CREATE TABLE producto(
+    id_producto INT AUTO_INCREMENT NOT NULL,
+    cod_producto VARCHAR(6) NOT NULL,
+    categoria_id INT NOT NULL,
+    marca_id INT NOT NULL,
+    nombre_producto VARCHAR(100) NOT NULL,
+    descripcion_producto text,
+    precio FLOAT(100,2) NOT NULL,
+    stock  INT(255) NOT NULL,
+    oferta VARCHAR(70),
+    regalo_id INT NOT NULL,
+    gama_id INT NOT NULL,
+    imagen varchar(255),
+    creado_en TIMESTAMP,
+    actualizado_en TIMESTAMP,
+    CONSTRAINT pk_producto PRIMARY KEY(id_producto),
+    CONSTRAINT uq_cod_producto UNIQUE(cod_producto),
+    CONSTRAINT fk_categoria_id FOREIGN KEY(categoria_id) REFERENCES categoria(id_categoria),
+    CONSTRAINT fk_marca_id FOREIGN KEY(marca_id) REFERENCES marca(id_marca),
+    CONSTRAINT fk_regalo_id FOREIGN KEY(regalo_id) REFERENCES regalo(id_regalo),
+    CONSTRAINT fk_gama_id FOREIGN KEY(gama_id) REFERENCES gama(id_gama)
+)ENGINE = InnoDb;
+
+
+-- GAMA PREMIUN
+INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, regalo_id, gama_id, imagen, creado_en, actualizado_en)
+VALUES ('8721', 1, 1, 'SAMSUNG Z FLIP 5', 'SAMSUNG Z FLIP 5 (SM-F731B)', 1181.49, 20, NULL, 1, 1, 'imagen_movil.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+-- MEDIA MEDIA
+INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, regalo_id, gama_id, imagen, creado_en, actualizado_en)
+VALUES ('8700', 1, 6, 'TCL 40SE (T610E)', 'XXXX', 254.99, 20, NULL, 2, 3, 'imagen_movil.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+
+
 CREATE TABLE msjwhatsapp(
     id_msjwhatsapp INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(50),
