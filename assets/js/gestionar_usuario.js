@@ -84,6 +84,28 @@ $(document).on('keyup','#buscar',function(){
   // btn_crear_usuario
   btn_crear_usuario.click(function() {
   modal_crear_usuario.css("display", "block");
+  funcion = "tipos_usuario";
+  $.post("../controllers/usuario.php", {funcion}, function(response){
+    // console.log(response);
+    // Parsear la respuesta JSON del servidor
+    const tipos_usuarios = JSON.parse(response);
+
+    // Inicializar la variable para almacenar el HTML de las opciones de categoría
+    let template = "";
+
+    // Agregar una opción por defecto
+    template += `<option selected>TIPOS DE USUARIOS</option>`;
+
+    // Iterar sobre las categorías recibidas del servidor y construir las opciones de categoría
+    for (let i = 1; i < tipos_usuarios.length; i++) {
+        const tipo_usuario = tipos_usuarios[i];
+        template += `<option value="${tipo_usuario.id_tipo_us}">${tipo_usuario.nombre_tipo_us}</option>`;
+    }
+
+    $("#select-tipo").html(template);
+
+
+  })
   
   });
 
@@ -341,11 +363,6 @@ $(document).on('keyup','#buscar',function(){
   // no se recargue la pagina
   e.preventDefault();
   })    
-
-
-
-
-
 
 
 

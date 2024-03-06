@@ -44,6 +44,7 @@ if($_POST['funcion']=='dato_usuario'){
 }
 
 
+
 // cambiar avatar
 if($_POST['funcion'] == 'cambiar_avatar'){
     if(($_FILES['avatar']['type'] == 'image/jpeg') || $_FILES['avatar']['type'] == "image/jpg" || ($_FILES['avatar']['type'] == 'image/png') || ($_FILES['avatar']['type'] == 'image/gif')) {
@@ -86,7 +87,20 @@ if($_POST['funcion'] == 'cambiar_avatar'){
 
 
 
+// tipos de usuario
+if($_POST["funcion"] == "tipos_usuario"){
+    $json = array();
+    $usuario->tipo_usuario();
+    foreach ($usuario->objetos as $objeto) {
+        $json[] = array(
+            'id_tipo_us' => $objeto->id_tipo_us,
+            'nombre_tipo_us' => $objeto->nombre_tipo_us
+        );
+    }
 
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+}
 
 // buscar usuarios
 if($_POST['funcion'] == 'buscar_usuarios'){

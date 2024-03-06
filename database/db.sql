@@ -69,6 +69,8 @@ INSERT INTO
     );
 
 
+
+
 CREATE TABLE categoria(
     id_categoria int auto_increment NOT NULL,
     nombre_categoria VARCHAR(70) NOT NULL,
@@ -109,7 +111,7 @@ INSERT INTO gama(nombre_gama) VALUES ("GAMA PREMIUM"), ("GAMA ALTA"), ("GAMA MED
 
 CREATE TABLE producto(
     id_producto INT AUTO_INCREMENT NOT NULL,
-    cod_producto VARCHAR(6) NOT NULL,
+    cod_producto VARCHAR(10) NOT NULL,
     categoria_id INT NOT NULL,
     marca_id INT NOT NULL,
     nombre_producto VARCHAR(100) NOT NULL,
@@ -139,6 +141,30 @@ VALUES ('8721', 1, 1, 'SAMSUNG Z FLIP 5', 'SAMSUNG Z FLIP 5 (SM-F731B)', 1181.49
 -- MEDIA MEDIA
 INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, regalo_id, gama_id, imagen, creado_en, actualizado_en)
 VALUES ('8700', 1, 6, 'TCL 40SE (T610E)', 'XXXX', 254.99, 20, NULL, 2, 3, 'imagen_movil.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+
+-- Cotizador
+CREATE TABLE smartflex(
+    id_smartflex INT AUTO_INCREMENT NOT NULL,
+    cod_smartflex VARCHAR(5)
+    CONSTRAINT pk_smartflex PRIMARY KEY(id_smartflex),
+    CONSTRAINT uq_cod_smartflex UNIQUE(cod_producto)
+)ENGINE = InnoDb;
+
+
+
+CREATE TABLE cotizacion(
+    id_cotizacion INT AUTO_INCREMENT NOT NULL,
+    producto_id INT NOT NULL,
+    smartflex_id INT NOT NULL,
+    CONSTRAINT pk_smartflex PRIMARY KEY(id_cotizacion),
+    CONSTRAINT fk_producto_id FOREIGN KEY(producto_id) REFERENCES producto(id_producto),
+    CONSTRAINT fk_smartflex_id FOREIGN KEY(smartflex_id) REFERENCES smartflex(id_smartflex)
+)ENGINE = InnoDb;
+
+
+
 
 
 

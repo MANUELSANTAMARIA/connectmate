@@ -171,29 +171,15 @@ $(window).click(function(event) {
   if(event.target === modal_confirmar_eliminar[0]){
     modal_confirmar_eliminar.css("display", "none")
   }
-  let modal_crear_eje = $("#modal-crear-eje");
-  if(event.target == modal_crear_eje[0]){
-    modal_crear_eje.css("display", "none")
-  }
-  let modal_cambiar_logo_eje = $("#modal-cambiar-logo-eje");
-  if(event.target == modal_cambiar_logo_eje[0]){
-    modal_cambiar_logo_eje.css("display", "none")
-  }
 
-  let modal_confirmar_deshabilitar_eje =$("#modal-confirmar-deshabilitar-eje")
-  if(event.target == modal_confirmar_deshabilitar_eje[0]){
-    modal_confirmar_deshabilitar_eje.css("display", "none");
-  }
 
-  let modal_confirmar_habilitar_eje = $("#modal-confirmar-habilitar-eje")
-  if(event.target == modal_confirmar_habilitar_eje[0]){
-    modal_confirmar_habilitar_eje.css("display", "none");
+  let modal_crear_producto = $("#modal-crear-producto");
+  if(event.target == modal_crear_producto[0]){
+    modal_crear_producto.css("display", "none")
   }
+  
 
-  let modal_edi_eje = $("#modal-edi-eje");
-  if(event.target == modal_edi_eje[0]){
-    modal_edi_eje.css("display", "none")
-  }
+  
 
  });
 

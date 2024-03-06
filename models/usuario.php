@@ -82,6 +82,15 @@ class usuario{
     
     }
 
+    // tipos de usuario
+    function tipo_usuario(){
+      $sql = "SELECT * FROM tipo_usuario";
+      $query = $this->acceso->prepare($sql);
+      $query->execute();
+      $this->objetos = $query->fetchall();
+      return $this->objetos;
+
+    }
     // gestinar usuario 
     function crear($nombre, $apellido, $fechaNacimiento, $ci, $correo, $contrasena, $tipo, $habilitado, $avatar_defecto){
         $sql = "SELECT * FROM usuario WHERE email_us = :email";

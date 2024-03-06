@@ -1,11 +1,11 @@
 <?php
 class conexion{
-    private $servidor = "samperza.com";
+    private $servidor = "localhost";
     private $db = "connectmate";
     private $puerto = 3306;
     private $charset="utf8";
-    private $usuario="connectmate";
-    private $contrasena="bdsseE12$";
+    private $usuario="root";
+    private $contrasena="";
     public $pdo = null;
     // PDO::ATTR_CASE:establecer el modo en que los nombres de columnas se devuelven en los resultados de consultas.
     // PDO::CASE_LOWER: indica que los nombres de las columnas se devuelven en minúsculas.

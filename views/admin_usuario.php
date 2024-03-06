@@ -101,10 +101,7 @@ if($_SESSION['us_tipo']==1){
 
         <div class="combodesplegable">
             <select class="select" id="select-tipo">
-              <option selected>Tipo De Usuario</option>
-              <option value="2">Administrador</option>
-              <option value="4">Administrador-Tecnico</option>
-              <option value="3">Tecnico</option>
+             
             </select> 
         </div>
 

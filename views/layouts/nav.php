@@ -40,15 +40,25 @@ $menuHome = array(
                 'icon' => 'fa-brands fa-whatsapp',
                 'title' => 'Mensajes Whatsapp',
                 'text' => 'Mensajes Whatsapp'
+            ) 
+        ),
+
+        "producto" => array(
+            array(
+                'href' => '../views/producto.php',
+                'icon' => 'fas fa-network-wired',
+                'title' => 'Gestionar Producto',
+                'text' => 'producto'
             ),
-            // array(
-            //     'href' => '#',
-            //     'icon' => 'fas fa-check-circle',
-            //     'title' => 'Linea de Accion',
-            //     'text' => 'Linea de Accion'
-            // ),
+            array(
+                'href' => '../views/ingresar_producto_masivo.php',
+                'icon' => 'fas fa-check-circle',
+                'title' => 'Subir Stock',
+                'text' => 'Subir Stock'
+            ),
            
         ),
+        
 
     );
     
@@ -57,23 +67,67 @@ $menuHome = array(
         "datos_personales" => array(
             array(
                 'href' => '../views/datos_personales.php',
-                'icon' => 'fas fa-user-cog',
+                'icon' => 'fa-solid fa-user',
                 'title' => 'Datos Personales',
                 'text' => 'DATOS PERSONALES'
             ),
         ),
-        "ejes" => array(
+
+        "producto" => array(
             array(
-                'href' => '../views/admin_ejes.php',
-                'icon' => 'fas fa-user-cog',
-                'title' => 'Datos Personales',
-                'text' => 'ejes'
+                'href' => '../views/producto.php',
+                'icon' => 'fas fa-network-wired',
+                'title' => 'Gestionar Producto',
+                'text' => 'producto'
             ),
             array(
-                'href' => '../views/admin_ejes.php',
-                'icon' => 'fas fa-users',
-                'title' => 'a',
-                'text' => 'GESTIONAR USUARIOS'
+                'href' => '../views/ingresar_producto_masivo.php',
+                'icon' => 'fas fa-check-circle',
+                'title' => 'Subir Stock',
+                'text' => 'Subir Stock'
+            ),
+           
+        ),
+    );
+
+
+    $menuvendedor = array(
+        "datos_personales" => array(
+            array(
+                'href' => '../views/datos_personales.php',
+                'icon' => 'fa-solid fa-user',
+                'title' => 'Datos Personales',
+                'text' => 'DATOS PERSONALES'
+            ),
+        ),
+
+        "producto" => array(
+            array(
+                'href' => '../views/producto.php',
+                'icon' => 'fas fa-network-wired',
+                'title' => 'Gestionar Producto',
+                'text' => 'producto'
+            ),
+        ),
+    );
+
+
+    $menuimpulsador = array(
+        "datos_personales" => array(
+            array(
+                'href' => '../views/datos_personales.php',
+                'icon' => 'fa-solid fa-user',
+                'title' => 'Datos Personales',
+                'text' => 'DATOS PERSONALES'
+            ),
+        ),
+
+        "producto" => array(
+            array(
+                'href' => '../views/producto.php',
+                'icon' => 'fas fa-network-wired',
+                'title' => 'Gestionar Producto',
+                'text' => 'producto'
             ),
         ),
     );
@@ -81,6 +135,9 @@ $menuHome = array(
 $menuOpciones = array(
     1 => $menuroot ,
     2 => $menuadmin,
+    3 => $menuvendedor,
+    4 => $menuimpulsador
+
 );
 // Obtener el tipo de usuario actual desde $_SESSION
 $userType = $_SESSION['us_tipo'];
@@ -121,7 +178,9 @@ $primerArray = $menuOpciones[$userType];
                         <?php endforeach; ?>
                         </ul>
                     </li>
-
+                    <?php
+                    if($userType == 1){
+                    ?>
                     <!-- mensajes_masivo -->
                     <li class="list__item">
                         <div>
@@ -132,6 +191,29 @@ $primerArray = $menuOpciones[$userType];
                         </div>
                         <ul class="list__show">
                         <?php foreach($primerArray["mensaje_masivo"] as $option): ?>
+                            <li class="list__inside">
+                                <a href="<?= $option['href'] ?>">
+                                 <i class="<?= $option['icon'] ?>" title="<?= $option['title']?>"></i>
+                                 <h4><?= $option['text'] ?></h4>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                        </ul>
+                    </li>
+                    <?php
+                    }
+                    ?>
+
+                    <!-- producto -->
+                    <li class="list__item">
+                        <div>
+                            <div class="option">
+                             <i class="fas fa-box" title="Mensajes Masivo"></i>
+                             <h4>Producto</h4>
+                            </div>
+                        </div>
+                        <ul class="list__show">
+                        <?php foreach($primerArray["producto"] as $option): ?>
                             <li class="list__inside">
                                 <a href="<?= $option['href'] ?>">
                                  <i class="<?= $option['icon'] ?>" title="<?= $option['title']?>"></i>

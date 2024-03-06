@@ -260,6 +260,12 @@
 
 
 /* buscar */
+.conbuscar {
+  display: flex;
+  width: 100%;
+}
+
+
 .ds-buscar{
   position: relative;
   overflow: hidden;
@@ -326,92 +332,36 @@
   transform: translateX(0%);
 } 
 
-
-/*HOME */
-.content-wrapper-catalogo{
+/* combodesplegable */
+.combodesplegable{
+  margin-top: 15px;
+  width: 100%;
   display: flex;
-  margin: 10px;
+  
+}
+
+
+.combodesplegable label{
+  display:block; 
+  margin-top:10px; 
+  color:#0000FF; 
+  margin-bottom:10px;
+  margin-right: 10px;
+}
+
+.combodesplegable .select {
+  width: 400px;
   padding: 10px;
-  background-color: white;  
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
 }
 
-/* graficos */
-.content-wrapper-catalogo .grafico {
-    width: 400px;
-    height: 400px;
-    border: 1px solid #ddd; /* Grosor y color del borde */
-    border-radius: 6px; /* Redondear las esquinas */
-    padding: 10px; /* Espacio interno del contenido de la card */
-    border-radius: 30px;
-    box-shadow: 0px 0px 25px #222; /*difuminacion*/
-    backdrop-filter: blur(10px);
-    margin-top: 30px;
-    margin-left: 50px;
-  }
-  
-.content-wrapper-catalogo .grafico  .titulografico {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 55px; /* Ajusta la altura según tus necesidades */
-  margin: 7px;
-  border-radius: 30px;
-  background: #0000FF;
-  border: 1px solid #ddd; /* Grosor y color del borde */
-  }
-  
-.content-wrapper-catalogo .grafico  .titulografico h5 {
-  margin: 0;
-  color: white;
-  font-size: 20px;
-  }
-  
-  .content-wrapper-catalogo .grafico .graficodona{
-    width: 80%;
-    margin-left: 50px;
-  }
-
-.content-wrapper-catalogo .embudossee{
-    display: flex;
-}
-
-.content-wrapper-catalogo  .embudossee img {
-    display: flex;
-    margin-left: 40px;
-    width: 700px; /* Ancho deseado */
-    height: auto; /* La altura se ajustará proporcionalmente al ancho */
-  }
-  
-/* Desacraga del archivo */
-.content-wrapper-catalogo .descargardoc{
-    height: 7%;
-    margin-left: 40px;
-    margin-right: 40px;
-    text-align: center;
-    border: 1px solid #ddd;
-    height: 200px;
-  }
-
-.content-wrapper-catalogo .descargardoc  .titulodes {
-    /*centrar el texto*/
-    text-align: center;
-    /*tamaño de letra*/
-    font-size: 15px;
-    /*tranformar la letra en mayuscula*/
-    text-transform: uppercase;
-    /*espacio entre letra*/
-    letter-spacing: 4px;
-    /*margen por arriba*/
-    margin-top: 15px;
-    /*trasicion*/
-    transition: all 30 ms;
-    color: black;
-    
-  }
-
-.content-wrapper-catalogo .descargardoc a{
-    font-size: 30px;
-    color: #0000FF;
+.combodesplegable .select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+  color: #0b7300;
 }
 
 
@@ -529,137 +479,7 @@
 }
 
 
-/* GESTIONAR PROGRAMA EJE */
-
-.card_programa_eje {
-  position: relative;
-  width:  30%;
-  margin-top: 20px;
-  margin-left: 10px;
-  border: 1px solid #ddd; /* Grosor y color del borde */
-  border-radius: 6px; /* Redondear las esquinas */
-  padding: 10px; /* Espacio interno del contenido de la card */
-  align-items: center;
-  word-wrap: break-word ; /*para controlar palabras largas*/
-  
-}
-
-.card_programa_eje .card-body{
-  height: 370px; 
-}
-
-.card_programa_eje .card-footer{
-  text-align: center;
-  margin-top: auto; /* Empujar el pie de la tarjeta hacia abajo */
-}
-
-.card_programa_eje .card-footer button{
-  margin-top: 5px;
-  
-}
-
-
-.contenedor-card .card-body img{
-  display: block; /* Cambia a bloque para centrar horizontalmente */
-  margin: auto; /* Centrar horizontalmente */
-  width: 130px; /* Establece una ancho fija */
-  height: 130px; /* Establece una altura fija */
-  object-fit: cover; /* Cubre completamente el contenedor manteniendo la proporción original */
-  border-radius: 50%;
-}
-
-.contenedor-card .card-body div button{
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-}
-
-.contenedor-card .card-body div button:hover{
-  background-color: #DCDCDC;
-  cursor: pointer;
-  
-}
-
-
-/* GESTIONAR PROYECTO */
-
-.macrometabuscar {
-  display: inline-block;
-  width: 100%;
-}
-
-.buscarinstitucionmacrometa{
-  color: #0000FF;
-}
-
-.buscarinstitucionmacrometa,
-.ds-buscar {
-  display: inline-block;
-  width: 30%;
-  box-sizing: border-box; /* Asegura que el ancho se incluya en el espacio total ocupado por cada elemento */
-  margin-left: 10px;
-}
-
-.combodesplegableadm label{
-  display:block; 
-  margin-top:10px; 
-  color:#0000FF; 
-  margin-bottom:10px;
-  margin-right: 10px;
-}
-
-
-
-.combodesplegableadm .select {
-  width: 400px;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-}
-
-.combodesplegableadm .select:focus {
-  outline: none;
-  box-shadow: 0 0 5px #999999;
-  color: #0b7300;
-}
-
-
-
-
-/* GESTIONAR PROYECTO */
-.card_proyecto {
-  position: relative;
-  width: 100%;
-  height: fit-content;
-  /* height: 300px; */
-  margin-top: 20px;
-  margin-left: 10px;
-  border: 1px solid #ddd; /* Grosor y color del borde */
-  border-radius: 6px; /* Redondear las esquinas */
-  padding: 10px; /* Espacio interno del contenido de la card */
-  align-items: center;
-  word-wrap: break-word ; /*para controlar palabras largas*/
-}
-
-.card_proyecto .card-body{
-  height: 270px;
-}
-
-.card_proyecto .card-footer{
-  text-align: center;
-  margin-top: auto; /* Empujar el pie de la tarjeta hacia abajo */
-}
-
-.card_proyecto .card-footer button{
-  margin-top: 5px;
-  
-}
-
-
-/* Mensajes masivos en Whatsapp */
+/* MENSAJES POR WHATSAPP */
 .subirdoc {
   display: none;
   width: 70%;
@@ -820,7 +640,136 @@ table.dataTable thead {
 }
 
 
+/* PRODUCTO */
+/* combodesplegable */
+.combodesplegablefiltro{
+  margin-top: 15px;
+  width: 30%;
+  display: flex;
+  
+}
 
+
+.combodesplegablefiltro label{
+  display:block; 
+  margin-top:10px; 
+  color:#0000FF; 
+  margin-bottom:10px;
+  margin-right: 10px;
+}
+
+.combodesplegablefiltro .select {
+  width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
+.combodesplegablefiltro .select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+  color: #0b7300;
+}
+
+
+/*centre*/
+.central{
+  width: 90%;
+  min-height: 500px;
+  float: left;
+  border: 1px solid #ccc;
+  box-shadow: -5px -1px 5px #ddd;
+  padding:25px;
+}
+
+.central h1{
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 1px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.product{
+  width: 30%;
+  float:left;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.product a{
+  color:black;
+  text-decoration: none;
+}
+
+.product a:hover{
+  color:#555;
+}
+
+.product img{
+  height:150px;
+  margin-bottom: 10px;
+}
+
+.img_carrito{
+  height: 80px;
+  display: block;
+  margin:10px auto;
+}
+
+.product h2{
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product p{
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.vista-img{
+  width: 230px; /* Ancho deseado */
+  margin: 0 auto; /* Margen automático en los lados (horizontalmente) */
+  margin-top: 5px;
+}
+
+
+/* SUBIR STOCK */
+.subirstock {
+  width: 70%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+
+.inline-button-csv-enviar {
+  display: none;
+  background-color: #1783db;
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 10px 30px; /* Espaciado interno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin decoración de texto */
+  font-size: 16px; /* Tamaño de fuente */
+  border-radius: 5px; /* Radio de borde */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+}
+
+
+
+.inline-button-csv-enviar:hover {
+  background-color: #0b7300; /* Color de fondo */
+
+}
 
 
 

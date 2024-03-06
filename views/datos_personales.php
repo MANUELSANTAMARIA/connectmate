@@ -28,8 +28,12 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 2 || $_SESSION['us_tipo'
     </div>
     <!-- form de cambiar contraseña -->
     <form id="form-avatar" class="formulario">
-      <label for="avatar">Seleccionar un nuevo avatar:</label>
-      <input type="file" name="avatar" id="avatar" accept="image/*" required>
+      <br>
+      <div class="image-upload">
+        <label for="avatar" class="custom-file-upload"><i class="fas fa-cloud-upload-alt"></i> Seleccionar imagen:</label>
+        <input type="file" name="avatar" id="avatar" accept="image/*" required>
+      </div>
+      <br>
       <p>Tamaño máximo: 2MB. Formatos permitidos: JPG, PNG, GIF.</p>
 
       <div class="vista-previa">
