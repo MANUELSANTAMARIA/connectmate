@@ -371,8 +371,9 @@ $(document).ready(function () {
             method: 'POST', // Método HTTP utilizado para la solicitud
             data: datosEnviar, // Los datos a enviar al servidor 
             success: function (response) {
+                // console.log(response);
                 var resultado = JSON.parse(response)
-                // console.log(resultado.desc);
+                console.log(resultado.desc);
                 if (resultado.alert == "exito") {
                     alertaCorrecto(resultado.descripcion);
 

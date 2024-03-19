@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>connectmate</title>
+    <link rel="icon" href="../assets/img/logo-cnt.svg.png" type="image/x-icon">
 
 <link rel="stylesheet" href="../assets/css/nav.css">
-
-
 <!-- DATATABLE css-->
 <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet"/>
 <link href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css" rel="stylesheet"/>
@@ -17,8 +16,16 @@
 
 <!-- fontawesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/> 
+<!-- lineicons de iconos  -->
+<link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+    
+<!-- flatpickr-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 <!-- link css -->
 <link rel="stylesheet" href="../assets/css/contenido.css">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+
  
 
 </head>

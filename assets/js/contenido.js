@@ -58,11 +58,10 @@ cerrar.click(function() {
   let modal_confirmar_deshabilitar_usu = $("#modal-confirmar-deshabilitar-usu");
   let modal_confirmar_habilitar_usu = $("#modal-confirmar-habilitar-usu");
   let modal_confirmar_eliminar = $("#modal-confirmar-eliminar");
-  let modal_crear_eje = $("#modal-crear-eje");
-  let modal_cambiar_logo_eje = $("#modal-cambiar-logo-eje");
-  let modal_confirmar_deshabilitar_eje =$("#modal-confirmar-deshabilitar-eje");
-  let modal_confirmar_habilitar_eje = $("#modal-confirmar-habilitar-eje");
-  let modal_edi_eje = $("#modal-edi-eje");
+  let modal_crear_producto = $("#modal-crear-producto");
+  let modal_editar_producto = $("#modal-editar-producto");
+  let modal_cotizador= $("#modal-cotizador");
+  
     // cerrar modal de usuario <span> (x)
     if (modal_cambiar_contrasena.length) {
       modal_cambiar_contrasena.css("display", "none");
@@ -103,26 +102,17 @@ cerrar.click(function() {
       modal_confirmar_eliminar.css("display", "none");
     }
 
-    if(modal_crear_eje.length){
-      modal_crear_eje.css("display", "none");
+    if(modal_crear_producto.length){
+      modal_crear_producto.css("display", "none");
     }
 
-    if(modal_cambiar_logo_eje.length){
-      modal_cambiar_logo_eje.css("display", "none");
+    if(modal_editar_producto.length){
+      modal_editar_producto.css("display", "none");
     }
-
-    if(modal_confirmar_deshabilitar_eje.length){
-      modal_confirmar_deshabilitar_eje.css("display", "none");
+    
+    if(modal_cotizador.length){
+      modal_cotizador.css("display", "none");
     }
-
-    if(modal_confirmar_habilitar_eje.length){
-      modal_confirmar_habilitar_eje.css("display", "none");
-    }
-
-    if(modal_edi_eje.length){
-      modal_edi_eje.css("display", "none");
-    }
-
     
 });
 
@@ -177,7 +167,11 @@ $(window).click(function(event) {
   if(event.target == modal_crear_producto[0]){
     modal_crear_producto.css("display", "none")
   }
-  
+
+  var modal_editar_producto = $("#modal-editar-producto");
+  if(event.target == modal_editar_producto[0]){
+    modal_editar_producto.css("display", "none")
+  }
 
   
 

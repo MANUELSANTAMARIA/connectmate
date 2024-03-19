@@ -17,10 +17,22 @@
 <!-- resposible -->
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
 
+<!-- chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- flatpickr -->
+<!-- Incluir la biblioteca de Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Incluir el archivo de localización en español -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
 
 <!-- mis js -->
 <script src="../assets/js/nav.js"></script>
 <script src="../assets/js/contenido.js"></script>
+
 
 
 

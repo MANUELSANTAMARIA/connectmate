@@ -1,0 +1,86 @@
+.fecha {
+    width: 300px; /* Ancho deseado */
+    height: 40px; /* Altura deseada */
+    font-size: 16px; /* Tamaño de fuente deseado */
+    /* Otros estilos personalizados según tus preferencias */
+}
+
+.kpi{
+    margin: 10px; /* Agrega margen entre los divs (ajústalo según tus preferencias) */
+    width: 50%; /* Establece el ancho de los divs (ajústalo según tus necesidades) */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(252, 252, 252, 0.1);
+    padding-top: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.kpi .contenedor-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas iguales */
+    grid-gap: 10px; /* Espacio entre las subcards (ajusta según tus preferencias) */
+    
+}
+
+
+.kpi .contenedor-card .subcard{
+    width: 90%; /* Ocupa todo el ancho de la columna */
+    background-color: #f0f0f0; /* Fondo de las subcards */
+    border: 1px solid #ccc; /* Borde de las subcards */
+    padding: 10px; /* Espacio interno en las subcards */
+    box-sizing: border-box; /* Incluye el borde en el cálculo del ancho */
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+
+.kpi .contenedor-card .subcard p{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+    color: green;
+}
+
+
+.kpi .contenedor-card .subcard h5{
+    display: flex; /* Usar flexbox para centrar */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 100%;
+    height: 40px;
+    background-color: #9370DB;
+}
+
+
+
+.subcard-inf{
+    width: 40%; /* Ocupa todo el ancho de la columna */
+    height: 350px;
+    background-color: #f0f0f0; /* Fondo de las subcards */
+    border: 1px solid #ccc; /* Borde de las subcards */
+    padding: 10px; /* Espacio interno en las subcards */
+    box-sizing: border-box; /* Incluye el borde en el cálculo del ancho */
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+}
+
+
+.subcard-inf p{
+    font-size: 12px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.subcard-inf h5{
+    display: flex; /* Usar flexbox para centrar */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: #9370DB;
+}

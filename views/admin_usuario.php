@@ -2,7 +2,7 @@
 session_name("connectmate");
 //inciar sesiones 
 session_start();
-if($_SESSION['us_tipo']==1){
+if($_SESSION['us_tipo']==1 || $_SESSION['us_tipo']==2){
     include_once 'layouts/header.php';
     include_once 'layouts/nav.php';
 ?>

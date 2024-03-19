@@ -36,10 +36,29 @@ class producto
         return $this->objetos;
     }
 
-    function regalo()
+    // function regalo()
+    // {
+    //     // Definición de la consulta SQL para seleccionar todos los registros de la tabla 'categori'
+    //     $sql = "SELECT * FROM regalo";
+
+    //     // Preparación de la consulta SQL para su ejecución
+    //     $query = $this->acceso->prepare($sql);
+
+    //     // Ejecución de la consulta preparada
+    //     $query->execute();
+
+    //     // Recuperación de todos los resultados de la consulta y asignación a la variable '$this->objetos'
+    //     $this->objetos = $query->fetchall();
+
+    //     // Retorno de los resultados obtenidos de la consulta
+    //     return $this->objetos;
+
+    // }
+
+    function smartflex()
     {
         // Definición de la consulta SQL para seleccionar todos los registros de la tabla 'categori'
-        $sql = "SELECT * FROM regalo";
+        $sql = "SELECT * FROM smartflex";
 
         // Preparación de la consulta SQL para su ejecución
         $query = $this->acceso->prepare($sql);
@@ -72,11 +91,11 @@ class producto
         $gama = isset($_POST['gama']) ? $_POST['gama'] : "";
 
         // La consulta SQL con marcadores de posición
-        $sql = "SELECT producto.*, categoria.nombre_categoria, marca.nombre_marca, regalo.nombre_regalo, gama.nombre_gama 
+        $sql = "SELECT producto.*, categoria.nombre_categoria, marca.nombre_marca, smartflex.cod_smartflex, smartflex.nombre_smartflex, gama.nombre_gama 
                 FROM producto 
                 JOIN categoria ON producto.categoria_id = categoria.id_categoria
                 JOIN marca ON producto.marca_id = marca.id_marca
-                JOIN regalo ON producto.regalo_id = regalo.id_regalo
+                JOIN smartflex ON producto.smartflex_cod = smartflex.cod_smartflex
                 JOIN gama ON producto.gama_id = gama.id_gama";
 
         // Array para almacenar las condiciones de la consulta
@@ -118,15 +137,15 @@ class producto
         return $this->objetos;
     }
 
-    function crear($cod_sap, $categoria, $marca, $nombre, $descripcion, $precio, $stock, $regalo, $gama, $nombre_imagen){
+    function crear($cod_sap, $categoria, $marca, $nombre, $descripcion, $precio, $stock, $smartflex, $gama, $nombre_imagen){
         // Verifica si el código del producto ya existe en la base de datos.
         $sql = "SELECT * FROM producto WHERE cod_producto = :codigo";
         $query = $this->acceso->prepare($sql);
         $query->execute(array(':codigo' => $cod_sap));
         $numFilas = $query->rowCount();
         if ($numFilas == 0) {
-            $sql = "INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, regalo_id, gama_id, imagen, creado_en)
-            VALUES (:cod_producto, :categoria_id, :marca_id, :nombre_producto, :descripcion_producto, :precio, :stock, :regalo_id, :gama_id, :imagen, NOW())";
+            $sql = "INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, smartflex_cod, gama_id, imagen, creado_en)
+            VALUES (:cod_producto, :categoria_id, :marca_id, :nombre_producto, :descripcion_producto, :precio, :stock, :cod_smartflex, :gama_id, :imagen, NOW())";
             $query = $this->acceso->prepare($sql);
             $query->execute(array(
                 ':cod_producto' => $cod_sap,
@@ -136,7 +155,7 @@ class producto
                 ':descripcion_producto' => $descripcion,
                 ':precio' => $precio,
                 ':stock' => $stock,
-                ':regalo_id' => $regalo,
+                ':cod_smartflex' => $smartflex,
                 ':gama_id' => $gama,
                 ':imagen' => $nombre_imagen
 
@@ -150,6 +169,70 @@ class producto
         }
         
     }
+
+    function dato_producto($cod_producto){
+         // La consulta SQL con marcadores de posición
+         $sql = "SELECT producto.*, categoria.nombre_categoria, marca.nombre_marca, smartflex.cod_smartflex, smartflex.nombre_smartflex, gama.nombre_gama 
+         FROM producto 
+         JOIN categoria ON producto.categoria_id = categoria.id_categoria
+         JOIN marca ON producto.marca_id = marca.id_marca
+         JOIN smartflex ON producto.smartflex_cod = smartflex.cod_smartflex
+         JOIN gama ON producto.gama_id = gama.id_gama
+         WHERE cod_producto = :cod_producto";
+         $query = $this->acceso->prepare($sql);
+         $query->execute(array(":cod_producto" => $cod_producto));
+         $this->objetos=$query->fetchall();
+         return $this->objetos;
+    }
+
+    function editar($cod_sap, $categoria, $marca, $nombre, $descripcion, $precio, $stock, $smartflex, $gama, $nombre_imagen){
+        $sql = "SELECT imagen FROM producto WHERE cod_producto = :codigo";
+        $query = $this->acceso->prepare($sql);
+        $query->execute(array(':codigo' => $cod_sap));
+        $this->objetos = $query->fetch();
+        $nombre_img = $this->objetos->imagen;
+        
+        if(!empty($nombre_imagen)){
+            // Se proporcionó una imagen nueva, elimina la imagen existente si existe
+            if(file_exists('../uploads/producto/'.$nombre_img)){
+                // Eliminar la imagen existente del servidor
+                unlink('../uploads/producto/'.$nombre_img);
+            }
+        } else {
+            // No se proporcionó una imagen nueva, mantener la imagen existente en la base de datos
+            $nombre_imagen = $nombre_img;
+        
+       }
+        $sql = "UPDATE producto 
+        SET categoria_id = :categoria_id,
+            marca_id = :marca_id,
+            nombre_producto = :nombre_producto, 
+            descripcion_producto = :descripcion_producto, 
+            precio = :precio, 
+            stock = :stock, 
+            smartflex_cod = :cod_smartflex, 
+            gama_id = :gama_id, 
+            actualizado_en = NOW(),
+            imagen = :imagen
+        WHERE cod_producto = :cod_producto";
+        $query = $this->acceso->prepare($sql);
+        $query->execute(array(
+                ':cod_producto' => $cod_sap,
+                ':categoria_id' => $categoria,
+                ':marca_id' => $marca,
+                ':nombre_producto' => $nombre,
+                ':descripcion_producto' => $descripcion,
+                ':precio' => $precio,
+                ':stock' => $stock,
+                ':cod_smartflex' => $smartflex,
+                ':gama_id' => $gama,
+                ':imagen' => $nombre_imagen
+                
+
+            ));
+        return "add";
+    }
+
 
     function ingresarmasivostock($tabla)
     {
@@ -177,15 +260,7 @@ class producto
                         'nombre' => $nombre,
                         'stock' => $stock
                     );
-                } else {
-                    // Actualiza el stock del producto.
-                    $sql = "UPDATE producto SET stock = :stock, actualizado_en = NOW() WHERE cod_producto = :codigo";
-                    $query = $this->acceso->prepare($sql);
-                    $query->execute(array(
-                        ':stock' => $stock,
-                        ':codigo' => $codigo
-                    ));
-                }
+                }     
             } else {
                 // Si la fila no tiene una longitud mayor 3
                 return array(
@@ -193,8 +268,9 @@ class producto
                     'alert' => 'error'
                 );
             }
-        }
 
+           
+        }
         if (!empty($cod_invalido)) {
             // Si hay códigos inválidos, devuelve la lista de ellos.
             return array(
@@ -202,11 +278,112 @@ class producto
                 'alert' => 'error-codigo'
             );
         } else {
+            // Itera sobre cada fila en la tabla.
+            foreach ($tabla as $fila) {
+                $codigo = $fila[0]; // Obtiene el código de la fila.
+                $nombre = $fila[1]; // Obtiene el nombre de la fila.
+                $stock = $fila[2]; // Obtiene el stock de la fila.
+                // Actualiza el stock del producto.
+
+                // aqui selciono si codigo es igual a codigo de producto y al bd stock ingresado es menor al stock
+                $sql = "SELECT * FROM producto WHERE cod_producto = :codigo AND stock > :stock";
+                $query = $this->acceso->prepare($sql);
+                $query->execute(array(
+                    ':codigo' => $codigo,
+                    ':stock' => $stock
+                ));
+                $producto = $query->fetch();
+                $numFilas = $query->rowCount();
+                if ($numFilas == 0) {
+                    // Si no hay diferencia de stock, no se realiza ninguna acción adicional
+                } else {
+                    // Obtener el stock actual del producto
+                    $stock_actual = $producto->stock;
+                    $unidad = $stock_actual - $stock;
+                    // Si hay diferencia de stock, se registra una venta en la tabla venta
+                    $sql_insert_venta = "INSERT INTO venta(producto_cod, unidad, fecha) VALUES(:codigo, :stock, NOW())";
+                    $query_insert_venta = $this->acceso->prepare($sql_insert_venta);
+                    $query_insert_venta->execute(array(
+                        ':stock' => $unidad,
+                        ':codigo' => $codigo
+                    ));
+                }
+
+                $sql = "UPDATE producto SET stock = :stock, actualizado_en = NOW() WHERE cod_producto = :codigo";
+                $query = $this->acceso->prepare($sql);
+                $query->execute(array(
+                    ':stock' => $stock,
+                    ':codigo' => $codigo
+                ));
+
+                
+
+                
+
+            }
             // Si no hay códigos inválidos, devuelve un mensaje de éxito.
             return array(
                 'descripcion' => "Se ha ingresado el stock correctamente.",
                 'alert' => 'exito'
             );
         }
+    }
+
+
+    function cotizacion(){
+        // Definición de la consulta SQL para seleccionar todos los registros de la tabla 'categori'
+        $sql = "SELECT * FROM cotizacion";
+
+        // Preparación de la consulta SQL para su ejecución
+        $query = $this->acceso->prepare($sql);
+
+        // Ejecución de la consulta preparada
+        $query->execute();
+
+        // Recuperación de todos los resultados de la consulta y asignación a la variable '$this->objetos'
+        $this->objetos = $query->fetchall();
+
+        // Retorno de los resultados obtenidos de la consulta
+        return $this->objetos;
+    }
+
+
+    function plan(){
+        // Definición de la consulta SQL para seleccionar todos los registros de la tabla 'categori'
+        $sql = "SELECT * FROM plan
+        JOIN rol_plan ON plan.rol_plan_id = rol_plan.id_rol_plan";
+
+        // Preparación de la consulta SQL para su ejecución
+        $query = $this->acceso->prepare($sql);
+
+        // Ejecución de la consulta preparada
+        $query->execute();
+
+        // Recuperación de todos los resultados de la consulta y asignación a la variable '$this->objetos'
+        $this->objetos = $query->fetchall();
+
+        // Retorno de los resultados obtenidos de la consulta
+        return $this->objetos;
+
+    }
+
+
+    function buscar_plan($cod_plan){
+         // Definición de la consulta SQL para seleccionar todos los registros de la tabla 'categori'
+         $sql = "SELECT * FROM plan
+         JOIN rol_plan ON plan.rol_plan_id = rol_plan.id_rol_plan
+         WHERE cod_plan = :cod_plan";
+ 
+         // Preparación de la consulta SQL para su ejecución
+         $query = $this->acceso->prepare($sql);
+ 
+         // Ejecución de la consulta preparada
+         $query->execute(array(':cod_plan' => $cod_plan));
+ 
+         // Recuperación de todos los resultados de la consulta y asignación a la variable '$this->objetos'
+         $this->objetos = $query->fetchall();
+ 
+         // Retorno de los resultados obtenidos de la consulta
+         return $this->objetos;
     }
 }

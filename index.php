@@ -11,7 +11,8 @@ else{
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CNT-MANUEL-SANTAMARIA-VENDEDOR</title>
+    <title>connectmate</title>
+    <link rel="icon" href="assets/img/logo-cnt.svg.png" type="image/x-icon">
     <meta charset="utf-8" />
     <meta
       name="viewport"

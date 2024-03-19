@@ -10,7 +10,7 @@ CREATE TABLE
     ) ENGINE = InnoDB;
 INSERT INTO
     tipo_usuario (nombre_tipo_us)
-VALUES ('Root'), ('Administrador'), ('Tecnico'), ('Administrador-Tecnico');
+VALUES ('Root'), ('Administrador'), ('Vendedor'), ('Impulsador'), ('Bodega');
 
 
 CREATE TABLE 
@@ -70,7 +70,7 @@ INSERT INTO
 
 
 
-
+-- PRODUCTO
 CREATE TABLE categoria(
     id_categoria int auto_increment NOT NULL,
     nombre_categoria VARCHAR(70) NOT NULL,
@@ -90,15 +90,29 @@ CREATE TABLE marca(
 INSERT INTO marca(nombre_marca) 
 VALUES ('SAMSUNG'), ('APPLE'), ('HUAWEI'), ('XIAOMI'), ('HONOR'), ("TCL");
 
-CREATE TABLE regalo(
-    id_regalo int auto_increment NOT NULL,
-    nombre_regalo VARCHAR(70) NOT NULL,
-    CONSTRAINT pk_regalo PRIMARY KEY(id_regalo)
+-- CREATE TABLE regalo(
+--     id_regalo int auto_increment NOT NULL,
+--     nombre_regalo VARCHAR(70) NOT NULL,
+--     CONSTRAINT pk_regalo PRIMARY KEY(id_regalo)
+-- )ENGINE = InnoDb;
+-- INSERT INTO regalo(nombre_regalo) 
+--     VALUES ("SIN REGALO"), ("TOMATODOS"), ("CUBRE CARRO"), ("AUDIFONOS");
+
+
+CREATE TABLE smartflex(
+    id_smartflex INT AUTO_INCREMENT NOT NULL,
+    cod_smartflex VARCHAR(5),
+    nombre_smartflex VARCHAR(255),
+    CONSTRAINT pk_smartflex PRIMARY KEY(id_smartflex),
+    CONSTRAINT uq_cod_smartflex UNIQUE(cod_smartflex)
 )ENGINE = InnoDb;
 
+INSERT INTO smartflex(cod_smartflex, nombre_smartflex) VALUES
+("8721", "SAMSUNG Z FLIP 5 (SM-F731B)"),
+('3144', 'HONOR 90 LITE (CRT-NX3)'),
+('3143', 'HONOR 90 (REA-NX9)');
 
-INSERT INTO regalo(nombre_regalo) 
-    VALUES ("TOMATODOS"), ("CUBRE CARRO");
+
 
 CREATE TABLE gama(
     id_gama int auto_increment NOT NULL,
@@ -119,7 +133,7 @@ CREATE TABLE producto(
     precio FLOAT(100,2) NOT NULL,
     stock  INT(255) NOT NULL,
     oferta VARCHAR(70),
-    regalo_id INT NOT NULL,
+    smartflex_cod VARCHAR(5) NOT NULL,
     gama_id INT NOT NULL,
     imagen varchar(255),
     creado_en TIMESTAMP,
@@ -128,44 +142,105 @@ CREATE TABLE producto(
     CONSTRAINT uq_cod_producto UNIQUE(cod_producto),
     CONSTRAINT fk_categoria_id FOREIGN KEY(categoria_id) REFERENCES categoria(id_categoria),
     CONSTRAINT fk_marca_id FOREIGN KEY(marca_id) REFERENCES marca(id_marca),
-    CONSTRAINT fk_regalo_id FOREIGN KEY(regalo_id) REFERENCES regalo(id_regalo),
+    CONSTRAINT fk_smartflex_cod FOREIGN KEY(smartflex_cod) REFERENCES smartflex(cod_smartflex),
     CONSTRAINT fk_gama_id FOREIGN KEY(gama_id) REFERENCES gama(id_gama)
 )ENGINE = InnoDb;
 
 
--- GAMA PREMIUN
-INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, regalo_id, gama_id, imagen, creado_en, actualizado_en)
-VALUES ('8721', 1, 1, 'SAMSUNG Z FLIP 5', 'SAMSUNG Z FLIP 5 (SM-F731B)', 1181.49, 20, NULL, 1, 1, 'imagen_movil.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO `producto` (id_producto, cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, smartflex_cod, gama_id, imagen, creado_en) VALUES
+(NULL, '40016562 ', 1, 1, 'SAMSUNG Z FLIP 5 (SM-F731B)', 'DE', 1464.00, 3, NULL, '8721', 1, '65f1ab692af1c-TLF Z FLIP.png', NOW())
 
 
--- MEDIA MEDIA
-INSERT INTO producto(cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, regalo_id, gama_id, imagen, creado_en, actualizado_en)
-VALUES ('8700', 1, 6, 'TCL 40SE (T610E)', 'XXXX', 254.99, 20, NULL, 2, 3, 'imagen_movil.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-
-
--- Cotizador
-CREATE TABLE smartflex(
-    id_smartflex INT AUTO_INCREMENT NOT NULL,
-    cod_smartflex VARCHAR(5)
-    CONSTRAINT pk_smartflex PRIMARY KEY(id_smartflex),
-    CONSTRAINT uq_cod_smartflex UNIQUE(cod_producto)
-)ENGINE = InnoDb;
-
-
-
-CREATE TABLE cotizacion(
+CREATE TABLE cotizacion (
     id_cotizacion INT AUTO_INCREMENT NOT NULL,
-    producto_id INT NOT NULL,
-    smartflex_id INT NOT NULL,
-    CONSTRAINT pk_smartflex PRIMARY KEY(id_cotizacion),
-    CONSTRAINT fk_producto_id FOREIGN KEY(producto_id) REFERENCES producto(id_producto),
-    CONSTRAINT fk_smartflex_id FOREIGN KEY(smartflex_id) REFERENCES smartflex(id_smartflex)
-)ENGINE = InnoDb;
+    nombre_cotizacion VARCHAR(70) NOT NULL,
+    valor_cotizacion FLOAT(100,2) NOT NULL,
+    CONSTRAINT pk_id_cotizacion PRIMARY KEY (id_cotizacion)
+) ENGINE = InnoDB;
+
+
+CREATE TABLE rol_plan (
+    id_rol_plan INT AUTO_INCREMENT NOT NULL,
+    nombre_rol_plan VARCHAR(150),
+    CONSTRAINT pk_id_rol_plan PRIMARY KEY(id_rol_plan)
+)ENGINE = InnoDB;
+
+INSERT INTO rol_plan (id_rol_plan, nombre_rol_plan) VALUES
+(1, 'PLANES MASIVOS - CLIENTES MASIVOS'),
+(2, 'PLAN ROL DE PAGOS - COLABORADORES INTERNO'),
+(3, 'PLANES CORPORATIVOS - EMPRESAS');
+
+
+CREATE TABLE venta(
+    id_venta INT AUTO_INCREMENT NOT NULL,
+    producto_cod VARCHAR(10) NOT NULL,
+    unidad INT NOT NULL,
+    fecha DATETIME NOT NULL,
+    CONSTRAINT pk_id_venta PRIMARY KEY(id_venta),
+    CONSTRAINT fk_producto_id FOREIGN KEY(producto_cod) REFERENCES producto(cod_producto)
+)ENGINE = InnoDB;
 
 
 
+CREATE TABLE plan(
+    id_plan INT AUTO_INCREMENT NOT NULL,
+    cod_plan VARCHAR(20) NOT NULL,
+    nombre_plan VARCHAR(150) NOT NULL,
+    cbm INT(10),
+    tarifa_plan FLOAT(100,2) NOT NULL,
+    equipo_diferido VARCHAR(50) NOT NULL,
+    observacion VARCHAR(100) NOT NULL,
+    rol_plan_id INT NOT NULL,
+    CONSTRAINT pk_id_plan PRIMARY KEY(id_plan),
+    CONSTRAINT uq_cod_plan UNIQUE(cod_plan),
+    CONSTRAINT fk_cod_plan FOREIGN KEY(rol_plan_id) REFERENCES rol_plan(id_rol_plan)
+)ENGINE = InnoDB;
 
+
+
+-- Inserciones de datos actualizados
+INSERT INTO plan (id_plan, cod_plan, nombre_plan, cbm, tarifa_plan, equipo_diferido, observacion, rol_plan_id) 
+VALUES 
+(NULL, '300529P1', 'Plan ilimitado Social Plus ($15,99 + imp)', '0', '15.99', 'SI', 'Verificar guía comercial', '1'), 
+(NULL, '300529P2', 'Plan ilimitado Social Plus ($19,99 + imp)', '0', '19.99', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300529P3', 'Plan ilimitado Social Plus ($21,99 + imp)', '0', '21.99', 'SI', 'Verificar guía comercial', '1'), 
+(NULL, '300522P1', 'Plan Ultra navegación ($17,99 + imp)', '0', '17.99', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300522P2', 'Plan móvil Ilimitado ($30,00 + imp)', '0', '30.00', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300525P1', 'Plan Portabilidad ($12,99 + imp)', '0', '12.99', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300516P1', 'Plan Móvil Más ($14,53 + imp)', '0', '14.53', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300516P2', 'Plan Móvil Más ($17,78 + imp)', '0', '17.78', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300516P3', 'Plan Móvil Más ($21,02 + imp)', '0', '21.02', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300516P4', 'Plan Móvil Más ($25,08 + imp)', '0', '25.08', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300515P1', 'Plan Servidor Público ($18,75 + imp)', '0', '18.75', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300517P1', 'Plan Adulto Mayor ($5,95 + imp)', '0', '5.95', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300516P5', 'Plan Móvil Ahorro ($10,47 + imp)', '0', '10.47', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300516P6', 'Plan Móvil Ahorro ($12,91 + imp)', '0', '12.91', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '300298P1', 'Plan Discapacidad ($12,00 + imp)', '2', '12', 'SI', 'Verificar guía comercial', '1'),
+(NULL, '999999P1', 'Rol de Pagos', '0' , '0.00', 'SI', 'Exclusivo para colaboradores internos', '2'),
+(NULL, '30051457055708P1', 'Plan Modular (14,90 + imp)', '14.90', '0', 'SI', 'Tiempo mínimo de permanencia: 12 meses', '3'),
+(NULL, '30051457055709P1', 'Plan Modular Starnet (19,90 + imp)', '19.90', '0', 'SI', 'Tiempo mínimo de permanencia: 12 meses', '3'),
+(NULL, '30051457055710P1', 'Plan Modular ProConnect (24,90 + imp)', '24.90', '0', 'SI', 'Tiempo mínimo de permanencia: 12 meses', '3'),
+(NULL, '30051457055711P1', 'Plan Modular EliteBusiness(29,90 + imp)', '29.90', '0', 'SI', 'Tiempo mínimo de permanencia: 12 meses', '3'),
+(NULL, '30051457055712P1', 'Plan Modular (34,90 + imp)', '34.90', '0', 'SI', 'Tiempo mínimo de permanencia: 12 meses', '3'),
+(NULL, '300514570557115712P1', 'Plan Modular (54,80 + imp)', '54.80', '0', 'SI', 'Tiempo mínimo de permanencia: 12 meses', '3'),
+(NULL, '300531P1', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 10 GB', '10.81', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P2', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 12 GB', '11.37', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P3', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 13 GB', '11.81', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P4', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 15 GB', '13.42', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P5', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 20 GB', '17.89', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P6', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 47 GB', '31.50', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P7', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 75 GB', '46.16', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P8', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 80 GB', '49.23', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P9', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 12M 150 GB', '85.21', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 12M', '3'),
+(NULL, '300531P10', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 10 GB', '8.65', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P11', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 12 GB', '9.10', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P12', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 13 GB', '9.80', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P13', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 15 GB', '10.74', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P14', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 20 GB', '14.32', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P15', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 47 GB', '25.20', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P16', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 75 GB', '36.93', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P17', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 80 GB', '39.39', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3'),
+(NULL, '300531P18', 'PLAN INERTEN GRANDES CAPACIDADES SMART CONNECT PRO 24M 150 GB', '68.17', '0', 'MIFI', 'Exclusivo para captación y mantenimiento de cuentas corporativas. 24M', '3');
 
 
 
