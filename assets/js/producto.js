@@ -398,7 +398,7 @@ $(document).ready(function () {
 
     function cargarOpcionesCategoria(categoria_id) {
         const funcion = "categoria";
-        $.post("../controllers/producto", {
+        $.post("../controllers/producto.php", {
             funcion
         }, response => {
             const categorias = JSON.parse(response);
