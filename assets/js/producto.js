@@ -151,7 +151,7 @@ $(document).ready(function () {
         // Definir la función que se va a enviar al servidor
         funcion = "categoria";
         // Realizar una solicitud POST al servidor
-        $.post("../controllers/producto", {
+        $.post("../controllers/producto.php", {
             funcion: funcion
         }, function (response) {
             // Parsear la respuesta JSON del servidor

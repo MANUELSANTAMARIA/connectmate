@@ -10,27 +10,27 @@ if ($_POST["funcion"] == "categoria") {
     $json = array();
     $producto->categoria();
     // Obtener el número de elementos en $producto->objetos
-    // $numObjetos = count($producto->objetos);
-    // // Utilizar un bucle for para recorrer los elementos
-    // for ($i = 0; $i < $numObjetos; $i++) {
-    //     $objeto = $producto->objetos[$i];
-    //     $json[] = array(
-    //         'id_categoria' => $objeto->id_categoria,
-    //         'nombre_categoria' => $objeto->nombre_categoria
-    //     );
-    // }
-    // Imprimir el JSON resultante
-    // echo json_encode($json);
-
-    foreach ($producto->objetos as $objeto) {
+    $numObjetos = count($producto->objetos);
+    // Utilizar un bucle for para recorrer los elementos
+    for ($i = 0; $i < $numObjetos; $i++) {
+        $objeto = $producto->objetos[$i];
         $json[] = array(
             'id_categoria' => $objeto->id_categoria,
             'nombre_categoria' => $objeto->nombre_categoria
         );
     }
+    // Imprimir el JSON resultante
+    echo json_encode($json);
 
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
+    // foreach ($producto->objetos as $objeto) {
+    //     $json[] = array(
+    //         'id_categoria' => $objeto->id_categoria,
+    //         'nombre_categoria' => $objeto->nombre_categoria
+    //     );
+    // }
+
+    // $jsonstring = json_encode($json);
+    // echo $jsonstring;
     
 }
 
