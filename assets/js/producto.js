@@ -156,6 +156,7 @@ $(document).ready(function () {
         }, function (response) {
             // Parsear la respuesta JSON del servidor
             const categorias = JSON.parse(response);
+            console.log(categorias);
 
             // Inicializar la variable para almacenar el HTML de las opciones de categoría
             let template = "";
