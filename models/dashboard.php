@@ -18,7 +18,7 @@ class dashboard
             $fechaFin = $_POST['fecha_fin'];
             // Incrementa la fecha de fin en un día para incluir el día de fin
             $fechaFin = date('Y-m-d', strtotime($fechaFin . ' +1 day'));
-            $sql = "SELECT SUM(unidad) AS total_productos_vendidos FROM venta WHERE fecha BETWEEN :fechaInicio AND :fechaFin";
+            $sql = "SELECT SUM(unidad) AS total_productos_vendidos FROM kardex WHERE fecha BETWEEN :fechaInicio AND :fechaFin AND tipo_transaccion_id = 1";
             // Preparación de la consulta SQL para su ejecución
             $query = $this->acceso->prepare($sql);
             // Ejecución de la consulta preparada
@@ -27,7 +27,7 @@ class dashboard
             return $consulta;
 
         } else {
-            $sql = "SELECT SUM(unidad)AS total_productos_vendidos FROM venta";
+            $sql = "SELECT SUM(unidad)AS total_productos_vendidos FROM kardex WHERE tipo_transaccion_id = 1";
             // Preparación de la consulta SQL para su ejecución
             $query = $this->acceso->prepare($sql);
             // Ejecución de la consulta preparada
@@ -47,11 +47,12 @@ class dashboard
             $fechaFin = $_POST['fecha_fin'];
             // Incrementa la fecha de fin en un día para incluir el día de fin
             $fechaFin = date('Y-m-d', strtotime($fechaFin . ' +1 day'));
-            $sql = "SELECT venta.producto_cod, producto.nombre_producto, SUM(venta.unidad) AS total_vendido
-            FROM venta 
-            JOIN producto ON venta.producto_cod = producto.cod_producto
+            $sql = "SELECT kardex.producto_cod, kardex.tipo_transaccion_id, producto.nombre_producto, SUM(kardex.unidad) AS total_vendido
+            FROM kardex
+            JOIN producto ON kardex.producto_cod = producto.cod_producto
             WHERE fecha BETWEEN :fechaInicio AND :fechaFin
-            GROUP BY venta.producto_cod
+            AND tipo_transaccion_id = 1
+            GROUP BY kardex.producto_cod
             ORDER BY total_vendido DESC
             LIMIT 6";
             $query = $this->acceso->prepare($sql);
@@ -60,10 +61,11 @@ class dashboard
             $productos_mas_vendidos = $query->fetchall();
             return $productos_mas_vendidos;
         }else{
-            $sql = "SELECT venta.producto_cod, producto.nombre_producto, SUM(venta.unidad) AS total_vendido
-            FROM venta 
-            JOIN producto ON venta.producto_cod = producto.cod_producto
-            GROUP BY venta.producto_cod
+            $sql = "SELECT kardex.producto_cod, kardex.tipo_transaccion_id, producto.nombre_producto, SUM(kardex.unidad) AS total_vendido
+            FROM kardex 
+            JOIN producto ON kardex.producto_cod = producto.cod_producto
+            WHERE tipo_transaccion_id = 1
+            GROUP BY kardex.producto_cod
             ORDER BY total_vendido DESC
             LIMIT 6;";
             $query = $this->acceso->prepare($sql);

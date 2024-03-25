@@ -286,26 +286,35 @@ class producto
                 // Actualiza el stock del producto.
 
                 // aqui selciono si codigo es igual a codigo de producto y al bd stock ingresado es menor al stock
-                $sql = "SELECT * FROM producto WHERE cod_producto = :codigo AND stock > :stock";
+                $sql = "SELECT * FROM producto WHERE cod_producto = :codigo";
                 $query = $this->acceso->prepare($sql);
                 $query->execute(array(
                     ':codigo' => $codigo,
-                    ':stock' => $stock
                 ));
-                $producto = $query->fetch();
-                $numFilas = $query->rowCount();
-                if ($numFilas == 0) {
-                    // Si no hay diferencia de stock, no se realiza ninguna acción adicional
-                } else {
-                    // Obtener el stock actual del producto
-                    $stock_actual = $producto->stock;
+                $producto = $query->fetch(PDO::FETCH_OBJ); // Obtén el producto como un objeto
+                $stock_actual = $producto->stock; // Obtener el stock actual del producto
+                // Verifica si hay una venta (stock actual > stock ingresado)
+                if ($stock_actual > $stock) {
+                    // Calcula la diferencia entre el stock actual y el stock ingresado
                     $unidad = $stock_actual - $stock;
-                    // Si hay diferencia de stock, se registra una venta en la tabla venta
-                    $sql_insert_venta = "INSERT INTO venta(producto_cod, unidad, fecha) VALUES(:codigo, :stock, NOW())";
+                    // Inserta un registro en la tabla kardex para registrar la venta
+                    $sql_insert_venta = "INSERT INTO kardex(producto_cod, tipo_transaccion_id, unidad, fecha) VALUES(:codigo, :tipo_transaccion_id, :stock, NOW())";
                     $query_insert_venta = $this->acceso->prepare($sql_insert_venta);
                     $query_insert_venta->execute(array(
                         ':stock' => $unidad,
-                        ':codigo' => $codigo
+                        ':codigo' => $codigo,
+                        ':tipo_transaccion_id' => 1 // Tipo de transacción para venta
+                    ));
+                    // Verifica si hay una compra (stock actual < stock ingresado)
+                } else if($stock_actual < $stock) {
+                    // Calcula la diferencia entre el stock actual y el stock ingresado
+                    $unidad = $stock - $stock_actual;
+                    $sql_insert_venta = "INSERT INTO kardex(producto_cod, tipo_transaccion_id, unidad, fecha) VALUES(:codigo, :tipo_transaccion_id, :stock, NOW())";
+                    $query_insert_venta = $this->acceso->prepare($sql_insert_venta);
+                    $query_insert_venta->execute(array(
+                        ':stock' => $unidad,
+                        ':codigo' => $codigo,
+                        ':tipo_transaccion_id' => 2 // Tipo de transacción para venta
                     ));
                 }
 
@@ -318,7 +327,7 @@ class producto
 
                 
 
-                
+
 
             }
             // Si no hay códigos inválidos, devuelve un mensaje de éxito.

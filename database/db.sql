@@ -78,7 +78,7 @@ CREATE TABLE categoria(
 )ENGINE = InnoDb;
 
 INSERT INTO categoria(nombre_categoria) 
-    VALUES ("SMARTPHONE"), ("FIJO"), ("PLANES");
+    VALUES ("SMARTPHONE"), ("FIJO"), ("TV");
 
 
 CREATE TABLE marca(
@@ -88,7 +88,7 @@ CREATE TABLE marca(
 )ENGINE = InnoDb;
 
 INSERT INTO marca(nombre_marca) 
-VALUES ('SAMSUNG'), ('APPLE'), ('HUAWEI'), ('XIAOMI'), ('HONOR'), ("TCL");
+VALUES ('SAMSUNG'), ('APPLE'), ('HUAWEI'), ('XIAOMI'), ('HONOR'), ("TCL"), ("CNT");
 
 -- CREATE TABLE regalo(
 --     id_regalo int auto_increment NOT NULL,
@@ -108,6 +108,9 @@ CREATE TABLE smartflex(
 )ENGINE = InnoDb;
 
 INSERT INTO smartflex(cod_smartflex, nombre_smartflex) VALUES
+("0001", "HUAWEI NOVA Y70 MGA-LX3"),
+("0002", "KIT TV PREPAGO PARA LA VENTA"),
+("0003", "256K SIM 4G/LTE 2FF/3FF/4FF NO/ROMNG MVL"),
 ('3143', 'HONOR 90 (REA-NX9)'),
 ('3144', 'HONOR 90 LITE (CRT-NX3)'),
 ('8717', 'HONOR MAGIC 5 PRO (PGT-N19)'),
@@ -163,8 +166,6 @@ CREATE TABLE producto(
 )ENGINE = InnoDb;
 
 
-INSERT INTO `producto` (id_producto, cod_producto, categoria_id, marca_id, nombre_producto, descripcion_producto, precio, stock, oferta, smartflex_cod, gama_id, imagen, creado_en) VALUES
-(NULL, '40016562 ', 1, 1, 'SAMSUNG Z FLIP 5 (SM-F731B)', 'DE', 1464.00, 3, NULL, '8721', 1, '65f1ab692af1c-TLF Z FLIP.png', NOW())
 
 
 CREATE TABLE cotizacion (
@@ -174,6 +175,10 @@ CREATE TABLE cotizacion (
     CONSTRAINT pk_id_cotizacion PRIMARY KEY (id_cotizacion)
 ) ENGINE = InnoDB;
 
+INSERT INTO cotizacion (id_cotizacion, nombre_cotizacion, valor_cotizacion) VALUES
+(1, 'TASA DE INTERÉS', 16.23),
+(2, 'INTERÉS MENSUAL', 1.26),
+(3, 'VALOR DEL IVA', 12.00);
 
 CREATE TABLE rol_plan (
     id_rol_plan INT AUTO_INCREMENT NOT NULL,
@@ -187,13 +192,25 @@ INSERT INTO rol_plan (id_rol_plan, nombre_rol_plan) VALUES
 (3, 'PLANES CORPORATIVOS - EMPRESAS');
 
 
-CREATE TABLE venta(
-    id_venta INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE tipo_transaccion(
+    id_tipo_transaccion INT AUTO_INCREMENT NOT NULL,
+    nombre_tipo_transaccion VARCHAR(150),
+    CONSTRAINT pk_id_tipo_transaccion PRIMARY KEY(id_tipo_transaccion)
+)ENGINE = InnoDB;
+
+INSERT INTO tipo_transaccion(id_tipo_transaccion, nombre_tipo_transaccion) VALUES
+(1, "entrada"),
+(2, "salida");
+
+CREATE TABLE kardex(
+    id_kardex INT AUTO_INCREMENT NOT NULL,
     producto_cod VARCHAR(10) NOT NULL,
+    tipo_transaccion_id INT NOT NULL,
     unidad INT NOT NULL,
     fecha DATETIME NOT NULL,
-    CONSTRAINT pk_id_venta PRIMARY KEY(id_venta),
-    CONSTRAINT fk_producto_id FOREIGN KEY(producto_cod) REFERENCES producto(cod_producto)
+    CONSTRAINT pk_id_kardex PRIMARY KEY(id_kardex),
+    CONSTRAINT fk_producto_cod FOREIGN KEY(producto_cod) REFERENCES producto(cod_producto),
+    CONSTRAINT fk_tipo_transaccion_id FOREIGN KEY(tipo_transaccion_id) REFERENCES tipo_transaccion(id_tipo_transaccion)
 )ENGINE = InnoDB;
 
 
