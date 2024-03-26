@@ -25,6 +25,17 @@ $(document).ready(function () {
 
     })
 
+    funcion = "total_productos_recibidos";
+    $.post("../controllers/dashboard.php", {
+      fecha_inicio,
+      fecha_fin,
+      funcion
+    }, (response) => {
+      var valor_registro_venta = response
+      $("#total_productos_recibido").text(valor_registro_venta);
+
+    })
+
     funcion = "productos_mas_vendidos"
     $.post("../controllers/dashboard.php", {
       fecha_inicio,
@@ -49,7 +60,67 @@ $(document).ready(function () {
         data: {
           labels: nombres,
           datasets: [{
-            label: 'Total Vendido',
+            label: 'Total Despachado',
+            data: totalVendido,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
+            borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
+            borderWidth: 1
+          }]
+        },
+        options: {
+          animation: {
+            duration: 1000, // Duración de la animación en milisegundos
+            easing: 'easeInOutQuart' // Tipo de interpolación para la animación
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top', // Posición de la leyenda
+              labels: {
+                font: {
+                  size: 14 // Tamaño de la fuente de las etiquetas de la leyenda
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 10 // Tamaño del paso en el eje y
+              }
+            }
+          }
+        }
+    });
+    
+    })
+
+    funcion = "productos_mas_recibidos"
+    $.post("../controllers/dashboard.php", {
+      fecha_inicio,
+      fecha_fin,
+      funcion
+    }, (response) => {
+      // console.log(response);
+      const productos = JSON.parse(response);
+      // Arrays para almacenar las propiedades separadas
+      var codigos = [];
+      var nombres = [];
+      var totalVendido = [];
+      productos.forEach(producto => {
+        codigos.push(producto.producto_cod);
+        nombres.push(producto.nombre_producto);
+        totalVendido.push(producto.total_vendido);
+      });
+      const ctx = $('#miGrafico_productos_recibidos');
+      // Crear un nuevo gráfico
+      window.miGrafico = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: nombres,
+          datasets: [{
+            label: 'Total Recibidos',
             data: totalVendido,
             backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
             borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras

@@ -20,18 +20,28 @@ if ($_SESSION['us_tipo'] == 2) {
         <div class="kpi">
             <div class="contenedor-card">
                 <div class="subcard">
-                    <h5>TOTAL DE PRODUCTO VENDIDOS</h5>
+                    <h5>Productos Despachados</h5>
                     <p id="total_productos_vendidos"></p>
                 </div>
-            
+                <div class="subcard">
+                    <h5>Productos Recibidos</h5>
+                    <p id="total_productos_recibido"></p>
+                </div>
             </div>
         </div>
-        <div class="subcard-inf">
-            <h5>PRODUCTOS MAS VENDIDOS</h5>
-            <canvas id="miGrafico">
 
-            </canvas>
 
+
+        <div class="contenedor">
+            <div class="subcard-inf">
+                <h5>Productos Mas Despachados</h5>
+                <canvas id="miGrafico"></canvas>
+            </div>
+
+            <div class="subcard-inf">
+                <h5>Productos Mas Recibidos</h5>
+                <canvas id="miGrafico_productos_recibidos"></canvas>
+            </div>
         </div>
     </div>
 

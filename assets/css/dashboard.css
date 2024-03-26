@@ -55,30 +55,32 @@
 }
 
 
-
-.subcard-inf{
-    width: 40%; /* Ocupa todo el ancho de la columna */
-    height: 350px;
-    background-color: #f0f0f0; /* Fondo de las subcards */
-    border: 1px solid #ccc; /* Borde de las subcards */
-    padding: 10px; /* Espacio interno en las subcards */
-    box-sizing: border-box; /* Incluye el borde en el cálculo del ancho */
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px; 
+.contenedor {
+    display: flex; /* Utilizar flexbox para alinear los elementos */
+    justify-content: space-between; /* Espacio uniformemente entre los elementos */
 }
 
+.subcard-inf {
+    width: 48%; /* Seleccionar el ancho deseado para cada subcard */
+    height: 350px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-.subcard-inf p{
+.subcard-inf p {
     font-size: 12px;
     align-items: center;
     margin-top: 40px;
 }
 
-.subcard-inf h5{
-    display: flex; /* Usar flexbox para centrar */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
+.subcard-inf h5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 40px;
     color: white;
